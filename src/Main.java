@@ -1,10 +1,13 @@
+import Calculations.DistanceCalculator;
 import Entities.Tour;
 import WayModel.TourPoint;
+import WayModel.WayPoint;
 
 public class Main {
     public static void main(String[] args) {
-        Tour t = new Tour("wilde Tour");
-        t.addTourPoints(new TourPoint[]{new TourPoint(1,2,1,null),new TourPoint(2,4,2,null)});
-        System.out.println(t);
+        WayPoint w1 = new WayPoint(45,45, 100,"Kaiserallee");
+        WayPoint w2 = new WayPoint(45.00,45.01, 100,"Radolfzell");
+
+        System.out.println(DistanceCalculator.calc2dDistance(w1,w2));
     }
 }
