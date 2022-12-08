@@ -1,13 +1,22 @@
 import Calculations.DistanceCalculator;
+import Calculations.TimePrediction;
 import Entities.Tour;
+import Entities.Track;
 import WayModel.TourPoint;
+import WayModel.TrackPoint;
 import WayModel.WayPoint;
 
 public class Main {
     public static void main(String[] args) {
-        WayPoint w1 = new WayPoint(45,45, 100,"Kaiserallee");
-        WayPoint w2 = new WayPoint(45.00,45.01, 100,"Radolfzell");
-
-        System.out.println(DistanceCalculator.calc2dDistance(w1,w2));
+        System.out.println(DistanceCalculator.calcElevationGain(getRandomTrack()));
     }
+
+    public static Track getRandomTrack(){
+       Track t =  new Track();
+       TrackPoint[] pointlist = {new TrackPoint(45,45,100),new TrackPoint(46,46,200),new TrackPoint(47,47,50)};
+       t.addTrackPoints(pointlist);
+       return t;
+    }
+
+
 }

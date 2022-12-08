@@ -1,13 +1,14 @@
 package Entities;
 
+import WayModel.Location;
 import WayModel.TourPoint;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Tour {
+public class Tour implements Path {
     private String description;
-    private ArrayList<TourPoint> tourPoints = new ArrayList<>();
+    private ArrayList<Location> tourPoints = new ArrayList<>();
 
     public Tour(String description) {
         this.description = description;
@@ -20,5 +21,10 @@ public class Tour {
     @Override
     public String toString() {
         return description;
+    }
+
+    @Override
+    public ArrayList<Location> getOrderedLocations() {
+        return tourPoints;
     }
 }

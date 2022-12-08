@@ -1,12 +1,19 @@
 package Calculations;
 
+import Entities.Path;
 import WayModel.Location;
+
+import java.util.ArrayList;
 
 public class TimePrediction {
     private static final int meterPerHour = 4000; //TODO für Fahrräder anpassen evtl
     private static final int climbPerHour = 400;
     private static final int descentPerHour = 600;
-    private static double predictTime(Location a, Location b){
+
+    /**
+     * @return Time in Hours
+     */
+    public static double predictTime(Location a, Location b){
         double HorizontalTime = predictHorizontalTime(a,b);
         double VerticalTime = predictVerticalTime(a,b);
         double LongTime = Math.max(HorizontalTime, VerticalTime);
@@ -15,7 +22,17 @@ public class TimePrediction {
         return WholeTime;
     }
 
-    //private static double predictTime()
+    /**
+     * @return Time in Hours
+     */
+    public static double predictTime(Path path){
+        ArrayList<Location> locations = path.getOrderedLocations();
+        double totalTime = 0;
+        for (int i = 1; i < locations.size();i++){
+            totalTime += predictTime(locations.get(i-1), locations.get(i));
+        }
+        return totalTime;
+    }
 
     /**
      * calculates the time needed without elevation

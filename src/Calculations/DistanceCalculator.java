@@ -1,6 +1,11 @@
 package Calculations;
 
+import Entities.Path;
+import WayModel.AltitudeGain;
 import WayModel.Location;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DistanceCalculator {
     /**
@@ -17,6 +22,15 @@ public class DistanceCalculator {
         double latDistKm = calcDeltaLat(a,b);
         double lonDistKm = calcDeltaLon(a,b);
         return Math.sqrt(Math.pow(lonDistKm,2) + Math.pow(latDistKm ,2));
+    }
+
+    public static double calc2dDistance(Path path){
+        ArrayList<Location> locations = path.getOrderedLocations();
+        double total2dDistance = 0;
+        for (int i = 1; i < locations.size();i++){
+            total2dDistance += calc2dDistance(locations.get(i-1), locations.get(i));
+        }
+        return total2dDistance;
     }
 
     private static double calcDeltaLon(Location a, Location b) {
@@ -42,11 +56,40 @@ public class DistanceCalculator {
         return b.getEle().getValue() - a.getEle().getValue();
     }
 
+    public static AltitudeGain calcElevationGain(Path path){
+        ArrayList<Location> locations = path.getOrderedLocations();
+        double up = 0;
+        double down = 0;
+        for (int i = 1; i < locations.size();i++){
+             double diff = calcElevationGain(locations.get(i-1), locations.get(i));
+             if (diff < 0){
+                 down -= diff;
+             }
+             if (diff > 0){
+                 up += diff;
+             }
+        }
+        return new AltitudeGain(up,down);
+    }
+
     /**
      * calculates three dimensional distance
      * @return Distance between two Locations in meter
      */
     public static double calc3dDistance(Location a, Location b){
         return Math.sqrt(Math.pow(calcElevationGain(a,b),2)+Math.pow(calc2dDistance(a,b),2));
+    }
+
+    public static double calc3dDistance(Path path){
+        ArrayList<Location> locations = path.getOrderedLocations();
+        double total3dDistance = 0;
+        for (int i = 1; i < locations.size();i++){
+            total3dDistance += calc3dDistance(locations.get(i-1), locations.get(i));
+        }
+        return total3dDistance;
+    }
+
+    public static double calcAvgAlt(List<Location> subList) {
+        return subList.stream().mapToDouble(i->i.getEle().getValue()).sum();//abomination
     }
 }
