@@ -89,7 +89,11 @@ public class DistanceCalculator {
         return total3dDistance;
     }
 
-    public static double calcAvgAlt(List<Location> subList) {
-        return subList.stream().mapToDouble(i->i.getEle().getValue()).sum();//abomination
+    public static double calcAvgAlt(List<Location> list) {
+        double sum = 0;
+        for (Location l:list) {
+            sum += l.getEle().getValue();
+        }
+        return sum/ list.size();
     }
 }

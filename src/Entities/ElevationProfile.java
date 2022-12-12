@@ -24,17 +24,20 @@ public class ElevationProfile {
     private boolean[][] calculateElevationProfile(Path path, int xGranularity) {
         ArrayList<Location> locations = path.getOrderedLocations();
         boolean[][] output = new boolean[xGranularity][yGranularity];
-        int sectionlength = locations.size() / xGranularity;
-        List<Double> heigts = new ArrayList<>();
-        for (int i = sectionlength; i < locations.size(); i+= sectionlength){
-            heigts.add(DistanceCalculator.calcAvgAlt(locations.subList(i-sectionlength,i)));
+
+        int[] sectionLength = split(locations.size() , xGranularity);
+        List<Double> heights = new ArrayList<>();
+        int processed = 0;
+        for (int i = 0; i < xGranularity; i++){
+            heights.add(DistanceCalculator.calcAvgAlt(locations.subList(processed,processed+sectionLength[i])));
+            processed += sectionLength[i];
         }
-        this.max = Collections.max(heigts);
-        this.min = Collections.min(heigts);
-        heigts = normalize(heigts,min,max);
+        this.max = Collections.max(heights);
+        this.min = Collections.min(heights);
+        heights = normalize(heights,min,max);
         for (int i = 0; i < xGranularity;i++) {
             for (int j = 0; j < yGranularity; j++) {
-                if (heigts.get(i)*yGranularity >= j){
+                if (heights.get(i)*yGranularity >= j){
                     output[i][j] = true;
                 }
             }
@@ -50,6 +53,21 @@ public class ElevationProfile {
             list.set(i,normalizedVal);
         }
         return list;
+    }
+
+    private int[] split(int pool,int sections){
+        int[] output = new int[sections];
+        int base = pool/sections;
+        int remainder = pool % sections;
+        for (int i = 0; i < output.length; i++){
+            if (remainder <= i){
+                output[i] = base;
+            }
+            if (remainder > i){
+                output[i] = 1+base;
+            }
+        }
+        return output;
     }
 
 

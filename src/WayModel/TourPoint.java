@@ -30,4 +30,8 @@ public class TourPoint implements Location{
     public Elevation getEle() {
         return tp.getEle();
     }
+
+    public Date getTime() {
+        return time;
+    }
 }
