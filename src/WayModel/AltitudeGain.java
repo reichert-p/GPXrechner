@@ -1,5 +1,8 @@
 package WayModel;
 
+/**
+ * A altitude Difference of a Path
+ */
 public class AltitudeGain {
     double up;
     double down;

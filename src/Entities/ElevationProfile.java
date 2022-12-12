@@ -29,7 +29,7 @@ public class ElevationProfile {
         List<Double> heights = new ArrayList<>();
         int processed = 0;
         for (int i = 0; i < xGranularity; i++){
-            heights.add(DistanceCalculator.calcAvgAlt(locations.subList(processed,processed+sectionLength[i])));
+            heights.add(DistanceCalculator.calcAvgAlt(locations.subList(processed,processed+sectionLength[i])).getValue());
             processed += sectionLength[i];
         }
         this.max = Collections.max(heights);

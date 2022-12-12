@@ -1,7 +1,7 @@
 package WayModel;
 
 /**
- * Beschreibt einen Längengrad
+ * A longitude in degrees on Planet Earth
  */
 public class Longitude {
     private double value;

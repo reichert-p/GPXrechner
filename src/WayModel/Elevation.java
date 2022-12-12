@@ -1,7 +1,7 @@
 package WayModel;
 
 /**
- * Beschreibt eine orthogonale Höhe über einem Meeresspiegel
+ * orthogonal Distance to sea level in meter
  */
 public class Elevation {
     private double value;

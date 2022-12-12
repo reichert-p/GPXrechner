@@ -3,6 +3,9 @@ package Calculations;
 import Entities.Path;
 import WayModel.Location;
 
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 
 public class TimePrediction {
@@ -13,23 +16,20 @@ public class TimePrediction {
     /**
      * @return Time in Hours
      */
-    public static double predictTime(Location a, Location b){
-        double HorizontalTime = predictHorizontalTime(a,b);
-        double VerticalTime = predictVerticalTime(a,b);
-        double LongTime = Math.max(HorizontalTime, VerticalTime);
-        double ShortTime = Math.min(HorizontalTime, VerticalTime);
-        double WholeTime = LongTime + 0.5 * ShortTime;
+    public static Duration predictTime(Location a, Location b){
+        Duration HorizontalTime = predictHorizontalTime(a,b);
+        Duration VerticalTime = predictVerticalTime(a,b);
+        double LongTime = Math.max(HorizontalTime.getSeconds(), VerticalTime.getSeconds());
+        double ShortTime = Math.min(HorizontalTime.getSeconds(), VerticalTime.getSeconds());
+        Duration WholeTime = Duration.ofSeconds((long)(LongTime + 0.5 * ShortTime));
         return WholeTime;
     }
 
-    /**
-     * @return Time in Hours
-     */
-    public static double predictTime(Path path){
+    public static Duration predictTime(Path path){
         ArrayList<Location> locations = path.getOrderedLocations();
-        double totalTime = 0;
+        Duration totalTime = Duration.ZERO;
         for (int i = 1; i < locations.size();i++){
-            totalTime += predictTime(locations.get(i-1), locations.get(i));
+            totalTime = totalTime.plus(predictTime(locations.get(i-1), locations.get(i)));
         }
         return totalTime;
     }
@@ -38,19 +38,19 @@ public class TimePrediction {
      * calculates the time needed without elevation
      * @return time in hours
      */
-    private static double predictHorizontalTime(Location a, Location b){
+    private static Duration predictHorizontalTime(Location a, Location b){
         double distance = DistanceCalculator.calc2dDistance(a,b);
-        return distance / meterPerHour;
+        return Duration.ofSeconds((long)(distance/meterPerHour * 60 * 60));
     }
 
-    private static double predictVerticalTime(Location a, Location b){
+    private static Duration predictVerticalTime(Location a, Location b){
         double elevationChange = DistanceCalculator.calcElevationGain(a,b);
         if (elevationChange > 0){
-            return elevationChange / climbPerHour;
+            Duration.ofHours((long) elevationChange / climbPerHour);
         }
         if (elevationChange <0){
-            return elevationChange / descentPerHour;
+            Duration.ofHours((long) elevationChange / descentPerHour);
         }
-        return 0;
+        return Duration.ZERO;
     }
 }

@@ -2,6 +2,8 @@ package Calculations;
 
 import Entities.Path;
 import WayModel.AltitudeGain;
+import WayModel.Distance;
+import WayModel.Elevation;
 import WayModel.Location;
 
 import java.util.ArrayList;
@@ -18,13 +20,13 @@ public class DistanceCalculator {
      * Doesn't account for heights, assumes distance as in a map
      * @return Distance between two Locations in meter
      */
-    public static double calc2dDistance(Location a, Location b){
+    public static Distance calc2dDistance(Location a, Location b){
         double latDistKm = calcDeltaLat(a,b);
         double lonDistKm = calcDeltaLon(a,b);
         return Math.sqrt(Math.pow(lonDistKm,2) + Math.pow(latDistKm ,2));
     }
 
-    public static double calc2dDistance(Path path){
+    public static Distance calc2dDistance(Path path){
         ArrayList<Location> locations = path.getOrderedLocations();
         double total2dDistance = 0;
         for (int i = 1; i < locations.size();i++){
@@ -33,7 +35,7 @@ public class DistanceCalculator {
         return total2dDistance;
     }
 
-    private static double calcDeltaLon(Location a, Location b) {
+    private static Distance calcDeltaLon(Location a, Location b) {
         double lonDistSex = a.getLon().getValue() - b.getLon().getValue(); //get distance in sexagesimal system
         lonDistSex = Math.abs(lonDistSex);                                //distance between two points should be positive
         double avgLat = (b.getLat().getValue() + b.getLat().getValue()) / 2; //distance between two Longitudes depends on Latitude
@@ -41,7 +43,7 @@ public class DistanceCalculator {
         return lonFact * lonDistSex; //convert into m
     }
 
-    private static double calcDeltaLat(Location a, Location b){
+    private static Distance calcDeltaLat(Location a, Location b){
         double latDistSex = a.getLat().getValue() - b.getLat().getValue();
         latDistSex = Math.abs(latDistSex);
         return Math.abs(equatorDegree * latDistSex);
@@ -52,7 +54,7 @@ public class DistanceCalculator {
      * @param b end
      * @return altitude gain/loss in meters
      */
-    public static double calcElevationGain(Location a, Location b){
+    public static AltitudeGain calcElevationGain(Location a, Location b){
         return b.getEle().getValue() - a.getEle().getValue();
     }
 
@@ -76,11 +78,11 @@ public class DistanceCalculator {
      * calculates three dimensional distance
      * @return Distance between two Locations in meter
      */
-    public static double calc3dDistance(Location a, Location b){
+    public static Distance calc3dDistance(Location a, Location b){
         return Math.sqrt(Math.pow(calcElevationGain(a,b),2)+Math.pow(calc2dDistance(a,b),2));
     }
 
-    public static double calc3dDistance(Path path){
+    public static Distance calc3dDistance(Path path){
         ArrayList<Location> locations = path.getOrderedLocations();
         double total3dDistance = 0;
         for (int i = 1; i < locations.size();i++){
@@ -89,11 +91,11 @@ public class DistanceCalculator {
         return total3dDistance;
     }
 
-    public static double calcAvgAlt(List<Location> list) {
+    public static Elevation calcAvgAlt(List<Location> list) {
         double sum = 0;
         for (Location l:list) {
             sum += l.getEle().getValue();
         }
-        return sum/ list.size();
+        return new Elevation(sum/ list.size());
     }
 }
