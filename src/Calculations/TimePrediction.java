@@ -1,7 +1,9 @@
 package Calculations;
 
 import Entities.Path;
+import WayModel.AltitudeGain;
 import WayModel.Location;
+import WayModel.Units.Distance;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -19,8 +21,8 @@ public class TimePrediction {
     public static Duration predictTime(Location a, Location b){
         Duration HorizontalTime = predictHorizontalTime(a,b);
         Duration VerticalTime = predictVerticalTime(a,b);
-        double LongTime = Math.max(HorizontalTime.getSeconds(), VerticalTime.getSeconds());
-        double ShortTime = Math.min(HorizontalTime.getSeconds(), VerticalTime.getSeconds());
+        long LongTime = Math.max(HorizontalTime.getSeconds(), VerticalTime.getSeconds());
+        long ShortTime = Math.min(HorizontalTime.getSeconds(), VerticalTime.getSeconds());
         Duration WholeTime = Duration.ofSeconds((long)(LongTime + 0.5 * ShortTime));
         return WholeTime;
     }
@@ -39,18 +41,15 @@ public class TimePrediction {
      * @return time in hours
      */
     private static Duration predictHorizontalTime(Location a, Location b){
-        double distance = DistanceCalculator.calc2dDistance(a,b);
-        return Duration.ofSeconds((long)(distance/meterPerHour * 60 * 60));
+        Distance distance = DistanceCalculator.calc2dDistance(a,b);
+        return Duration.ofSeconds((long)(distance.getValue()/meterPerHour * 60 * 60));
     }
 
     private static Duration predictVerticalTime(Location a, Location b){
-        double elevationChange = DistanceCalculator.calcElevationGain(a,b);
-        if (elevationChange > 0){
-            Duration.ofHours((long) elevationChange / climbPerHour);
-        }
-        if (elevationChange <0){
-            Duration.ofHours((long) elevationChange / descentPerHour);
-        }
-        return Duration.ZERO;
+        AltitudeGain elevationChange = DistanceCalculator.calcElevationGain(a,b);
+        double totalVerticalTime = 0;
+        totalVerticalTime += elevationChange.getUp() / climbPerHour * 60 * 60;
+        totalVerticalTime += elevationChange.getDown() / descentPerHour * 60 * 60; // TODO wie sieht dass denn aus?
+        return Duration.ofSeconds((long)totalVerticalTime);
     }
 }

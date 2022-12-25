@@ -1,4 +1,4 @@
-package WayModel;
+package WayModel.Units;
 
 /**
  * A latitude in Degrees on Planet Earth

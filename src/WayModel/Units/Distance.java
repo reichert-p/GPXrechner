@@ -1,4 +1,4 @@
-package WayModel;
+package WayModel.Units;
 
 /**
  * Distance in meter
@@ -13,6 +13,10 @@ public class Distance {
         else{
             throw new RuntimeException("Distance out of bounds: " + value + "Elevation must be a positive number");
         }
+    }
+
+    public void addDistance(Distance difference){
+        value += difference.getValue();
     }
 
     public double getValue() {

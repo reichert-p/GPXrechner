@@ -1,4 +1,4 @@
-package WayModel;
+package WayModel.Units;
 
 /**
  * orthogonal Distance to sea level in meter

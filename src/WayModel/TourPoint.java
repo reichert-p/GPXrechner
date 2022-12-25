@@ -1,5 +1,9 @@
 package WayModel;
 
+import WayModel.Units.Elevation;
+import WayModel.Units.Latitude;
+import WayModel.Units.Longitude;
+
 import java.util.Date;
 
 public class TourPoint implements Location{

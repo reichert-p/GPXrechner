@@ -1,4 +1,4 @@
-package WayModel;
+package WayModel.Units;
 
 /**
  * Speed in meters per hour

@@ -1,4 +1,4 @@
-package WayModel;
+package WayModel.Units;
 
 /**
  * A longitude in degrees on Planet Earth

@@ -1,5 +1,9 @@
 package WayModel;
 
+import WayModel.Units.Elevation;
+import WayModel.Units.Latitude;
+import WayModel.Units.Longitude;
+
 public class TrackPoint implements Location{
     private Latitude lat;
     private Longitude lon;
