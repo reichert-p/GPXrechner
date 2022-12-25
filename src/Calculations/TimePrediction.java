@@ -36,10 +36,6 @@ public class TimePrediction {
         return totalTime;
     }
 
-    /**
-     * calculates the time needed without elevation
-     * @return time in hours
-     */
     private static Duration predictHorizontalTime(Location a, Location b){
         Distance distance = DistanceCalculator.calc2dDistance(a,b);
         return Duration.ofSeconds((long)(distance.getValue()/meterPerHour * 60 * 60));

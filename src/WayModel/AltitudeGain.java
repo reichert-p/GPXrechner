@@ -13,11 +13,8 @@ public class AltitudeGain {
     }
 
     public AltitudeGain(double difference){ //returns an Altitude Gain which only moves one vertical direction
-        if (difference > 0){
-            new AltitudeGain(difference, 0);
-        }else {
-            new AltitudeGain(0, Math.abs(difference));
-        }
+        this.up = Math.max(0, difference);
+        this.down = Math.abs(Math.min(0,difference));
     }
 
     public double getUp() {
