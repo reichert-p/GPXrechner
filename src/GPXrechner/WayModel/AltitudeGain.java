@@ -1,7 +1,7 @@
-package WayModel;
+package GPXrechner.WayModel;
 
 /**
- * A altitude Difference of a Path
+ * The altitude Difference of a Path
  */
 public class AltitudeGain {
     double up;

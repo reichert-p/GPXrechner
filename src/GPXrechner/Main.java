@@ -1,12 +1,8 @@
-import Calculations.DistanceCalculator;
-import Calculations.SpeedCalculator;
-import Calculations.TimePrediction;
-import Entities.ElevationProfile;
-import Entities.Tour;
-import Entities.Track;
-import WayModel.TourPoint;
-import WayModel.TrackPoint;
-import WayModel.WayPoint;
+package GPXrechner;
+
+import GPXrechner.Calculations.SpeedCalculator;
+import GPXrechner.Entities.Track;
+import GPXrechner.WayModel.TrackPoint;
 
 public class Main {
     public static void main(String[] args) {

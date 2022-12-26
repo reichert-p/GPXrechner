@@ -1,8 +1,8 @@
-package Calculations;
+package GPXrechner.Calculations;
 
-import WayModel.Location;
-import WayModel.Units.Pace;
-import WayModel.TourPoint;
+import GPXrechner.WayModel.Location;
+import GPXrechner.WayModel.Units.Pace;
+import GPXrechner.WayModel.TourPoint;
 
 import java.time.Duration;
 

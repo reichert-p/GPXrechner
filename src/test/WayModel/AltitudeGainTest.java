@@ -1,8 +1,7 @@
-package test;
+package test.WayModel;
 
 
-import WayModel.AltitudeGain;
-import org.junit.Assert;
+import GPXrechner.WayModel.AltitudeGain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

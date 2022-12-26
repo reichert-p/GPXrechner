@@ -1,13 +1,11 @@
-package Calculations;
+package GPXrechner.Calculations;
 
-import Entities.Path;
-import WayModel.AltitudeGain;
-import WayModel.Location;
-import WayModel.Units.Distance;
+import GPXrechner.Entities.Path;
+import GPXrechner.WayModel.AltitudeGain;
+import GPXrechner.WayModel.Location;
+import GPXrechner.WayModel.Units.Distance;
 
 import java.time.Duration;
-import java.time.LocalTime;
-import java.time.temporal.Temporal;
 import java.util.ArrayList;
 
 public class TimePrediction {

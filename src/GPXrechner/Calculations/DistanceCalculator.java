@@ -1,10 +1,10 @@
-package Calculations;
+package GPXrechner.Calculations;
 
-import Entities.Path;
-import WayModel.AltitudeGain;
-import WayModel.Units.Distance;
-import WayModel.Units.Elevation;
-import WayModel.Location;
+import GPXrechner.Entities.Path;
+import GPXrechner.WayModel.AltitudeGain;
+import GPXrechner.WayModel.Units.Distance;
+import GPXrechner.WayModel.Units.Elevation;
+import GPXrechner.WayModel.Location;
 
 import java.util.ArrayList;
 import java.util.List;

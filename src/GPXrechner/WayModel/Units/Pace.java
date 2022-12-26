@@ -1,4 +1,4 @@
-package WayModel.Units;
+package GPXrechner.WayModel.Units;
 
 /**
  * Speed in meters per hour

@@ -1,10 +1,15 @@
-package WayModel.Units;
+package GPXrechner.WayModel.Units;
 
 /**
  * Distance in meter
  */
 public class Distance {
     private double value;
+
+    @Override
+    public String toString() {
+        return "Distance: " + (int)value + " meters";
+    }
 
     public Distance(double value) {
         if (value >= 0) {

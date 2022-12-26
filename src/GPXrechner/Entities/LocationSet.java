@@ -1,4 +1,4 @@
-package Entities;
+package GPXrechner.Entities;
 
 public class LocationSet {
 

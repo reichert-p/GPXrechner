@@ -1,4 +1,4 @@
-package WayModel.Units;
+package GPXrechner.WayModel.Units;
 
 /**
  * orthogonal Distance to sea level in meter

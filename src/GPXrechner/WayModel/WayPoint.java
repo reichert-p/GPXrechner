@@ -1,8 +1,8 @@
-package WayModel;
+package GPXrechner.WayModel;
 
-import WayModel.Units.Elevation;
-import WayModel.Units.Latitude;
-import WayModel.Units.Longitude;
+import GPXrechner.WayModel.Units.Elevation;
+import GPXrechner.WayModel.Units.Latitude;
+import GPXrechner.WayModel.Units.Longitude;
 
 public class WayPoint implements Location{
     private TrackPoint tp;

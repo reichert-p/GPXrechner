@@ -1,6 +1,6 @@
-package Entities;
+package GPXrechner.Entities;
 
-import WayModel.Location;
+import GPXrechner.WayModel.Location;
 
 import java.util.ArrayList;
 

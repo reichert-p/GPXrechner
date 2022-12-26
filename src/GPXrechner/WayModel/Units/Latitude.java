@@ -1,4 +1,4 @@
-package WayModel.Units;
+package GPXrechner.WayModel.Units;
 
 /**
  * A latitude in Degrees on Planet Earth

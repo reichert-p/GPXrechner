@@ -1,7 +1,7 @@
-package Entities;
+package GPXrechner.Entities;
 
-import WayModel.Location;
-import WayModel.TourPoint;
+import GPXrechner.WayModel.Location;
+import GPXrechner.WayModel.TourPoint;
 
 import java.util.ArrayList;
 import java.util.Arrays;

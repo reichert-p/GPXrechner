@@ -1,10 +1,9 @@
-package Entities;
+package GPXrechner.Entities;
 
-import Calculations.DistanceCalculator;
-import WayModel.Location;
+import GPXrechner.Calculations.DistanceCalculator;
+import GPXrechner.WayModel.Location;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
