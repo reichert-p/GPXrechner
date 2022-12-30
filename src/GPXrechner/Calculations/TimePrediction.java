@@ -1,22 +1,29 @@
 package GPXrechner.Calculations;
 
+import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Entities.Path;
 import GPXrechner.WayModel.AltitudeGain;
 import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.Units.Distance;
+import GPXrechner.WayModel.Units.Pace;
 
 import java.time.Duration;
 import java.util.ArrayList;
 
 public class TimePrediction {
-    private static final int meterPerHour = 4000; //TODO für Fahrräder anpassen evtl
-    private static final int climbPerHour = 400;
-    private static final int descentPerHour = 600;
+    private Pace horizontalSpeed; //TODO für Fahrräder anpassen evtl
+    private Pace climbingSpeed;
+    private Pace descendingSpeed;
 
+    public TimePrediction(MovementSpeed movementSpeed){
+        this.horizontalSpeed = movementSpeed.getHorizontalSpeed();
+        this.climbingSpeed = movementSpeed.getClimbingSpeed();
+        this.descendingSpeed = movementSpeed.getDescendingSpeed();
+    }
     /**
      * @return Time in Hours
      */
-    public static Duration predictTime(Location a, Location b){
+    public Duration predictTime(Location a, Location b){
         Duration HorizontalTime = predictHorizontalTime(a,b);
         Duration VerticalTime = predictVerticalTime(a,b);
         long LongTime = Math.max(HorizontalTime.getSeconds(), VerticalTime.getSeconds());
@@ -25,7 +32,7 @@ public class TimePrediction {
         return WholeTime;
     }
 
-    public static Duration predictTime(Path path){
+    public Duration predictTime(Path path){
         ArrayList<Location> locations = path.getOrderedLocations();
         Duration totalTime = Duration.ZERO;
         for (int i = 1; i < locations.size();i++){
@@ -34,16 +41,16 @@ public class TimePrediction {
         return totalTime;
     }
 
-    private static Duration predictHorizontalTime(Location a, Location b){
+    private Duration predictHorizontalTime(Location a, Location b){
         Distance distance = DistanceCalculator.calc2dDistance(a,b);
-        return Duration.ofSeconds((long)(distance.getValue()/meterPerHour * 60 * 60));
+        return Duration.ofSeconds((long)(distance.getValue() / horizontalSpeed.getValue() * 60 * 60));
     }
 
-    private static Duration predictVerticalTime(Location a, Location b){
+    private Duration predictVerticalTime(Location a, Location b){
         AltitudeGain elevationChange = DistanceCalculator.calcElevationGain(a,b);
         double totalVerticalTime = 0;
-        totalVerticalTime += elevationChange.getUp() / climbPerHour * 60 * 60;
-        totalVerticalTime += elevationChange.getDown() / descentPerHour * 60 * 60; // TODO wie sieht dass denn aus?
+        totalVerticalTime += elevationChange.getUp() / climbingSpeed.getValue() * 60 * 60;
+        totalVerticalTime += elevationChange.getDown() / descendingSpeed.getValue() * 60 * 60; // TODO wie sieht dass denn aus?
         return Duration.ofSeconds((long)totalVerticalTime);
     }
 }
