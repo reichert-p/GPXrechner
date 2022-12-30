@@ -4,28 +4,28 @@ import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.WayModel.Units.Pace;
 
 public class PersonalSpeed implements MovementSpeed {
-    Pace a,b,c;
+    Pace horizontal,climbing,descending;
 
     //TODO probably a refactor here
 
-    public PersonalSpeed(Pace a, Pace b, Pace c) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
+    public PersonalSpeed(Pace horizontalSpeed, Pace climbingSpeed, Pace descendingSpeed) {
+        this.horizontal = horizontalSpeed;
+        this.climbing = climbingSpeed;
+        this.descending = descendingSpeed;
     }
 
     @Override
     public Pace getHorizontalSpeed() {
-        return a;
+        return horizontal;
     }
 
     @Override
     public Pace getClimbingSpeed() {
-        return b;
+        return climbing;
     }
 
     @Override
     public Pace getDescendingSpeed() {
-        return c;
+        return descending;
     }
 }
