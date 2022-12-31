@@ -9,8 +9,7 @@ import java.util.List;
 
 public class SpeedHeuristics {
     private static Duration calculateTime(TourPoint a, TourPoint b){
-        long timeDiff = b.getTime().getTime() - a.getTime().getTime();
-        return Duration.ofMillis(timeDiff);
+        return Duration.between(a.getTime(),b.getTime());
     }
     public static Pace getDescendingHeuristic(List<TourPoint> tourPoints, Pace horizontalHeuristic) {
         ArrayList<Pace> paces = new ArrayList<>();

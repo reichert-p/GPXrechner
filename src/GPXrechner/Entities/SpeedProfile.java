@@ -1,43 +1,47 @@
 package GPXrechner.Entities;
 
 import GPXrechner.Calculations.DistanceCalculator;
+import GPXrechner.Calculations.SpeedCalculator;
 import GPXrechner.WayModel.Location;
+import GPXrechner.WayModel.TourPoint;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ElevationProfile {
+public class SpeedProfile {
     private static final int yGranularity = 10;
     private boolean[][] profile;
     double min,max;
 
-    public ElevationProfile(Path path, int granularity) {
-        this.profile = calculateElevationProfile(path,granularity);
+    public SpeedProfile(Tour tour, int xGranularity) {
+        this.profile = calculateSpeedProfile(tour,xGranularity);
     }
 
-    public ElevationProfile(Path path){
-        new ElevationProfile(path,10);
+    public SpeedProfile(Tour tour){
+        new ElevationProfile(tour,10);
     }
-     //TODO this needs refactoring
-    //TODO consider minima and maxima
-    private boolean[][] calculateElevationProfile(Path path, int xGranularity) {
-        ArrayList<Location> locations = path.getOrderedLocations();
+    //TODO put stuff together with ElevationProfile
+    private boolean[][] calculateSpeedProfile(Tour tour, int xGranularity) {
+        List<TourPoint> tourPoints = tour.getOrderedLocations().stream()
+                .filter(c -> c instanceof TourPoint)
+                .map(c -> (TourPoint)c)
+                .toList(); //massive casting
         boolean[][] output = new boolean[xGranularity][yGranularity];
 
-        int[] sectionLength = split(locations.size() , xGranularity);
-        List<Double> heights = new ArrayList<>();
+        int[] sectionLength = split(tourPoints.size() , xGranularity);
+        List<Double> speeds = new ArrayList<>();
         int processed = 0;
         for (int i = 0; i < xGranularity; i++){
-            heights.add(DistanceCalculator.calcAvgAlt(locations.subList(processed,processed+sectionLength[i])).getValue());
+            speeds.add(SpeedCalculator.calculateSpeedDeviation(tour, tourPoints.subList(processed,processed+sectionLength[i])));
             processed += sectionLength[i];
         }
-        this.max = Collections.max(heights);
-        this.min = Collections.min(heights);
-        heights = normalize(heights,min,max);
+        this.max = Collections.max(speeds);
+        this.min = Collections.min(speeds);
+        speeds = normalize(speeds,min,max);
         for (int i = 0; i < xGranularity;i++) {
             for (int j = 0; j < yGranularity; j++) {
-                if (heights.get(i)*yGranularity >= j){
+                if (speeds.get(i)*yGranularity >= j){
                     output[i][j] = true;
                 }
             }
@@ -77,7 +81,7 @@ public class ElevationProfile {
         for (boolean[] row:profile) {
             for (boolean b: row) {
                 if (b){
-                buffer.append("F");
+                    buffer.append("F");
                 }
             }
             buffer.append("\n");

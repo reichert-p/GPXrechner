@@ -7,7 +7,7 @@ import GPXrechner.WayModel.TrackPoint;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(SpeedCalculator.predictSpeed( new TrackPoint(45,45,0),new TrackPoint(46,46,100), Sport.HIKING));
+        System.out.println(SpeedCalculator.predictSpeed( new TrackPoint(45,45,0),new TrackPoint(46,46,100), Sport.HIKING).getValue());
     }
 
     public static Track getRandomTrack(){

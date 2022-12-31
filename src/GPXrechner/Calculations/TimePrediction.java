@@ -11,7 +11,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 
 public class TimePrediction {
-    private Pace horizontalSpeed; //TODO für Fahrräder anpassen evtl
+    private Pace horizontalSpeed; //TODO warum ist das nicht static?
     private Pace climbingSpeed;
     private Pace descendingSpeed;
 

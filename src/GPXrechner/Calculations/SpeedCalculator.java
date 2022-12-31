@@ -2,17 +2,14 @@ package GPXrechner.Calculations;
 
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.MovementSpeed.PersonalSpeed;
-import GPXrechner.Calculations.MovementSpeed.Sport;
 import GPXrechner.Entities.Tour;
 import GPXrechner.WayModel.Location;
-import GPXrechner.WayModel.Units.Distance;
 import GPXrechner.WayModel.Units.Pace;
 import GPXrechner.WayModel.TourPoint;
 
+import java.sql.Time;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 
 public class SpeedCalculator {
@@ -24,7 +21,7 @@ public class SpeedCalculator {
         return new Pace(distance / timeInHours);
     }
 
-    private static MovementSpeed predictPersonalMovementSpeed (Tour tour){
+    public static MovementSpeed predictPersonalMovementSpeed (Tour tour){ //TODO make incomplete movementspeeds possible?
         List<TourPoint> tourPoints = tour.getOrderedLocations().stream()
                 .filter(c -> c instanceof TourPoint)
                 .map(c -> (TourPoint) c)
@@ -33,6 +30,16 @@ public class SpeedCalculator {
         Pace climbingHeuristic = SpeedHeuristics.getClimbingHeuristic(tourPoints, horizontalHeuristic);
         Pace descendingHeuristic = SpeedHeuristics.getDescendingHeuristic(tourPoints, horizontalHeuristic);
         return new PersonalSpeed(horizontalHeuristic,climbingHeuristic,descendingHeuristic);
+    }
+
+    public static Double calculateSpeedDeviation(Tour tour, List<TourPoint> section){
+        MovementSpeed generalSpeed = predictPersonalMovementSpeed(tour);
+        Tour sectionTour = new Tour("");
+        sectionTour.addTourPoints((TourPoint[]) section.toArray());
+        TimePrediction timePrediction = new TimePrediction(generalSpeed);
+        Duration predictedTime = timePrediction.predictTime(sectionTour); //predicted time for section
+        Duration actualTime = Duration.between(section.get(0).getTime(),section.get(section.size()-1).getTime()); //actual time taken
+        return predictedTime.getSeconds() / (double)actualTime.getSeconds();
     }
 
 }
