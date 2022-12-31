@@ -4,18 +4,19 @@ import GPXrechner.WayModel.Units.Elevation;
 import GPXrechner.WayModel.Units.Latitude;
 import GPXrechner.WayModel.Units.Longitude;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class TourPoint implements Location{
     private TrackPoint tp;
-    private Date time;
+    private LocalDateTime time;
 
-    public TourPoint(TrackPoint tp, Date time) {
+    public TourPoint(TrackPoint tp, LocalDateTime time) {
         this.tp = tp;
         this.time = time;
     }
 
-    public TourPoint(double lat, double lon, double ele, Date time) {
+    public TourPoint(double lat, double lon, double ele, LocalDateTime time) {
         this.tp = new TrackPoint(lat, lon, ele);
         this.time = time;
     }
@@ -35,7 +36,7 @@ public class TourPoint implements Location{
         return tp.getEle();
     }
 
-    public Date getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 }

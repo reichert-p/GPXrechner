@@ -18,6 +18,10 @@ public class Tour implements Path {
         tourPoints.addAll(Arrays.stream(t).toList());
     }
 
+    public void addTourPoint(TourPoint t){
+        tourPoints.add(t);
+    }
+
     @Override
     public String toString() {
         return description;

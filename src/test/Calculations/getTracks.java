@@ -5,7 +5,7 @@ import GPXrechner.WayModel.TrackPoint;
 
 public class getTracks {
     public static Track getMountainTrack(){ //Hochvogel traverse
-        Track t =  new Track();
+        Track t =  new Track("Hochvogel traverse");
         TrackPoint[] pointList = {
                 new TrackPoint(47.402998, 10.407784, 1242.83478),
                 new TrackPoint(47.400906, 10.410466, 1271.47648),

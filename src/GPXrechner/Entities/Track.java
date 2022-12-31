@@ -10,6 +10,10 @@ public class Track implements Path{
     private String description;
     private ArrayList<Location> trackPoints = new ArrayList<>();
 
+    public Track(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return description;
@@ -22,5 +26,9 @@ public class Track implements Path{
 
     public void addTrackPoints(TrackPoint[] t){
         trackPoints.addAll(Arrays.stream(t).toList());
+    }
+
+    public void addTrackPoint(TrackPoint t){
+        trackPoints.add(t);
     }
 }

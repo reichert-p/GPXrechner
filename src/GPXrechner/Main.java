@@ -11,7 +11,7 @@ public class Main {
     }
 
     public static Track getRandomTrack(){
-       Track t =  new Track();
+       Track t =  new Track("randomtrack");
        TrackPoint[] pointlist = {
                new TrackPoint(45,45,0),
                new TrackPoint(46,46,10),
