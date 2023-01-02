@@ -1,33 +1,25 @@
 package GPXrechner;
 
+import GPXrechner.Calculations.DistanceCalculator;
 import GPXrechner.Calculations.MovementSpeed.Sport;
-import GPXrechner.Calculations.SpeedCalculator;
+import GPXrechner.Calculations.TimePrediction;
 import GPXrechner.Entities.Track;
-import GPXrechner.WayModel.TrackPoint;
+import GPXrechner.Inputhandling.Parsing.DOMParser;
+import GPXrechner.WayModel.AltitudeGain;
+import GPXrechner.WayModel.Units.Distance;
+
+import java.sql.Time;
+import java.time.Duration;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(SpeedCalculator.predictSpeed( new TrackPoint(45,45,0),new TrackPoint(46,46,100), Sport.HIKING).getValue());
+        DOMParser parser = new DOMParser();
+        Track westweg = parser.parseTrack("Files\\GPX\\Track_Westweg.gpx");
+        Distance dist = DistanceCalculator.calc3dDistance(westweg);
+        AltitudeGain ele = DistanceCalculator.calcElevationGain(westweg);
+        TimePrediction pred = new TimePrediction(Sport.HIKING);
+        Duration dur = pred.predictTime(westweg);
+        System.out.println("haha");
     }
-
-    public static Track getRandomTrack(){
-       Track t =  new Track("randomtrack");
-       TrackPoint[] pointlist = {
-               new TrackPoint(45,45,0),
-               new TrackPoint(46,46,10),
-               new TrackPoint(47,47,5),
-               new TrackPoint(45,45,-10),
-               new TrackPoint(46,46,0),
-               new TrackPoint(47,47,20),
-               new TrackPoint(45,45,35),
-               new TrackPoint(46,46,30),
-               new TrackPoint(47,47,15),
-               new TrackPoint(45,45,5),
-               new TrackPoint(46,46,0),
-               new TrackPoint(47,47,0)};
-       t.addTrackPoints(pointlist);
-       return t;
-    }
-
 
 }

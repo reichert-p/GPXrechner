@@ -21,7 +21,7 @@ public class SpeedCalculator {
         return new Pace(distance / timeInHours);
     }
 
-    public static MovementSpeed predictPersonalMovementSpeed (Tour tour){ //TODO make incomplete movementspeeds possible?
+    public static PersonalSpeed predictPersonalMovementSpeed (Tour tour){ //TODO make incomplete movementspeeds possible?
         List<TourPoint> tourPoints = tour.getOrderedLocations().stream()
                 .filter(c -> c instanceof TourPoint)
                 .map(c -> (TourPoint) c)
@@ -30,6 +30,11 @@ public class SpeedCalculator {
         Pace climbingHeuristic = SpeedHeuristics.getClimbingHeuristic(tourPoints, horizontalHeuristic);
         Pace descendingHeuristic = SpeedHeuristics.getDescendingHeuristic(tourPoints, horizontalHeuristic);
         return new PersonalSpeed(horizontalHeuristic,climbingHeuristic,descendingHeuristic);
+    }
+
+    public static PersonalSpeed predictPersonalMovementSpeed (String[] fileLocations){
+        //TODO implement this bs
+        return null;
     }
 
     public static Double calculateSpeedDeviation(Tour tour, List<TourPoint> section){

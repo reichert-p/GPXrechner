@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<gpx version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:geotracker="http://ilyabogdanovich.com/gpx/extensions/geotracker" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" creator="Geo Tracker 5.1.5.2972 for Android by Ilya Bogdanovich">
+  <metadata>
+    <name>Gartenstrasse</name>
+    <author>
+      <name>Aufgezeichnet mit Geo Tracker für Android von Ilya Bogdanovich</name>
+      <link href="https://play.google.com/store/apps/details?id=com.ilyabogdanovich.geotracker" />
+    </author>
+    <link href="https://play.google.com/store/apps/details?id=com.ilyabogdanovich.geotracker" />
+    <time>2022-12-31T16:58:12.035Z</time>
+  </metadata>
+  <trk>
+    <name>Gartenstrasse</name>
+    <src>Aufgezeichnet mit Geo Tracker für Android von Ilya Bogdanovich</src>
+    <link href="https://play.google.com/store/apps/details?id=com.ilyabogdanovich.geotracker" />
+    <extensions>
+      <geotracker:meta>
+        <length>86.71</length>
+        <duration>106067</duration>
+        <creationtime>2022-12-31T16:58:12.035Z</creationtime>
+        <activity>0</activity>
+      </geotracker:meta>
+    </extensions>
+    <trkseg>
+      <trkpt lat="49.00452" lon="8.39341667">
+        <ele>175.7</ele>
+        <time>2022-12-31T16:58:13Z</time>
+        <extensions>
+          <geotracker:meta c="4.02" s="0.15" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="49.00454667" lon="8.39327167">
+        <ele>178.6</ele>
+        <time>2022-12-31T16:58:55Z</time>
+        <extensions>
+          <geotracker:meta c="3.35" s="0.19" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="49.0045" lon="8.39339667">
+        <ele>177.8</ele>
+        <time>2022-12-31T16:59:03Z</time>
+        <extensions>
+          <geotracker:meta c="1.89" s="0.97" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="49.00452167" lon="8.39354">
+        <ele>173.3</ele>
+        <time>2022-12-31T16:59:18Z</time>
+        <extensions>
+          <geotracker:meta c="1.79" s="1.08" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="49.004575" lon="8.39367167">
+        <ele>175.1</ele>
+        <time>2022-12-31T16:59:24Z</time>
+        <extensions>
+          <geotracker:meta c="1.93" s="1.14" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="49.00456" lon="8.39382833">
+        <ele>174.2</ele>
+        <time>2022-12-31T16:59:33Z</time>
+        <extensions>
+          <geotracker:meta c="1.83" s="1" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="49.00448667" lon="8.39391833">
+        <ele>169.5</ele>
+        <time>2022-12-31T16:59:39Z</time>
+        <extensions>
+          <geotracker:meta c="2.08" s="1.35" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="49.00448167" lon="8.39405667">
+        <ele>166.9</ele>
+        <time>2022-12-31T16:59:48Z</time>
+        <extensions>
+          <geotracker:meta c="2.34" s="1.12" />
+        </extensions>
+      </trkpt>
+      <trkpt lat="49.00441" lon="8.39415833">
+        <ele>166</ele>
+        <time>2022-12-31T16:59:56Z</time>
+        <extensions>
+          <geotracker:meta c="1.64" s="1.14" />
+        </extensions>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

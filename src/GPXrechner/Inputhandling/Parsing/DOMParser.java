@@ -1,4 +1,4 @@
-package GPXrechner.Inputhandling;
+package GPXrechner.Inputhandling.Parsing;
 
 import GPXrechner.Entities.Tour;
 import GPXrechner.Entities.Track;
@@ -12,17 +12,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class XMLParser {
-    public static void main(String[] args) {
-        try {
-            Tour tour = parseTour("Files\\GPX\\example.gpx");
-            System.out.println(tour.toString());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public static Tour parseTour(String pathName){
+public class DOMParser implements XMLParser{
+    public Tour parseTour(String pathName){
         Tour tour = null;
         try {
             Document doc = documentFactory(pathName);
@@ -43,11 +34,10 @@ public class XMLParser {
         }catch (Exception E){
             E.printStackTrace(); //TODO better exception handling :(
         }
-
         return tour;
     }
 
-    public static Track parseTrack(String pathName){
+    public Track parseTrack(String pathName){
         Track track = null;
         try {
             Document doc = documentFactory(pathName);
