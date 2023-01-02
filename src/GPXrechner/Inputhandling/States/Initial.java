@@ -1,7 +1,6 @@
 package GPXrechner.Inputhandling.States;
 
-import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
-import GPXrechner.Entities.Path;
+import GPXrechner.WayModel.Entities.Path;
 
 public class Initial implements State{
     @Override

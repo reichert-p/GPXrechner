@@ -8,7 +8,7 @@ public class Distance {
 
     @Override
     public String toString() {
-        return "Distance: " + (int)value + " meters";
+        return (int)value + " meters";
     }
 
     public Distance(double value) {

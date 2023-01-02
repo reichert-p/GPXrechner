@@ -1,7 +1,8 @@
-package GPXrechner.Entities;
+package GPXrechner.WayModel.Entities;
 
 import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.TourPoint;
+import GPXrechner.WayModel.TrackPoint;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,5 +31,17 @@ public class Tour implements Path {
     @Override
     public ArrayList<Location> getOrderedLocations() {
         return tourPoints;
+    }
+
+    public Track getTrack(){
+        Track output = new Track(description);
+        for (Location tp:tourPoints) {
+            output.addTrackPoint(new TrackPoint(
+                    tp.getLat(),
+                    tp.getLon(),
+                    tp.getEle()
+            ));
+        }
+        return output;
     }
 }

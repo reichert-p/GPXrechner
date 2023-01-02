@@ -1,7 +1,13 @@
 package GPXrechner.Inputhandling.Instructions;
 
+import GPXrechner.Calculations.SpeedCalculator;
 import GPXrechner.Inputhandling.InvalidStateException;
+import GPXrechner.Inputhandling.Parsing.ConsoleParsing;
 import GPXrechner.Inputhandling.States.State;
+import GPXrechner.Inputhandling.States.TourLoaded;
+import GPXrechner.WayModel.Entities.ElevationProfile;
+import GPXrechner.WayModel.Entities.SpeedProfile;
+import GPXrechner.WayModel.Entities.Tour;
 
 public class GetSpeedProfile implements Instruction{
     @Override
@@ -11,11 +17,29 @@ public class GetSpeedProfile implements Instruction{
 
     @Override
     public State execute(State state) throws InvalidStateException {
-        return null;
+        if (!(state instanceof TourLoaded)){
+            throw new InvalidStateException(this,state);
+        }
+        Tour tour;
+        try {
+            tour = (Tour)state.getPath();
+        }catch (Exception e){
+            System.out.println("this should not happen :))))");
+            return state;
+        }
+        SpeedProfile speedProfile;
+        try {
+            int granularity = ConsoleParsing.getGranularity();
+            speedProfile = new SpeedProfile(tour,granularity);
+        }catch (Exception e){
+            speedProfile = new SpeedProfile(tour);
+        }
+        System.out.println(speedProfile);
+        return state;
     }
 
     @Override
     public String getRegex() {
-        return null;
+        return "show speed profile";
     }
 }

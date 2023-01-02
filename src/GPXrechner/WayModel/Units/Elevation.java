@@ -11,7 +11,7 @@ public class Elevation {
             this.value = value;
         }
         else{
-            throw new RuntimeException("Elevation out of bounds: " + value + "Elevation expected to be between -500 and 9000: " + 90);
+            throw new RuntimeException("Elevation out of bounds: " + "Elevation expected to be between -500 and 9000: " + value);
         }
     }
 

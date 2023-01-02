@@ -1,8 +1,7 @@
 package GPXrechner.Inputhandling.States;
 
-import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
-import GPXrechner.Entities.Path;
-import GPXrechner.Entities.Tour;
+import GPXrechner.WayModel.Entities.Path;
+import GPXrechner.WayModel.Entities.Tour;
 
 public class TourLoaded implements State{
 

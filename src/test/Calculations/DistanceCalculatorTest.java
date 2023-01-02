@@ -1,12 +1,10 @@
 package test.Calculations;
 
 import GPXrechner.Calculations.DistanceCalculator;
-import GPXrechner.Entities.Track;
+import GPXrechner.WayModel.Entities.Track;
 import GPXrechner.WayModel.AltitudeGain;
 import GPXrechner.WayModel.Location;
-import GPXrechner.WayModel.TrackPoint;
 import GPXrechner.WayModel.Units.Distance;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

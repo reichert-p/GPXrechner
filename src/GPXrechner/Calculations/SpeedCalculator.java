@@ -2,12 +2,11 @@ package GPXrechner.Calculations;
 
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.MovementSpeed.PersonalSpeed;
-import GPXrechner.Entities.Tour;
+import GPXrechner.WayModel.Entities.Tour;
 import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.Units.Pace;
 import GPXrechner.WayModel.TourPoint;
 
-import java.sql.Time;
 import java.time.Duration;
 import java.util.List;
 

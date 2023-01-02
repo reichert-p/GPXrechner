@@ -1,7 +1,7 @@
 package GPXrechner.Inputhandling.Parsing;
 
-import GPXrechner.Entities.Tour;
-import GPXrechner.Entities.Track;
+import GPXrechner.WayModel.Entities.Tour;
+import GPXrechner.WayModel.Entities.Track;
 import GPXrechner.WayModel.TourPoint;
 import GPXrechner.WayModel.TrackPoint;
 import org.w3c.dom.*;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class DOMParser implements XMLParser{
-    public Tour parseTour(String pathName){
+    public Tour parseTour(String pathName) throws NoTourException{
         Tour tour = null;
         try {
             Document doc = documentFactory(pathName);
@@ -29,15 +29,14 @@ public class DOMParser implements XMLParser{
                                 trackPoint,
                                 parseDate(eElement.getElementsByTagName("time").item(0).getTextContent())
                         ));
-
             }
+            return tour;
         }catch (Exception E){
-            E.printStackTrace(); //TODO better exception handling :(
+            throw new NoTourException();
         }
-        return tour;
     }
 
-    public Track parseTrack(String pathName){
+    public Track parseTrack(String pathName) throws NoTrackException{
         Track track = null;
         try {
             Document doc = documentFactory(pathName);
@@ -50,10 +49,10 @@ public class DOMParser implements XMLParser{
                 Element eElement = (Element) node;
                 track.addTrackPoint(trackPoint);
             }
+            return track;
         }catch (Exception E){
-            E.printStackTrace(); //TODO better exception handling :(
+            throw new NoTrackException();
         }
-        return track;
     }
 
     private static LocalDateTime parseDate(String s){

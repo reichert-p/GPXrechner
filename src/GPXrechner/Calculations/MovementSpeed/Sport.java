@@ -7,28 +7,36 @@ public enum Sport implements MovementSpeed {
     //TODO dies hier pflegen
     HIKING(4000,400,600),
     TRAILRUNNING(15000,800,1200),
-    CYCLING(20000,400,3000);
+    CYCLING(20000,400,3000),
+    SPRINTING(35000, 1000, 3000);
 
 
-    int a,b,c;
-    Sport(int a, int b, int c){
-        this.a = a;
-        this.b = b;
-        this.c = c;
+    Pace horizontal,climbing,descending;;
+    Sport(int horizontal, int climbing, int descending){
+        this.horizontal = new Pace(horizontal);
+        this.climbing = new Pace(climbing);
+        this.descending = new Pace(descending);
     }
 
     @Override
     public Pace getHorizontalSpeed() {
-        return new Pace(a);
+        return horizontal;
     }
 
     @Override
     public Pace getClimbingSpeed() {
-        return new Pace(b);
+        return climbing;
     }
 
     @Override
     public Pace getDescendingSpeed() {
-        return new Pace(c);
+        return descending;
+    }
+
+    @Override
+    public String toString() {
+        return "horizontal speed: " + horizontal + "\n " +
+               "climbing speed:   " + climbing + "\n " +
+               "descending speed: " + descending +"\n";
     }
 }

@@ -1,6 +1,6 @@
 package GPXrechner.Calculations;
 
-import GPXrechner.Entities.Path;
+import GPXrechner.WayModel.Entities.Path;
 import GPXrechner.WayModel.AltitudeGain;
 import GPXrechner.WayModel.Units.Distance;
 import GPXrechner.WayModel.Units.Elevation;

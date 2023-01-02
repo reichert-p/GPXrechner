@@ -1,7 +1,7 @@
 package GPXrechner.Calculations;
 
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
-import GPXrechner.Entities.Path;
+import GPXrechner.WayModel.Entities.Path;
 import GPXrechner.WayModel.AltitudeGain;
 import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.Units.Distance;

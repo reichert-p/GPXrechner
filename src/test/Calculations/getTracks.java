@@ -1,6 +1,6 @@
 package test.Calculations;
 
-import GPXrechner.Entities.Track;
+import GPXrechner.WayModel.Entities.Track;
 import GPXrechner.WayModel.TrackPoint;
 
 public class getTracks {

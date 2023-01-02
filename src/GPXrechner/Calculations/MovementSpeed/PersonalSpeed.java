@@ -28,4 +28,11 @@ public class PersonalSpeed implements MovementSpeed {
     public Pace getDescendingSpeed() {
         return descending;
     }
+
+    @Override
+    public String toString() {
+        return "horizontal speed: " + horizontal + "\n " +
+                "climbing speed:   " + climbing + "\n " +
+                "descending speed: " + descending +"\n";
+    }
 }

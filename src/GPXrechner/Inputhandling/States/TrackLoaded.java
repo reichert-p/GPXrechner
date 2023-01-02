@@ -1,8 +1,7 @@
 package GPXrechner.Inputhandling.States;
 
-import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
-import GPXrechner.Entities.Path;
-import GPXrechner.Entities.Track;
+import GPXrechner.WayModel.Entities.Path;
+import GPXrechner.WayModel.Entities.Track;
 
 public class TrackLoaded implements State{
     Track track;
