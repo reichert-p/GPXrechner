@@ -72,7 +72,7 @@ public class DistanceCalculator {
      * calculates three dimensional distance
      * @return Distance between two Locations in meter
      */
-    public static Distance calc3dDistance(Location a, Location b){ //TODO improve this abomination
+    public static Distance calc3dDistance(Location a, Location b){
         return new Distance(Math.sqrt(Math.pow(calcElevationGain(a,b).getManhattenNorm(),2)+Math.pow(calc2dDistance(a,b).getValue(),2)));
     }
 
@@ -92,4 +92,21 @@ public class DistanceCalculator {
         }
         return new Elevation(sum/ list.size());
     }
+
+    public static Elevation calcMinAlt(List<Location> list) {
+        double min = 10000;
+        for (Location l:list) {
+            min = Math.min(min,l.getEle().getValue());
+        }
+        return new Elevation(min);
+    }
+
+    public static Elevation calcMaxAlt(List<Location> list) {
+        double max = -1000;
+        for (Location l:list) {
+            max = Math.max(max,l.getEle().getValue());
+        }
+        return new Elevation(max);
+    }
+
 }

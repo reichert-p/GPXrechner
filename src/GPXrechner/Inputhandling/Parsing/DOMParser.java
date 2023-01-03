@@ -19,7 +19,7 @@ public class DOMParser implements XMLParser{
             Document doc = documentFactory(pathName);
             String name = getName(doc);
             tour = new Tour(name);
-            NodeList nodeList = doc.getElementsByTagName("trkpt"); //TODO other possible tags for this
+            NodeList nodeList = doc.getElementsByTagName("trkpt");
             for (int itr = 0; itr < nodeList.getLength(); itr++) { // alle trkpts durchlaufen
                 Node node = nodeList.item(itr);
                 TrackPoint trackPoint = parseTrackPoint(node);
@@ -42,8 +42,8 @@ public class DOMParser implements XMLParser{
             Document doc = documentFactory(pathName);
             String name = getName(doc);
             track = new Track(name);
-            NodeList nodeList = doc.getElementsByTagName("trkpt"); //TODO other possible tags for this
-            for (int itr = 0; itr < nodeList.getLength(); itr++) { // alle trkpts durchlaufen
+            NodeList nodeList = doc.getElementsByTagName("trkpt");
+            for (int itr = 0; itr < nodeList.getLength(); itr++) {
                 Node node = nodeList.item(itr);
                 TrackPoint trackPoint = parseTrackPoint(node);
                 Element eElement = (Element) node;
@@ -79,7 +79,7 @@ public class DOMParser implements XMLParser{
         return doc;
     }
 
-    public static TrackPoint parseTrackPoint(Node trackNode){ //TODO error handling
+    public static TrackPoint parseTrackPoint(Node trackNode){
         NamedNodeMap attributes = trackNode.getAttributes();
         Node lat = attributes.getNamedItem("lat");
         Node lon = attributes.getNamedItem("lon");

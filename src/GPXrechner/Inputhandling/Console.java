@@ -27,6 +27,7 @@ public class Console {
                 new GetSpeedProfile(),
                 new PMSFromFiles(),
                 new PredictTime(),
+                new GetTimeTaken(),
                 new ReadPath()
         };
     }

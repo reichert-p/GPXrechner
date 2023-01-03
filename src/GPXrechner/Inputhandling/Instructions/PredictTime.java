@@ -27,8 +27,7 @@ public class PredictTime implements Instruction{
             return state;
         }
         MovementSpeed movementSpeed = ConsoleParsing.parseMovementSpeed();
-        TimePrediction timePrediction = new TimePrediction(movementSpeed);
-        System.out.println("Estimated Time for Path " + path.toString() + ": " + timePrediction.predictTime(path));
+        System.out.println("Estimated Time for Path " + path.toString() + ": " + TimePrediction.predictTime(path,movementSpeed));
         return state;
     }
 

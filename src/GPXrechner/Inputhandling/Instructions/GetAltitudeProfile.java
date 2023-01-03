@@ -12,7 +12,6 @@ public class GetAltitudeProfile implements Instruction{
     public String getDescription() {
         return "see the altitude profile of the path";
     }
- //TODO elevation and altitude aussortieren
     @Override
     public State execute(State state) throws InvalidStateException {
         Path path;

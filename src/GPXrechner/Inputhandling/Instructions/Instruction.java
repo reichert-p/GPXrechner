@@ -9,4 +9,5 @@ public interface Instruction {
     public State execute(State state) throws InvalidStateException;
 
     public String getRegex();
+
 }

@@ -27,7 +27,7 @@ public class ReadPath implements Instruction{
                     Track track = XMLParser.parseTrack(s);
                     return new TrackLoaded(track);
                 }catch (NoTrackException f){
-                    f.printStackTrace();
+                    System.out.println("Specified path contains no gpx path");
                 }
             }
         }

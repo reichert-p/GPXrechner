@@ -3,7 +3,7 @@ package GPXrechner.WayModel.Units;
 /**
  * orthogonal Distance to sea level in meter
  */
-public class Elevation {
+public class Elevation implements Comparable<Elevation> {
     private double value;
 
     public Elevation(double value) {
@@ -19,4 +19,12 @@ public class Elevation {
         return value;
     }
 
+    @Override
+    public int compareTo(Elevation o) {
+        if (this.getValue() == o.getValue())
+            return 0;
+        if (this.getValue() < o.getValue())
+            return -1;
+        return 1;
+    }
 }

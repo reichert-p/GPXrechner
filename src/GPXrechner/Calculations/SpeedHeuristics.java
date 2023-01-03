@@ -1,15 +1,24 @@
 package GPXrechner.Calculations;
 
+import GPXrechner.WayModel.Entities.Tour;
+import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.TourPoint;
 import GPXrechner.WayModel.Units.Pace;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SpeedHeuristics {
     private static Duration calculateTime(TourPoint a, TourPoint b){
         return Duration.between(a.getTime(),b.getTime());
+    }
+    public static Duration calculateTime(Tour tour){
+        List<Location> locations = tour.getOrderedLocations();
+        TourPoint first = (TourPoint)(locations.get(0));
+        TourPoint last = (TourPoint)(locations.get(locations.size()-1));
+        return Duration.between(first.getTime(), last.getTime());
     }
     public static Pace getDescendingHeuristic(List<TourPoint> tourPoints, Pace horizontalHeuristic) {
         ArrayList<Pace> paces = new ArrayList<>();

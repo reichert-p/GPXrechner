@@ -6,8 +6,6 @@ import GPXrechner.WayModel.Units.Pace;
 public class PersonalSpeed implements MovementSpeed {
     Pace horizontal,climbing,descending;
 
-    //TODO probably a refactor here
-
     public PersonalSpeed(Pace horizontalSpeed, Pace climbingSpeed, Pace descendingSpeed) {
         this.horizontal = horizontalSpeed;
         this.climbing = climbingSpeed;
