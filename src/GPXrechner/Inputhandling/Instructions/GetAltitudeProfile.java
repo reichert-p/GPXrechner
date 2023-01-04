@@ -1,6 +1,7 @@
 package GPXrechner.Inputhandling.Instructions;
 
 import GPXrechner.Calculations.DistanceCalculator;
+import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Inputhandling.InvalidStateException;
 import GPXrechner.Inputhandling.Parsing.ConsoleParsing;
 import GPXrechner.Inputhandling.States.State;
@@ -25,10 +26,15 @@ public class GetAltitudeProfile implements Instruction{
         try {
             int granularity = ConsoleParsing.getGranularity();
             elevationProfile = new ElevationProfile(path,granularity);
-        }catch (Exception e){
-            elevationProfile = new ElevationProfile(path);
+            System.out.println(elevationProfile);
+        }catch (Exception | InsufficientDataException e){
+            try {
+                elevationProfile = new ElevationProfile(path);
+                System.out.println(elevationProfile);
+            }catch (InsufficientDataException f){
+                f.printStackTrace();
+            }
         }
-        System.out.println(elevationProfile);
         return state;
     }
 

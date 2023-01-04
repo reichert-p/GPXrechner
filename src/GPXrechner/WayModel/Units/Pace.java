@@ -7,7 +7,7 @@ public class Pace {
     private double value;
 
     public Pace(double value) {
-        if (value < 3600000 && value > -0) {
+        if (value < 3600000 && value >= 0) {
             this.value = value;
         }
         else{
@@ -17,5 +17,10 @@ public class Pace {
 
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return "" + Math.round(value) + "m/s";
     }
 }

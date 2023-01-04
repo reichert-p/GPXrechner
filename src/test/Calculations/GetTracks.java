@@ -3,7 +3,7 @@ package test.Calculations;
 import GPXrechner.WayModel.Entities.Track;
 import GPXrechner.WayModel.TrackPoint;
 
-public class getTracks {
+public class GetTracks {
     public static Track getMountainTrack(){ //Hochvogel traverse
         Track t =  new Track("Hochvogel traverse");
         TrackPoint[] pointList = {

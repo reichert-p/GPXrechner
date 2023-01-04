@@ -1,10 +1,15 @@
 package GPXrechner.WayModel.Entities;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProfileCalculation {
-    public static List<Double> normalize(List<Double> list, double min, double max){
+    public static List<Double> normalize(List<Double> plist){
+        Double min = Collections.min(plist);
+        Double max = Collections.max(plist);
         double diff = max - min;
+        ArrayList<Double> list = (ArrayList<Double>) plist;
         for (int i = 0; i < list.size(); i++) {
             double val = list.get(i);
             double normalizedVal = (val - min) / diff;

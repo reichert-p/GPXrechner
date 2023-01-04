@@ -1,6 +1,7 @@
 package GPXrechner.Inputhandling.Instructions;
 
 import GPXrechner.Calculations.DistanceCalculator;
+import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Calculations.SpeedCalculator;
 import GPXrechner.Inputhandling.InvalidStateException;
 import GPXrechner.Inputhandling.States.State;
@@ -26,7 +27,11 @@ public class GetPMS implements Instruction{
             System.out.println("this should not happen :))))");
             return state;
         }
-        System.out.println("PMS of Tour " + tour.toString() + ": " + SpeedCalculator.predictPersonalMovementSpeed(tour));
+        try {
+            System.out.println("PMS of Tour " + tour.toString() + ": " + SpeedCalculator.predictPersonalMovementSpeed(tour));
+        }catch (InsufficientDataException e){
+            e.printStackTrace();
+        }
         return state;
     }
 

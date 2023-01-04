@@ -1,5 +1,6 @@
 package GPXrechner.Inputhandling.Instructions;
 
+import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Calculations.SpeedCalculator;
 import GPXrechner.Inputhandling.InvalidStateException;
 import GPXrechner.Inputhandling.Parsing.ConsoleParsing;
@@ -31,10 +32,18 @@ public class GetSpeedProfile implements Instruction{
         try {
             int granularity = ConsoleParsing.getGranularity();
             speedProfile = new SpeedProfile(tour,granularity);
+            System.out.println(speedProfile);
+        }catch (InsufficientDataException e) {
+            System.out.println("granularity too high for amount of Locations in Path");;
         }catch (Exception e){
-            speedProfile = new SpeedProfile(tour);
+            try {
+                speedProfile = new SpeedProfile(tour);
+                System.out.println(speedProfile);
+            } catch (InsufficientDataException ex) {
+                System.out.println("invalid input for granularity. standard granularity of 10 is too high for amount of Locations in path");
+            }
         }
-        System.out.println(speedProfile);
+
         return state;
     }
 

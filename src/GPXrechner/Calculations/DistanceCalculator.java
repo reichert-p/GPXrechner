@@ -10,16 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DistanceCalculator {
-    /**
-     * Simple Kugeloberflächenberechnung nach Pythagoras
-     */
     private static final int equatorLength = 40075017;
     private static final int equatorDegree = equatorLength / 360;
 
-    /**
-     * Doesn't account for heights, assumes distance as in a map
-     * @return Distance between two Locations in meter
-     */
     public static Distance calc2dDistance(Location a, Location b){
         Distance latDistKm = calcDeltaLat(a,b);
         Distance lonDistKm = calcDeltaLon(a,b);
@@ -49,11 +42,6 @@ public class DistanceCalculator {
         return new Distance(Math.abs(equatorDegree * latDistSex));
     }
 
-    /**
-     * @param a start
-     * @param b end
-     * @return altitude gain/loss in meters
-     */
     public static AltitudeGain calcElevationGain(Location a, Location b){
         return new AltitudeGain(b.getEle().getValue() - a.getEle().getValue());
     }
@@ -68,10 +56,6 @@ public class DistanceCalculator {
         return totalAltitudeDiff;
     }
 
-    /**
-     * calculates three dimensional distance
-     * @return Distance between two Locations in meter
-     */
     public static Distance calc3dDistance(Location a, Location b){
         return new Distance(Math.sqrt(Math.pow(calcElevationGain(a,b).getManhattenNorm(),2)+Math.pow(calc2dDistance(a,b).getValue(),2)));
     }
@@ -85,7 +69,10 @@ public class DistanceCalculator {
         return total3dDistance;
     }
 
-    public static Elevation calcAvgAlt(List<Location> list) {
+    public static Elevation calcAvgAlt(List<Location> list) throws InsufficientDataException {
+        if (list.size() == 0){
+            throw new InsufficientDataException();
+        }
         double sum = 0;
         for (Location l:list) {
             sum += l.getEle().getValue();
@@ -93,7 +80,10 @@ public class DistanceCalculator {
         return new Elevation(sum/ list.size());
     }
 
-    public static Elevation calcMinAlt(List<Location> list) {
+    public static Elevation calcMinAlt(List<Location> list) throws InsufficientDataException {
+        if (list.size() == 0){
+            throw new InsufficientDataException();
+        }
         double min = 10000;
         for (Location l:list) {
             min = Math.min(min,l.getEle().getValue());
@@ -101,12 +91,14 @@ public class DistanceCalculator {
         return new Elevation(min);
     }
 
-    public static Elevation calcMaxAlt(List<Location> list) {
+    public static Elevation calcMaxAlt(List<Location> list) throws InsufficientDataException {
+        if (list.size() == 0){
+            throw new InsufficientDataException();
+        }
         double max = -1000;
         for (Location l:list) {
             max = Math.max(max,l.getEle().getValue());
         }
         return new Elevation(max);
     }
-
 }

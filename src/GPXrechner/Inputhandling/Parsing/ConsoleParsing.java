@@ -1,5 +1,6 @@
 package GPXrechner.Inputhandling.Parsing;
 
+import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.MovementSpeed.Sport;
 import GPXrechner.Calculations.SpeedCalculator;
@@ -62,7 +63,11 @@ public class ConsoleParsing {
         System.out.println("Bitte Sportart eingeben. Alternativ 'PMS' um Geschwindigkeit aus Tour(en) zu berechnen");
         String userInput = scanner.next();
         if (userInput.matches("PMS")){
-            return pathsToMovementSpeeds();
+            try {
+                return pathsToMovementSpeeds();
+            } catch (InsufficientDataException e) {
+                e.printStackTrace();
+            }
         }
         for (Sport sport:Sport.values()) {
             if (userInput.matches(sport.name().toLowerCase())){
@@ -80,7 +85,7 @@ public class ConsoleParsing {
         }
     }
 
-    public static MovementSpeed pathsToMovementSpeeds(){
+    public static MovementSpeed pathsToMovementSpeeds() throws InsufficientDataException {
         XMLParser xmlParser = new DOMParser();
         String[] paths = ConsoleParsing.readPaths();
         List<Tour> tours= new ArrayList<>();

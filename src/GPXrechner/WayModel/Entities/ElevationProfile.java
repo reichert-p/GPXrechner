@@ -1,27 +1,27 @@
 package GPXrechner.WayModel.Entities;
 
 import GPXrechner.Calculations.DistanceCalculator;
+import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.Units.Elevation;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ElevationProfile {
     private static final int yGranularity = 10;
     private boolean[][] profile;
-    Elevation min,max;
 
-    public ElevationProfile(Path path, int granularity) {
+    public ElevationProfile(Path path, int granularity) throws InsufficientDataException {
         this.profile = calculateElevationProfile(path,granularity);
     }
 
-    public ElevationProfile(Path path){
+    public ElevationProfile(Path path) throws InsufficientDataException {
         new ElevationProfile(path,10);
     }
 
-    private boolean[][] calculateElevationProfile(Path path, int xGranularity) {
+    private boolean[][] calculateElevationProfile(Path path, int xGranularity) throws InsufficientDataException {
         ArrayList<Location> locations = path.getOrderedLocations();
         boolean[][] output = new boolean[xGranularity][yGranularity];
         int[] sectionLength = ProfileCalculation.split(locations.size() , xGranularity);
@@ -33,9 +33,7 @@ public class ElevationProfile {
             processed += sectionLength[i];
         }
         List<Elevation> heights = getHeights(locationClusters);
-        this.max = Collections.max(heights);
-        this.min = Collections.min(heights);
-        List<Double> values = ProfileCalculation.normalize(heights.stream().map(e->e.getValue()).toList(),min.getValue(),max.getValue());
+        List<Double> values = ProfileCalculation.normalize(heights.stream().map(e->e.getValue()).collect(Collectors.toCollection(ArrayList::new)));
         for (int i = 0; i < xGranularity;i++) {
             for (int j = 0; j < yGranularity; j++) {
                 if (values.get(i)*yGranularity >= j){
@@ -46,7 +44,7 @@ public class ElevationProfile {
         return output;
     }
 
-    private List<Elevation> getHeights(List<List<Location>> locationClusters) {
+    private List<Elevation> getHeights(List<List<Location>> locationClusters) throws InsufficientDataException {
         List<Elevation> heights = new ArrayList<>();
         Elevation firstAvg = DistanceCalculator.calcAvgAlt(locationClusters.get(0));
         Elevation secondAvg = DistanceCalculator.calcAvgAlt(locationClusters.get(1));
@@ -63,14 +61,15 @@ public class ElevationProfile {
             if (actAvg.getValue() > prevAvg.getValue() && actAvg.getValue() > postAvg.getValue()){
                 heights.add(DistanceCalculator.calcMaxAlt(locationClusters.get(i)));
             }
-            if (actAvg.getValue() < prevAvg.getValue() && actAvg.getValue() < postAvg.getValue()) {
+            else if (actAvg.getValue() < prevAvg.getValue() && actAvg.getValue() < postAvg.getValue()) {
                 heights.add(DistanceCalculator.calcMinAlt(locationClusters.get(i)));
             }
-            heights.add(DistanceCalculator.calcAvgAlt(locationClusters.get(i)));
-
+            else {
+                heights.add(DistanceCalculator.calcAvgAlt(locationClusters.get(i)));
+            }
         }
-        Elevation lastAvg = DistanceCalculator.calcAvgAlt(locationClusters.get(0));
-        Elevation secondToLastAvg = DistanceCalculator.calcAvgAlt(locationClusters.get(1));
+        Elevation lastAvg = DistanceCalculator.calcAvgAlt(locationClusters.get(locationClusters.size()-1));
+        Elevation secondToLastAvg = DistanceCalculator.calcAvgAlt(locationClusters.get(locationClusters.size()-2));
         if (lastAvg.getValue() < secondToLastAvg.getValue()){
             heights.add(DistanceCalculator.calcMinAlt(locationClusters.get(locationClusters.size()-1)));
         }

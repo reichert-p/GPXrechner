@@ -14,13 +14,7 @@ import java.util.List;
 
 public class SpeedCalculator {
 
-    public static Pace predictSpeed(Location a, Location b, MovementSpeed speed){
-        long timeInHours = TimePrediction.predictTime(a,b,speed).toHours();
-        double distance = DistanceCalculator.calc3dDistance(a,b).getValue();
-        return new Pace(distance / timeInHours);
-    }
-
-    public static PersonalSpeed predictPersonalMovementSpeed (Tour tour){
+    public static PersonalSpeed predictPersonalMovementSpeed(Tour tour) throws InsufficientDataException{
         List<TourPoint> tourPoints = tour.getOrderedLocations().stream()
                 .filter(c -> c instanceof TourPoint)
                 .map(c -> (TourPoint) c)
@@ -31,7 +25,7 @@ public class SpeedCalculator {
         return new PersonalSpeed(horizontalHeuristic,climbingHeuristic,descendingHeuristic);
     }
 
-    public static PersonalSpeed predictPersonalMovementSpeed (Tour[] tours){
+    public static PersonalSpeed predictPersonalMovementSpeed(Tour[] tours) throws InsufficientDataException{
         Double horizontalSum = 0.0;
         Double climbingSum = 0.0;
         Double descendingSum = 0.0;
@@ -39,23 +33,34 @@ public class SpeedCalculator {
         for (Tour tour: tours) {
             Duration duration = TimePrediction.predictTime(tour, Sport.HIKING);
             long specifiedWeight = duration.toMinutes();
-            PersonalSpeed specificSpeed = predictPersonalMovementSpeed(tour);
-            weight += specifiedWeight;
-            horizontalSum += specifiedWeight * specificSpeed.getHorizontalSpeed().getValue();
-            climbingSum += specifiedWeight * specificSpeed.getClimbingSpeed().getValue();
-            descendingSum += specifiedWeight * specificSpeed.getDescendingSpeed().getValue();
+            try {
+                PersonalSpeed specificSpeed = predictPersonalMovementSpeed(tour);
+                weight += specifiedWeight;
+                horizontalSum += specifiedWeight * specificSpeed.getHorizontalSpeed().getValue();
+                climbingSum += specifiedWeight * specificSpeed.getClimbingSpeed().getValue();
+                descendingSum += specifiedWeight * specificSpeed.getDescendingSpeed().getValue();
+            }catch (InsufficientDataException e){
+
+            }
         }
-        return new PersonalSpeed(
-                new Pace(horizontalSum / weight),
-                new Pace(climbingSum / weight),
-                new Pace(descendingSum / weight)
-        );
+        if (weight != 0){
+            return new PersonalSpeed(
+                    new Pace(horizontalSum / weight),
+                    new Pace(climbingSum / weight),
+                    new Pace(descendingSum / weight)
+            );
+        }
+        throw new InsufficientDataException();
     }
 
-    public static Double calculateSpeedDeviation(Tour tour, List<TourPoint> section){
+    public static Double calculateSpeedDeviation(Tour tour, List<TourPoint> section)throws InsufficientDataException{
+        if (section.isEmpty()){
+            throw new InsufficientDataException();
+        }
         MovementSpeed generalSpeed = predictPersonalMovementSpeed(tour);
         Tour sectionTour = new Tour("");
-        sectionTour.addTourPoints((TourPoint[]) section.toArray());
+        sectionTour.addTourPoints(section.toArray(new TourPoint[0]));
+
         Duration predictedTime = TimePrediction.predictTime(sectionTour,generalSpeed); //predicted time for section
         Duration actualTime = Duration.between(section.get(0).getTime(),section.get(section.size()-1).getTime()); //actual time taken
         return predictedTime.getSeconds() / (double)actualTime.getSeconds();

@@ -22,7 +22,7 @@ class DistanceTest {
 
     @Test
     void testToString() {
-        assertEquals("Distance: 250 meters", dist.toString());
+        assertEquals("250 meters", dist.toString());
     }
 
     @Test

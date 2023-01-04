@@ -29,8 +29,8 @@ public class PersonalSpeed implements MovementSpeed {
 
     @Override
     public String toString() {
-        return "horizontal speed: " + horizontal + "\n " +
-                "climbing speed:   " + climbing + "\n " +
-                "descending speed: " + descending +"\n";
+        return "horizontal speed: " + horizontal.toString() + "\n " +
+                "climbing speed:   " + climbing.toString() + "\n " +
+                "descending speed: " + descending.toString() +"\n";
     }
 }
