@@ -1,7 +1,8 @@
-package GPXrechner.WayModel.Entities;
+package GPXrechner.WayModel.Profiles;
 
 import GPXrechner.Calculations.DistanceCalculator;
 import GPXrechner.Calculations.InsufficientDataException;
+import GPXrechner.WayModel.Entities.Path;
 import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.Units.Elevation;
 

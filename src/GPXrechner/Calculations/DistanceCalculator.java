@@ -1,7 +1,7 @@
 package GPXrechner.Calculations;
 
 import GPXrechner.WayModel.Entities.Path;
-import GPXrechner.WayModel.AltitudeGain;
+import GPXrechner.WayModel.ElevationGain;
 import GPXrechner.WayModel.Units.Distance;
 import GPXrechner.WayModel.Units.Elevation;
 import GPXrechner.WayModel.Location;
@@ -42,18 +42,18 @@ public class DistanceCalculator {
         return new Distance(Math.abs(equatorDegree * latDistSex));
     }
 
-    public static AltitudeGain calcElevationGain(Location a, Location b){
-        return new AltitudeGain(b.getEle().getValue() - a.getEle().getValue());
+    public static ElevationGain calcElevationGain(Location a, Location b){
+        return new ElevationGain(b.getEle().getValue() - a.getEle().getValue());
     }
 
-    public static AltitudeGain calcElevationGain(Path path){
+    public static ElevationGain calcElevationGain(Path path){
         ArrayList<Location> locations = path.getOrderedLocations();
-        AltitudeGain totalAltitudeDiff = new AltitudeGain(0,0);
+        ElevationGain totalElevationDiff = new ElevationGain(0,0);
         for (int i = 1; i < locations.size();i++){
-            AltitudeGain diff = calcElevationGain(locations.get(i-1), locations.get(i));
-            totalAltitudeDiff.addAltitude(diff);
+            ElevationGain diff = calcElevationGain(locations.get(i-1), locations.get(i));
+            totalElevationDiff.addElevationGain(diff);
         }
-        return totalAltitudeDiff;
+        return totalElevationDiff;
     }
 
     public static Distance calc3dDistance(Location a, Location b){

@@ -46,21 +46,18 @@ class SpeedCalculatorTest {
     @Test
     void calculateSpeedDeviation() throws InsufficientDataException {
         List<Location> locations = tour[0].getOrderedLocations().subList(120,200);
-        List<TourPoint> tourPoints = locations.stream()
-                .filter(e -> e instanceof TourPoint)
-                .map(e -> (TourPoint)e)
-                .toList();
-        double result = SpeedCalculator.calculateSpeedDeviation(tour[0],tourPoints);
+        Tour section = new Tour("Section");
+        section.addTourPoints(locations.toArray(TourPoint[]::new));
+
+        double result = SpeedCalculator.calculateSpeedDeviation(tour[0],section);
         Assertions.assertEquals(18,Math.round(result * 10));
     }
 
     @Test
     void calculateSpeedDeviationFail() throws InsufficientDataException {
         List<Location> locations = tour[0].getOrderedLocations().subList(1,10);
-        List<TourPoint> tourPoints = locations.stream()
-                .filter(e -> e instanceof TourPoint)
-                .map(e -> (TourPoint)e)
-                .toList();
-        Assertions.assertThrows(InsufficientDataException.class,()->SpeedCalculator.calculateSpeedDeviation(tour[1],tourPoints));
+        Tour section = new Tour("Section");
+        section.addTourPoints(locations.toArray(TourPoint[]::new));
+        Assertions.assertThrows(InsufficientDataException.class,()->SpeedCalculator.calculateSpeedDeviation(tour[1],section));
     }
 }

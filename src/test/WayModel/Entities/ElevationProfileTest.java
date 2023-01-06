@@ -1,10 +1,8 @@
 package test.WayModel.Entities;
 
 import GPXrechner.Calculations.InsufficientDataException;
-import GPXrechner.Inputhandling.Instructions.GetAltitudeProfile;
-import GPXrechner.WayModel.Entities.ElevationProfile;
+import GPXrechner.WayModel.Profiles.ElevationProfile;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import test.Calculations.GetTracks;
 

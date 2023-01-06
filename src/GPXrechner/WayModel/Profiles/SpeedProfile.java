@@ -1,7 +1,8 @@
-package GPXrechner.WayModel.Entities;
+package GPXrechner.WayModel.Profiles;
 
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Calculations.SpeedCalculator;
+import GPXrechner.WayModel.Entities.Tour;
 import GPXrechner.WayModel.TourPoint;
 
 import java.util.ArrayList;
@@ -27,7 +28,9 @@ public class SpeedProfile {
         List<Double> speeds = new ArrayList<>();
         int processed = 0;
         for (int i = 0; i < xGranularity; i++){
-                speeds.add(SpeedCalculator.calculateSpeedDeviation(tour, tourPoints.subList(processed,processed+sectionLength[i])));
+            Tour section = new Tour("Section " + i);
+            section.addTourPoints(tourPoints.subList(processed,processed+sectionLength[i]).toArray(TourPoint[]::new));
+                speeds.add(SpeedCalculator.calculateSpeedDeviation(tour,section));
             processed += sectionLength[i];
         }
         speeds = ProfileCalculation.normalize(speeds);

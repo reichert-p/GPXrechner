@@ -4,6 +4,7 @@ import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.TourPoint;
 import GPXrechner.WayModel.TrackPoint;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,5 +44,11 @@ public class Tour implements Path {
             ));
         }
         return output;
+    }
+
+    public Duration getDuration(){
+        TourPoint first = (TourPoint) tourPoints.get(0);
+        TourPoint last = (TourPoint) tourPoints.get(tourPoints.size()-1);
+        return Duration.between(first.getTime(), last.getTime());
     }
 }

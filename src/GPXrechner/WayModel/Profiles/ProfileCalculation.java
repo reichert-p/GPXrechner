@@ -1,4 +1,4 @@
-package GPXrechner.WayModel.Entities;
+package GPXrechner.WayModel.Profiles;
 
 import java.util.ArrayList;
 import java.util.Collections;

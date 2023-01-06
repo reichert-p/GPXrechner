@@ -3,7 +3,7 @@ package test.Calculations;
 import GPXrechner.Calculations.DistanceCalculator;
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.WayModel.Entities.Track;
-import GPXrechner.WayModel.AltitudeGain;
+import GPXrechner.WayModel.ElevationGain;
 import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.Units.Distance;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,9 +43,9 @@ class DistanceCalculatorTest {
     @Test
     void testCalcElevationGain() {
         ArrayList<Location> locations = mountainTrack.getOrderedLocations();
-        AltitudeGain a1 = DistanceCalculator.calcElevationGain(locations.get(1),locations.get(2)); //uphill
-        AltitudeGain a2 = DistanceCalculator.calcElevationGain(locations.get(4), locations.get(5)); //downhill
-        AltitudeGain a3 = DistanceCalculator.calcElevationGain(mountainTrack); //whole Track
+        ElevationGain a1 = DistanceCalculator.calcElevationGain(locations.get(1),locations.get(2)); //uphill
+        ElevationGain a2 = DistanceCalculator.calcElevationGain(locations.get(4), locations.get(5)); //downhill
+        ElevationGain a3 = DistanceCalculator.calcElevationGain(mountainTrack); //whole Track
         assertEquals(569, Math.round(a1.getUp()));
         assertEquals(0, a1.getDown());
         assertEquals(0, a2.getUp());

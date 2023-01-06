@@ -4,12 +4,10 @@ import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Inputhandling.Parsing.DOMParser;
 import GPXrechner.Inputhandling.Parsing.NoTourException;
 import GPXrechner.Inputhandling.Parsing.XMLParser;
-import GPXrechner.WayModel.Entities.ElevationProfile;
-import GPXrechner.WayModel.Entities.SpeedProfile;
+import GPXrechner.WayModel.Profiles.SpeedProfile;
 import GPXrechner.WayModel.Entities.Tour;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import test.Calculations.GetTracks;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,18 +1,18 @@
 package test.WayModel;
 
 
-import GPXrechner.WayModel.AltitudeGain;
+import GPXrechner.WayModel.ElevationGain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class AltitudeGainTest { //TODO change expected and actual
-    AltitudeGain alt1,alt2,alt3;
+class ElevationGainTest { //TODO change expected and actual
+    ElevationGain alt1,alt2,alt3;
     @BeforeEach
     void beforeEachTest(){
-        alt1 = new AltitudeGain(200, 400);
-        alt2 = new AltitudeGain(300);
-        alt3 = new AltitudeGain(-400);
+        alt1 = new ElevationGain(200, 400);
+        alt2 = new ElevationGain(300);
+        alt3 = new ElevationGain(-400);
     }
 
     @Test
@@ -35,9 +35,9 @@ class AltitudeGainTest { //TODO change expected and actual
     }
 
     @Test
-    void addAltitude() {
-        alt1.addAltitude(alt2);
-        alt1.addAltitude(alt3);
+    void addElevation() {
+        alt1.addElevationGain(alt2);
+        alt1.addElevationGain(alt3);
         Assertions.assertEquals(alt1.getUp(),500);
         Assertions.assertEquals(alt1.getDown(), 800);
     }

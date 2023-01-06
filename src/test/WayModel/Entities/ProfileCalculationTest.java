@@ -1,6 +1,6 @@
 package test.WayModel.Entities;
 
-import GPXrechner.WayModel.Entities.ProfileCalculation;
+import GPXrechner.WayModel.Profiles.ProfileCalculation;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

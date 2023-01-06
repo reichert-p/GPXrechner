@@ -2,7 +2,6 @@ package GPXrechner.Inputhandling;
 
 import GPXrechner.Inputhandling.Instructions.*;
 import GPXrechner.Inputhandling.Parsing.ConsoleParsing;
-import GPXrechner.Inputhandling.Parsing.XMLParser;
 import GPXrechner.Inputhandling.States.Initial;
 import GPXrechner.Inputhandling.States.State;
 
@@ -20,7 +19,7 @@ public class Console {
     private void generateInstructions(){
         instructions = new Instruction[]{
                 new GenerateTrack(),
-                new GetAltitudeProfile(),
+                new GetElevationProfile(),
                 new GetDistance(),
                 new GetHeigthDifference(),
                 new GetPMS(),

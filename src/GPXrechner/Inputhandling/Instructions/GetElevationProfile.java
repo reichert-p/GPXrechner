@@ -1,17 +1,16 @@
 package GPXrechner.Inputhandling.Instructions;
 
-import GPXrechner.Calculations.DistanceCalculator;
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Inputhandling.InvalidStateException;
 import GPXrechner.Inputhandling.Parsing.ConsoleParsing;
 import GPXrechner.Inputhandling.States.State;
-import GPXrechner.WayModel.Entities.ElevationProfile;
+import GPXrechner.WayModel.Profiles.ElevationProfile;
 import GPXrechner.WayModel.Entities.Path;
 
-public class GetAltitudeProfile implements Instruction{
+public class GetElevationProfile implements Instruction{
     @Override
     public String getDescription() {
-        return "see the altitude profile of the path";
+        return "see the elevation profile of the path";
     }
     @Override
     public State execute(State state) throws InvalidStateException {
@@ -19,7 +18,7 @@ public class GetAltitudeProfile implements Instruction{
         try {
             path = state.getPath();
         }catch (NullPointerException e){
-            System.out.println("Need to load gpx before showing altitude profile");
+            System.out.println("Need to load gpx before showing elevation profile");
             return state;
         }
         ElevationProfile elevationProfile;
@@ -40,6 +39,6 @@ public class GetAltitudeProfile implements Instruction{
 
     @Override
     public String getRegex() {
-        return "show altitude profile";
+        return "show elevation profile";
     }
 }

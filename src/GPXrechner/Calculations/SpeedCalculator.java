@@ -53,16 +53,14 @@ public class SpeedCalculator {
         throw new InsufficientDataException();
     }
 
-    public static Double calculateSpeedDeviation(Tour tour, List<TourPoint> section)throws InsufficientDataException{
-        if (section.isEmpty()){
+    public static Double calculateSpeedDeviation(Tour tour, Tour section)throws InsufficientDataException{
+        if (section.getOrderedLocations().isEmpty()){
             throw new InsufficientDataException();
         }
         MovementSpeed generalSpeed = predictPersonalMovementSpeed(tour);
-        Tour sectionTour = new Tour("");
-        sectionTour.addTourPoints(section.toArray(new TourPoint[0]));
 
-        Duration predictedTime = TimePrediction.predictTime(sectionTour,generalSpeed); //predicted time for section
-        Duration actualTime = Duration.between(section.get(0).getTime(),section.get(section.size()-1).getTime()); //actual time taken
+        Duration predictedTime = TimePrediction.predictTime(section,generalSpeed); //predicted time for section
+        Duration actualTime = section.getDuration(); //actual time taken
         return predictedTime.getSeconds() / (double)actualTime.getSeconds();
     }
 }

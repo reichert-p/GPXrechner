@@ -1,18 +1,18 @@
 package GPXrechner.WayModel;
 
 /**
- * The altitude Difference of a Path
+ * The elevation Difference of a Path
  */
-public class AltitudeGain {
+public class ElevationGain {
     double up;
     double down;
 
-    public AltitudeGain(double up, double down) {
+    public ElevationGain(double up, double down) {
         this.up = up;
         this.down = down;
     }
 
-    public AltitudeGain(double difference){ //returns an Altitude Gain which only moves one vertical direction
+    public ElevationGain(double difference){ //returns an Elevation Gain which only moves one vertical direction
         this.up = Math.max(0, difference);
         this.down = Math.abs(Math.min(0,difference));
     }
@@ -30,7 +30,7 @@ public class AltitudeGain {
         return "up: " + up + "m down: " + down + "m";
     }
 
-    public void addAltitude(AltitudeGain diff) {
+    public void addElevationGain(ElevationGain diff) {
         this.up += diff.up;
         this.down += diff.down;
     }

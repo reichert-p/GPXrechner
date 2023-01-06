@@ -4,7 +4,6 @@ import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.WayModel.Units.Pace;
 
 public enum Sport implements MovementSpeed {
-    //TODO dies hier pflegen
     HIKING(4000,400,600),
     TRAILRUNNING(15000,800,1200),
     CYCLING(20000,400,3000),

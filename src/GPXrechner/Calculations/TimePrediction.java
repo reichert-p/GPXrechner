@@ -2,10 +2,9 @@ package GPXrechner.Calculations;
 
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.WayModel.Entities.Path;
-import GPXrechner.WayModel.AltitudeGain;
+import GPXrechner.WayModel.ElevationGain;
 import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.Units.Distance;
-import GPXrechner.WayModel.Units.Pace;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class TimePrediction {
     }
 
     private static Duration predictVerticalTime(Location a, Location b,MovementSpeed movementSpeed){
-        AltitudeGain elevationChange = DistanceCalculator.calcElevationGain(a,b);
+        ElevationGain elevationChange = DistanceCalculator.calcElevationGain(a,b);
         double totalVerticalTime = 0;
         totalVerticalTime += elevationChange.getUp() / movementSpeed.getClimbingSpeed().getValue() * 60 * 60;
         totalVerticalTime += elevationChange.getDown() / movementSpeed.getDescendingSpeed().getValue() * 60 * 60;

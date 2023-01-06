@@ -28,4 +28,5 @@ public class GenerateTrack implements Instruction {
     public String getRegex() {
         return "generate track";
     }
-} //TODO eine Ausgabe von Touren/Tracks im gpx Format :/
+} //TODO eine Ausgabe von Touren/Tracks im gpx Format
+// TODO evolutionärer Algorithmus

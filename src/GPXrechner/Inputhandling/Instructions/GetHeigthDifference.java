@@ -20,7 +20,7 @@ public class GetHeigthDifference implements Instruction{
             System.out.println("gpx track needs to be loaded to get it's height difference");
             return state;
         }
-        System.out.println("Altitude gain of Path " + path.toString() + ": " + DistanceCalculator.calcElevationGain(path));
+        System.out.println("Elevation difference of Path " + path.toString() + ": " + DistanceCalculator.calcElevationGain(path));
         return state;
     }
 

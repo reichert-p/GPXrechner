@@ -8,6 +8,6 @@ public interface Instruction {
 
     public State execute(State state) throws InvalidStateException;
 
-    public String getRegex();
+    public String getRegex(); //TODO all out's in extra Class to split application and Plugins
 
 }
