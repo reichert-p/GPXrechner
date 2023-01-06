@@ -1,0 +1,44 @@
+\section{Kapitel 2: Clean Architecture}
+
+\subsection{Was ist Clean Architecture?}
+
+Clean Architecture ist der Aufbau von Anwendungen in verschiedenen Schichten, die nach innen hin immer beständiger werden. Äussere Schichten können dabei von inneren Schichten Abhängen, innere jedoch nicht von äusseren.
+
+\subsection{Analyse der Dependency Rule}
+
+\subsubsection{Positiv-Beispiel: Dependency Rule}
+
+Das Positivbeispiel ist die Klasse Speedprofile. Die einzige Methode mit Abhängigkeiten ist 
+
+\begin{figure}[h]
+  \centering
+  \includesvg[inkscapelatex = false, width = 300pt]{Chapters/Chapter2/positive}
+  \caption{Abhängigkeiten der Klassse Speedprofile}
+\end{figure}
+
+
+\subsubsection{Negativ-Beispiel: Dependency Rule}
+
+\subsubsection{Schicht: Domain Code}
+
+Die Klasse DistanceCalculator ist dafür Zuständig verschiedene Distanzen zwischen Orten oder einer chronologischen Abfolgen von Orten im Sexalsystem zu berechnen.
+Die (zugegeben heuristische) Berechnung von Distanzen im Sexalsystem basieren auf grundlegenden Zusammenhängen und werden sich in absehbarer Zeit nicht ändern und sind Grundlegend für alle Auswertungen von Daten, welche im Sexalsystem abgespeichert sind.
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, width = 90pt]{Chapters/Chapter2/ClassUML1}
+  \caption{UML Diagramm der Klasse DistanceCalculator}
+\end{figure}
+
+\subsubsection{Schicht: Plugins}
+
+Die Klasse ConsoleParsing ist dafür Zuständig bestimmte vorgegebene Werte von der Konsole zu lesen. Bei Eingabe unvorhergesehener Werte werden Vorschläge ausgegeben.
+Die Klasse stellt einen wesentlichen Bestandteil der Benutzerschnittstelle dar. Ein Austausch der Klasse durch beispielsweise ein tolles GUI mit Drop-Downs in Zukunft ist wahrscheinlich und lässt sich entsprechend einfach umsetzen.
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, width = 90pt]{Chapters/Chapter2/ClassUML2}
+  \caption{UML Diagramm der Klasse ConsoleParsing}
+\end{figure}
+
+
