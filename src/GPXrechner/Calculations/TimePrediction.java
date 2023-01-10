@@ -1,6 +1,7 @@
 package GPXrechner.Calculations;
 
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
+import GPXrechner.Calculations.TourSplitting.TimeHeuristic;
 import GPXrechner.WayModel.Entities.Path;
 import GPXrechner.WayModel.ElevationGain;
 import GPXrechner.WayModel.Location;
@@ -8,8 +9,9 @@ import GPXrechner.WayModel.Units.Distance;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
 
-public class TimePrediction {
+public class TimePrediction{
     public static Duration predictTime(Location a, Location b, MovementSpeed movementSpeed){
         Duration HorizontalTime = predictHorizontalTime(a,b,movementSpeed);
         Duration VerticalTime = predictVerticalTime(a,b,movementSpeed);
@@ -21,6 +23,10 @@ public class TimePrediction {
 
     public static Duration predictTime(Path path,MovementSpeed movementSpeed){
         ArrayList<Location> locations = path.getOrderedLocations();
+        return  predictTime(locations, movementSpeed);
+    }
+
+    public static Duration predictTime(List<Location> locations, MovementSpeed movementSpeed) {
         Duration totalTime = Duration.ZERO;
         for (int i = 1; i < locations.size();i++){
             totalTime = totalTime.plus(predictTime(locations.get(i-1), locations.get(i),movementSpeed));
@@ -40,4 +46,6 @@ public class TimePrediction {
         totalVerticalTime += elevationChange.getDown() / movementSpeed.getDescendingSpeed().getValue() * 60 * 60;
         return Duration.ofSeconds((long)totalVerticalTime);
     }
+
+
 }

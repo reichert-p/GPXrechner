@@ -58,7 +58,6 @@ public class SpeedCalculator {
             throw new InsufficientDataException();
         }
         MovementSpeed generalSpeed = predictPersonalMovementSpeed(tour);
-
         Duration predictedTime = TimePrediction.predictTime(section,generalSpeed); //predicted time for section
         Duration actualTime = section.getDuration(); //actual time taken
         return predictedTime.getSeconds() / (double)actualTime.getSeconds();

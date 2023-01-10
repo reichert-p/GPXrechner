@@ -27,7 +27,7 @@ class SpeedCalculatorTest {
     }
 
     @Test
-    void predictPersonalMovementSpeedSingle() throws InsufficientDataException {
+    void predictPMSSingle() throws InsufficientDataException {
         PersonalSpeed personalSpeed = SpeedCalculator.predictPersonalMovementSpeed(tour[0]);
         Assertions.assertEquals(15890,Math.round(personalSpeed.getHorizontalSpeed().getValue()));
         Assertions.assertEquals(791,Math.round(personalSpeed.getDescendingSpeed().getValue()));
@@ -36,7 +36,7 @@ class SpeedCalculatorTest {
         }
 
     @Test
-    void testPredictPersonalMovementSpeedMultiple() throws InsufficientDataException {
+    void testPredictPMSMultiple() throws InsufficientDataException {
         PersonalSpeed personalSpeed = SpeedCalculator.predictPersonalMovementSpeed(tour);
         Assertions.assertEquals(15890,Math.round(personalSpeed.getHorizontalSpeed().getValue()));
         Assertions.assertEquals(791,Math.round(personalSpeed.getDescendingSpeed().getValue()));

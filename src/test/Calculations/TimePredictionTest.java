@@ -7,7 +7,4 @@ class TimePredictionTest {
     void predictTime() {
     }
 
-    @Test
-    void testPredictTime() {
-    }
 }

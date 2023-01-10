@@ -1,9 +1,12 @@
 package GPXrechner.Inputhandling.Parsing;
 
+import GPXrechner.Calculations.TourSplitting.NoWayPointsExeption;
+import GPXrechner.Calculations.TourSplitting.WayPointSet;
 import GPXrechner.WayModel.Entities.Tour;
 import GPXrechner.WayModel.Entities.Track;
 import GPXrechner.WayModel.TourPoint;
 import GPXrechner.WayModel.TrackPoint;
+import GPXrechner.WayModel.WayPoint;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -13,12 +16,12 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class DOMParser implements XMLParser{
+
     public Tour parseTour(String pathName) throws NoTourException{
-        Tour tour = null;
         try {
             Document doc = documentFactory(pathName);
             String name = getName(doc);
-            tour = new Tour(name);
+            Tour tour = new Tour(name);
             NodeList nodeList = doc.getElementsByTagName("trkpt");
             for (int itr = 0; itr < nodeList.getLength(); itr++) { // alle trkpts durchlaufen
                 Node node = nodeList.item(itr);
@@ -37,21 +40,49 @@ public class DOMParser implements XMLParser{
     }
 
     public Track parseTrack(String pathName) throws NoTrackException{
-        Track track = null;
         try {
             Document doc = documentFactory(pathName);
             String name = getName(doc);
-            track = new Track(name);
+            Track track = new Track(name);
             NodeList nodeList = doc.getElementsByTagName("trkpt");
             for (int itr = 0; itr < nodeList.getLength(); itr++) {
                 Node node = nodeList.item(itr);
                 TrackPoint trackPoint = parseTrackPoint(node);
-                Element eElement = (Element) node;
                 track.addTrackPoint(trackPoint);
             }
             return track;
         }catch (Exception E){
             throw new NoTrackException();
+        }
+    }
+
+    @Override
+    public WayPointSet parseWayPoints(String pathName) throws NoWayPointsExeption {
+        try {
+            Document doc = documentFactory(pathName);
+            String name = getName(doc);
+            WayPointSet wayPointSet = new WayPointSet(name);
+            NodeList nodeList = doc.getElementsByTagName("wpt");
+            for (int itr = 0; itr < nodeList.getLength(); itr++) {
+                Node node = nodeList.item(itr);
+                TrackPoint trackPoint = parseTrackPoint(node);
+                Element eElement = (Element) node;
+                String nodeDescr;
+                try {
+                    nodeDescr = eElement.getElementsByTagName("name").item(0).getTextContent();
+                }catch ( Exception e){
+                    nodeDescr = "Unnamed Entity";
+                }
+                wayPointSet.addWayPoint(
+                        new WayPoint(
+                                trackPoint,
+                                nodeDescr
+                        )
+                );
+            }
+            return wayPointSet;
+        } catch (Exception e) {
+            throw new NoWayPointsExeption();
         }
     }
 
@@ -79,7 +110,7 @@ public class DOMParser implements XMLParser{
         return doc;
     }
 
-    public static TrackPoint parseTrackPoint(Node trackNode){
+    private static TrackPoint parseTrackPoint(Node trackNode){
         NamedNodeMap attributes = trackNode.getAttributes();
         Node lat = attributes.getNamedItem("lat");
         Node lon = attributes.getNamedItem("lon");

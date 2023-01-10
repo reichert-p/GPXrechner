@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="Wikipedia"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+ <metadata>
+  <name>Watzmann Wasser</name>
+  <desc>Validiertes GPX-Beispiel ohne Sonderzeichen</desc>
+  <author>
+   <name>Autorenname</name>
+  </author>
+ </metadata>
+ <wpt lat="47.569385" lon="12.938824">
+  <ele>1979.3</ele>
+  <name>Watzmannhaus</name>
+ </wpt>
+ <wpt lat="47.535597" lon="12.909882">
+  <ele>1732.8</ele>
+  <name>Quelle Schönfeld</name>
+ </wpt>
+ <wpt lat="47.531701" lon="12.899848">
+  <ele>1441.2</ele>
+  <name>Wimbachgrieshütte</name>
+ </wpt>
+</gpx>

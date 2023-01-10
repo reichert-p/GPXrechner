@@ -23,7 +23,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalc2dDistance() {
+    void calc2dDistance() {
         Distance d1 = DistanceCalculator.calc2dDistance(mountainTrack.getOrderedLocations().get(0),mountainTrack.getOrderedLocations().get(1));
         assertEquals(308, Math.round(d1.getValue()));
         Distance dAll = DistanceCalculator.calc2dDistance(mountainTrack);
@@ -32,7 +32,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalc3dDistance() {
+    void calc3dDistance() {
         Distance d1 = DistanceCalculator.calc3dDistance(mountainTrack.getOrderedLocations().get(0),mountainTrack.getOrderedLocations().get(1));
         assertEquals(310, Math.round(d1.getValue()));
         Distance dAll = DistanceCalculator.calc3dDistance(mountainTrack);
@@ -41,7 +41,7 @@ class DistanceCalculatorTest {
     }
 
     @Test
-    void testCalcElevationGain() {
+    void calcElevationGain() {
         ArrayList<Location> locations = mountainTrack.getOrderedLocations();
         ElevationGain a1 = DistanceCalculator.calcElevationGain(locations.get(1),locations.get(2)); //uphill
         ElevationGain a2 = DistanceCalculator.calcElevationGain(locations.get(4), locations.get(5)); //downhill
