@@ -4,21 +4,83 @@
 
 \subsubsection{Positiv-Beispiel}
 
+Die Klasse Latitude und repräsentiert eine Breite im Sexalsystem, also etwa 49.00 für Karlsruhe. Die Aufgabe ist die Überprüfung ob die Breite im Erlaubten Wertebereich ist und die Ausgabe als Double, was in eigenen Methoden umgesetzt ist.
+
 \begin{figure}[h]
   \centering
   \includesvg[inkscapelatex = false, scale = 1]{Chapters/Chapter3/SRP_good}
-  \caption{Abhängigkeiten der Klassse Speedprofile}
+  \caption{UML Diagramm der Klasse Latitude}
 \end{figure}
 
 \subsubsection{Negativ-Beispiel}
 
+Die Klasse SpeedCalculator ist eine Klasse die statische Methoden zu Berechnungen mit Geschwindigkeiten umsetzt. Konkrete Aufgaben sind die Berechnung von Geschwindigkeitskomponenten aus einer oder mehreren Touren sowie die in Verhältnis Stellung von der Geschwindigkeit einer Tour mit einer Liste von Tourpunkten.
+
 \begin{figure}[h]
   \centering
   \includesvg[inkscapelatex = false, scale = 1]{Chapters/Chapter3/SRP_bad}
-  \caption{Abhängigkeiten der Klassse Speedprofile}
+  \caption{UML Diagramm der Klasse SpeedCalculator}
+\end{figure}
+
+Hier könnte das SRP (zumindest auf Klassenebene) umgesetzt werden indem die Berechnung der Geschwindigkeitsabweichung eine eingene Klasse bekommt die von der neuen Klasse, welche lediglich die Aufgabe hat Geschwindigkeitskomponenten zu berechnen abhängt.
+
+\begin{figure}[h]
+  \centering
+  \includesvg[inkscapelatex = false, scale = 1]{Chapters/Chapter3/SRP_better}
+  \caption{UML Diagramm mit Umsetzung des SRP}
 \end{figure}
 
 \subsection{Analyse Open-Closed-Principle (OCP)}
 
+\subsubsection{Positiv-Beispiel}
+
+Ein Beispiel wo das OCP angewandt wurde ist im Instruction Interface. Es ist der Zentrale Punkt in der Anwendungslogik, das den Matcher einer Eingabe darstellt. In der execute() Methode wird der zugehörige Use Case ausgeführt. Durch die Implementierung des Interfaces können neue Befehle einfach hinzugefügt werden ohne bestehende Befehle zu verändern.
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, scale = 1]{Chapters/Chapter3/OCP_good}
+  \caption{UML Diagramm des Instruction Interface mit 2 Implementierungen}
+\end{figure}
+
+\subsubsection{Negativ-Beispiel}
+
+Ein Beispiel wo das OCP nicht angewandt wurde ist bei der Klasse Console. Sie ist dazu zuständig die Verbindung zwischen verschiedenen Befehlen zu gewährleisten. Wollte man diese anderst Umsetzten, etwa mithilfe von Event listenern oder ähnlichem, müsste man die bestehende Implementierung ändern.
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, scale = 1]{Chapters/Chapter3/OCP_bad}
+  \caption{UML Diagramm der Klasse SpeedCalculator}
+\end{figure}
+
+Mithilfe eines ProgramFlow Interfaces könnte hier das OCP verwendet werden.
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, scale = 1]{Chapters/Chapter3/OCP_better}
+  \caption{UML Diagramm mit Umsetzung des SRP}
+\end{figure}
+
+
 \subsection{Dependency-Inversion-Principle (DIP))}
+
+\subsubsection{Positiv-Beispiel}
+
+Bei der TimePrediction wurde das Dependency Inversion Principle angewandt, da verhindert wird, dass diese von den Details eines Bestimmten Pfades abhängt. Durch die Einsetzun des Path Interfaces hängt nun die Detailimplementation(Track) von der Abstraktion(Path) ab.
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, scale = 0.5]{Chapters/Chapter3/DIP_good}
+  \caption{Dependency Inversion von Vorhersagen bei verschiedenen Pfaden}
+\end{figure}
+
+\subsubsection{Negativ-Beispiel}
+
+Dadurch, dass der Befehl ReadPath neben der Abstraktion auch von der Detailimplementierung abhängt ist das DIP hier nicht erfüllt. Besser wäre, wenn in einer abstrakteren Schicht der detaillierte DOMParser als XMLParser übergeben wird statt ihn bei der Instanziierung zu erzeugen.
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, scale = 1]{Chapters/Chapter3/DIP_bad}
+  \caption{Keine Dependency Inversion beim Lesen eines Pfads}
+\end{figure}
+
 

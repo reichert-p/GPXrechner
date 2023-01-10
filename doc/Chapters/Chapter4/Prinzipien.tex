@@ -1,0 +1,148 @@
+\section{Kapitel 4: Weitere Prinzipien}
+
+\subsection{Analyse GRASP: Geringe Kopplung}
+
+
+\subsubsection{Positiv-Beispiel}
+
+
+\subsubsection{Negativ-Beispiel}
+
+
+\subsection{Analyse GRASP: Hohe Kohäsion}
+
+
+
+\subsection{Don’t Repeat Yourself (DRY)}
+
+Erstellen der Helferklasse ProfileCalcultion für die Berechnung von Profilen, welchen von den Klassen (damals)ElevationProfile un d SpeedProfile verwendet wird (\href{https://github.com/reichert-p/GPXrechner/commit/8ffd648d794563fea2c8662debe12ca1277b1b3e#diff-3be7b5bf425b2c9794272cdc879a4e9b0ed23bab55acbdf71756fbda1356ff80}{commit 8ffd648d794563fea2c8662debe12ca1277b1b3e} ).
+Da die Methoden jeweils unabhängig vom Inhalt des jeweiligen Profils ausgeführt werden und genau Dasselbe tun können sie ausgelagert und dann darauf zugegriffen werden. Dies verhindert eine wiederholte Implementierung, hat aber keinerlei Auswirkungen auf das Ergebnis. In einem Anschliessenden Commit wird dieser Effekt sogar noch Ausgeweitet, indem anstelle von Minima und Maxima zur Normalisierung nur die Liste selbst angegeben wird und diese Werte dann in der ausgelagerten Methode berechnet werden (\href{https://github.com/reichert-p/GPXrechner/commit/996f066a8f26f78852df00c85888f7236b87b458#diff-3be7b5bf425b2c9794272cdc879a4e9b0ed23bab55acbdf71756fbda1356ff80}{commit 996f066a8f26f78852df00c85888f7236b87b458}).
+
+\subsubsection{Vorher}
+
+\begin{lstlisting}
+public class SpeedProfile {
+	private boolean[][] calculateSpeedProfile(Tour tour, int xGranularity) {
+		...
+		int[] sectionLength = split(tourPoints.size() , xGranularity);
+		...
+		speeds = normalize(speeds,min,max);
+		...
+	}
+
+    private List<Double> normalize(List<Double> list,double min, double max){
+        double diff = max - min;
+        for (int i = 0; i < list.size(); i++) {
+            double val = list.get(i);
+            double normalizedVal = (val - min) / diff;
+            list.set(i,normalizedVal);
+        }
+        return list;
+    }
+
+    private int[] split(int pool,int sections){
+        int[] output = new int[sections];
+        int base = pool/sections;
+        int remainder = pool % sections;
+        for (int i = 0; i < output.length; i++){
+            if (remainder <= i){
+                output[i] = base;
+            }
+            if (remainder > i){
+                output[i] = 1+base;
+            }
+        }
+        return output;
+    }
+}
+
+public class ElevationProfile {
+	private boolean[][] calculateSpeedProfile(Tour tour, int xGranularity) {
+		...
+		int[] sectionLength = split(locations.size() , xGranularity);
+		...
+		heights = normalize(heights,min,max);
+		...
+	}
+
+    private List<Double> normalize(List<Double> list,double min, double max){
+        double diff = max - min;
+        for (int i = 0; i < list.size(); i++) {
+            double val = list.get(i);
+            double normalizedVal = (val - min) / diff;
+            list.set(i,normalizedVal);
+        }
+        return list;
+    }
+
+    private int[] split(int pool,int sections){
+        int[] output = new int[sections];
+        int base = pool/sections;
+        int remainder = pool % sections;
+        for (int i = 0; i < output.length; i++){
+            if (remainder <= i){
+                output[i] = base;
+            }
+            if (remainder > i){
+                output[i] = 1+base;
+            }
+        }
+        return output;
+    }
+}
+
+\end{lstlisting}
+
+
+\subsubsection{Nacher}
+
+\begin{lstlisting}
+public class SpeedProfile {
+	private boolean[][] calculateSpeedProfile(Tour tour, int xGranularity) {
+		...
+		int[] sectionLength = ProfileCalculation.split(tourPoints.size() , xGranularity);
+		...
+		speeds = normalize(speeds,min,max);
+		...
+	}
+}
+
+public class ElevationProfile {
+	private boolean[][] calculateSpeedProfile(Tour tour, int xGranularity) {
+		...
+		int[] sectionLength = ProfileCalculation.split(locations.size() , xGranularity);
+		...
+		heights = ProfileCalculation.normalize(heights.stream().map(e->e.getValue()).toList(),min.getValue(),max.getValue());
+		...
+	}
+}
+
+public class ProfileCalculation {
+    public static List<Double> normalize(List<Double> list, double min, double max){
+        double diff = max - min;
+        for (int i = 0; i < list.size(); i++) {
+            double val = list.get(i);
+            double normalizedVal = (val - min) / diff;
+            list.set(i,normalizedVal);
+        }
+        return list;
+    }
+
+    public static int[] split(int pool,int sections){
+        int[] output = new int[sections];
+        int base = pool/sections;
+        int remainder = pool % sections;
+        for (int i = 0; i < output.length; i++){
+            if (remainder <= i){
+                output[i] = base;
+            }
+            if (remainder > i){
+                output[i] = 1+base;
+            }
+        }
+        return output;
+    }
+}
+ 
+
+\end{lstlisting}
