@@ -1,8 +1,8 @@
-package GPXrechner.Inputhandling.Instructions;
+package GPXrechner.Application.Instructions;
 
 import GPXrechner.Calculations.DistanceCalculator;
-import GPXrechner.Inputhandling.InvalidStateException;
-import GPXrechner.Inputhandling.States.State;
+import GPXrechner.Interfaces.InvalidStateException;
+import GPXrechner.Application.States.State;
 import GPXrechner.WayModel.Entities.Path;
 
 public class GetHeigthDifference implements Instruction{

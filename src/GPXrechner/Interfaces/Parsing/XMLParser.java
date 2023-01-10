@@ -1,4 +1,4 @@
-package GPXrechner.Inputhandling.Parsing;
+package GPXrechner.Interfaces.Parsing;
 
 import GPXrechner.Calculations.TourSplitting.NoWayPointsExeption;
 import GPXrechner.Calculations.TourSplitting.WayPointSet;

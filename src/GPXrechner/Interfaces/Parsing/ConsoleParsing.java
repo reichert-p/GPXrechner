@@ -1,10 +1,10 @@
-package GPXrechner.Inputhandling.Parsing;
+package GPXrechner.Interfaces.Parsing;
 
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.MovementSpeed.Sport;
 import GPXrechner.Calculations.SpeedCalculator;
-import GPXrechner.Inputhandling.Instructions.Instruction;
+import GPXrechner.Application.Instructions.Instruction;
 import GPXrechner.WayModel.Entities.Tour;
 
 import java.util.ArrayList;

@@ -1,10 +1,10 @@
-package GPXrechner.Inputhandling.Instructions;
+package GPXrechner.Application.Instructions;
 
-import GPXrechner.Inputhandling.InvalidStateException;
-import GPXrechner.Inputhandling.Parsing.*;
-import GPXrechner.Inputhandling.States.State;
-import GPXrechner.Inputhandling.States.TourLoaded;
-import GPXrechner.Inputhandling.States.TrackLoaded;
+import GPXrechner.Interfaces.InvalidStateException;
+import GPXrechner.Interfaces.Parsing.*;
+import GPXrechner.Application.States.State;
+import GPXrechner.Application.States.TourLoaded;
+import GPXrechner.Application.States.TrackLoaded;
 import GPXrechner.WayModel.Entities.Tour;
 import GPXrechner.WayModel.Entities.Track;
 

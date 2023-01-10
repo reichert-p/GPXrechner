@@ -1,4 +1,4 @@
-package GPXrechner.Inputhandling.States;
+package GPXrechner.Application.States;
 
 import GPXrechner.WayModel.Entities.Path;
 

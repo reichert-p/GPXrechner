@@ -1,7 +1,7 @@
-package GPXrechner.Inputhandling;
+package GPXrechner.Interfaces;
 
-import GPXrechner.Inputhandling.Instructions.Instruction;
-import GPXrechner.Inputhandling.States.State;
+import GPXrechner.Application.Instructions.Instruction;
+import GPXrechner.Application.States.State;
 
 public class InvalidStateException extends Exception {
     public InvalidStateException(Instruction instruction, State state){

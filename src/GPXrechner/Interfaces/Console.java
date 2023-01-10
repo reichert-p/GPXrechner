@@ -1,9 +1,9 @@
-package GPXrechner.Inputhandling;
+package GPXrechner.Interfaces;
 
-import GPXrechner.Inputhandling.Instructions.*;
-import GPXrechner.Inputhandling.Parsing.ConsoleParsing;
-import GPXrechner.Inputhandling.States.Initial;
-import GPXrechner.Inputhandling.States.State;
+import GPXrechner.Application.Instructions.*;
+import GPXrechner.Interfaces.Parsing.ConsoleParsing;
+import GPXrechner.Application.States.Initial;
+import GPXrechner.Application.States.State;
 
 public class Console {
 

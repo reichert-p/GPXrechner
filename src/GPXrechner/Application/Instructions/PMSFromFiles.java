@@ -1,18 +1,9 @@
-package GPXrechner.Inputhandling.Instructions;
+package GPXrechner.Application.Instructions;
 
 import GPXrechner.Calculations.InsufficientDataException;
-import GPXrechner.Calculations.SpeedCalculator;
-import GPXrechner.Inputhandling.InvalidStateException;
-import GPXrechner.Inputhandling.Parsing.ConsoleParsing;
-import GPXrechner.Inputhandling.Parsing.DOMParser;
-import GPXrechner.Inputhandling.Parsing.NoTourException;
-import GPXrechner.Inputhandling.Parsing.XMLParser;
-import GPXrechner.Inputhandling.States.State;
-import GPXrechner.WayModel.Entities.Tour;
-import GPXrechner.WayModel.TourPoint;
-
-import java.util.ArrayList;
-import java.util.List;
+import GPXrechner.Interfaces.InvalidStateException;
+import GPXrechner.Interfaces.Parsing.ConsoleParsing;
+import GPXrechner.Application.States.State;
 
 public class PMSFromFiles implements  Instruction{
     @Override

@@ -3,8 +3,8 @@ package GPXrechner.Calculations.TourSplitting;
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.MovementSpeed.Sport;
 import GPXrechner.Calculations.TimePrediction;
-import GPXrechner.Inputhandling.Parsing.DOMParser;
-import GPXrechner.Inputhandling.Parsing.NoTrackException;
+import GPXrechner.Interfaces.Parsing.DOMParser;
+import GPXrechner.Interfaces.Parsing.NoTrackException;
 import GPXrechner.WayModel.Entities.Path;
 import GPXrechner.WayModel.Entities.Track;
 import GPXrechner.WayModel.Location;
@@ -101,7 +101,7 @@ public class EvolutionaryDist {
         return sum;
     }
 
-    public long evaluationFunction(Representation representation){ //TODO refactor name
+    public long evaluationFunction(Representation representation){
         Duration sum = Duration.ZERO;
         Duration baseDuration = TimePrediction.predictTime(path, this.movementSpeed);
         for (int i = 0; i < detours.getPossibleDetours().size(); i++){

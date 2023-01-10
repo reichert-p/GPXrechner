@@ -2,22 +2,19 @@ package test.Calculations;
 
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Calculations.SpeedHeuristics;
-import GPXrechner.Inputhandling.Parsing.DOMParser;
-import GPXrechner.Inputhandling.Parsing.NoTourException;
-import GPXrechner.Inputhandling.Parsing.XMLParser;
+import GPXrechner.Interfaces.Parsing.DOMParser;
+import GPXrechner.Interfaces.Parsing.NoTourException;
+import GPXrechner.Interfaces.Parsing.XMLParser;
 import GPXrechner.WayModel.Entities.Tour;
 import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.TourPoint;
 import GPXrechner.WayModel.Units.Pace;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SpeedHeuristicsTest {
     Tour[] tour = new Tour[3];

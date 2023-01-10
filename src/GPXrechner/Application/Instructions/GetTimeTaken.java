@@ -1,9 +1,9 @@
-package GPXrechner.Inputhandling.Instructions;
+package GPXrechner.Application.Instructions;
 
 import GPXrechner.Calculations.SpeedHeuristics;
-import GPXrechner.Inputhandling.InvalidStateException;
-import GPXrechner.Inputhandling.States.State;
-import GPXrechner.Inputhandling.States.TourLoaded;
+import GPXrechner.Interfaces.InvalidStateException;
+import GPXrechner.Application.States.State;
+import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.WayModel.Entities.Tour;
 
 public class GetTimeTaken implements Instruction{

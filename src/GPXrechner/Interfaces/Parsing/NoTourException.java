@@ -1,4 +1,4 @@
-package GPXrechner.Inputhandling.Parsing;
+package GPXrechner.Interfaces.Parsing;
 
 public class NoTourException extends Throwable{
 }

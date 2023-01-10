@@ -1,9 +1,9 @@
-package GPXrechner.Inputhandling.Instructions;
+package GPXrechner.Application.Instructions;
 
 import GPXrechner.Calculations.InsufficientDataException;
-import GPXrechner.Inputhandling.InvalidStateException;
-import GPXrechner.Inputhandling.Parsing.ConsoleParsing;
-import GPXrechner.Inputhandling.States.State;
+import GPXrechner.Interfaces.InvalidStateException;
+import GPXrechner.Interfaces.Parsing.ConsoleParsing;
+import GPXrechner.Application.States.State;
 import GPXrechner.WayModel.Profiles.ElevationProfile;
 import GPXrechner.WayModel.Entities.Path;
 
