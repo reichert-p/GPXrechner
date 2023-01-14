@@ -21,7 +21,7 @@ public class Console {
                 new GenerateTrack(),
                 new GetElevationProfile(),
                 new GetDistance(),
-                new GetHeigthDifference(),
+                new GetAltitudeDifference(),
                 new GetPMS(),
                 new GetSpeedProfile(),
                 new PMSFromFiles(),

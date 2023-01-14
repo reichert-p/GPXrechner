@@ -2,6 +2,7 @@ package GPXrechner.Application.Instructions;
 
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Interfaces.InvalidStateException;
+import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.Interfaces.Parsing.ConsoleParsing;
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
@@ -17,31 +18,25 @@ public class GetSpeedProfile implements Instruction{
     @Override
     public State execute(State state) throws InvalidStateException {
         if (!(state instanceof TourLoaded)){
-            throw new InvalidStateException(this,state);
+            throw new InvalidStateException("TourLoaded",state);
         }
-        Tour tour;
-        try {
-            tour = (Tour)state.getPath();
-        }catch (Exception e){
-            System.out.println("this should not happen :))))");
-            return state;
-        }
+        Tour tour = (Tour)state.getPath();
         SpeedProfile speedProfile;
-        try {
-            int granularity = ConsoleParsing.getGranularity();
-            speedProfile = new SpeedProfile(tour,granularity);
-            System.out.println(speedProfile);
-        }catch (InsufficientDataException e) {
-            System.out.println("granularity too high for amount of Locations in Path");;
+        int granularity = -1;
+        try{
+            granularity = ConsoleParsing.getGranularity();
         }catch (Exception e){
-            try {
-                speedProfile = new SpeedProfile(tour);
-                System.out.println(speedProfile);
-            } catch (InsufficientDataException ex) {
-                System.out.println("invalid input for granularity. standard granularity of 10 is too high for amount of Locations in path");
-            }
+            e.printStackTrace();
         }
-
+        if (granularity < 1){
+            granularity = 10;
+        }
+        try {
+            speedProfile = new SpeedProfile(tour,granularity);
+            ConsoleInformation.showSpeedProfile(tour.toString() , speedProfile);
+        }catch (InsufficientDataException e) {
+            ConsoleInformation.alertGranularityTooHigh(granularity);
+        }
         return state;
     }
 

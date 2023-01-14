@@ -3,26 +3,22 @@ package GPXrechner.Application.Instructions;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
 import GPXrechner.Calculations.DistanceCalculator;
-import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
-import GPXrechner.Calculations.TimePrediction;
 import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Interfaces.Output.ConsoleInformation;
-import GPXrechner.Interfaces.Parsing.ConsoleParsing;
 import GPXrechner.Application.States.State;
+import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.WayModel.Entities.Path;
 
-public class PredictTime implements Instruction{
+public class GetAltitudeDifference implements Instruction{
     @Override
     public String getDescription() {
-        return "predict the time needed for the path";
+        return "see the altitude difference of the path";
     }
 
     @Override
     public State execute(State state) throws InvalidStateException {
         if (state instanceof TourLoaded || state instanceof TrackLoaded){
             Path path = state.getPath();
-            MovementSpeed movementSpeed = ConsoleParsing.parseMovementSpeed();
-            ConsoleInformation.infoEstimatedTime(path.toString(),TimePrediction.predictTime(path,movementSpeed));
+            ConsoleInformation.infoPathElevationGain(path.toString(), DistanceCalculator.calcElevationGain(path).toString());
             return state;
         }
         throw new InvalidStateException("Tour loaded, Track loaded", state);
@@ -30,6 +26,6 @@ public class PredictTime implements Instruction{
 
     @Override
     public String getRegex() {
-        return "predict time";
+        return "show altitude difference";
     }
 }

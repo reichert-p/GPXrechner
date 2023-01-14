@@ -5,6 +5,7 @@ import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.MovementSpeed.Sport;
 import GPXrechner.Calculations.SpeedCalculator;
 import GPXrechner.Application.Instructions.Instruction;
+import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.WayModel.Entities.Tour;
 
 import java.util.ArrayList;
@@ -15,14 +16,14 @@ public class ConsoleParsing {
 
     public static String readPath(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Bitte Pfad angeben(relativ zum Files/GPX Ordner)!");
+        ConsoleInformation.userToGiveClassPath("Files/GPX");
         return "Files\\GPX\\" + scanner.next();
     }
 
     public static String[] readPaths() {
         List<String> output = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Bitte Pfade angeben(relativ zum Files/GPX Ordner)! Zum Abbrechen x drücken");
+        ConsoleInformation.userToGiveClassPath("Files/GPX", "x");
         while (true){
             String in = scanner.next();
             if (in.matches("x")){
@@ -34,33 +35,26 @@ public class ConsoleParsing {
 
     public static Instruction getInstruction(Instruction[] instructions){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Bitte Befehl eingeben");
+        ConsoleInformation.userToProvideInstruction();
         String userInput = scanner.nextLine();
         for (Instruction i:instructions) {
             if (userInput.matches(i.getRegex())){
                 return i;
             }
         }
-        printInstructions(instructions);
+        ConsoleInformation.provideInstructions(instructions);
         return getInstruction(instructions);
-    }
-
-    private static void printInstructions(Instruction[] instructions){ //das vielleicht in help Instruction?
-        System.out.println("Instructions are");
-        for (Instruction i: instructions) {
-            System.out.println(i.getDescription() + " (" + i.getRegex() + ")");
-        }
     }
 
     public static int getGranularity(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Wie fein soll die x-Achse werden(Ganzzahl der Punkte)?");
+        ConsoleInformation.userToProvideGranularity();
         return scanner.nextInt();
     }
 
     public static MovementSpeed parseMovementSpeed() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Bitte Sportart eingeben. Alternativ 'PMS' um Geschwindigkeit aus Tour(en) zu berechnen");
+        ConsoleInformation.userToProvideMovementSpeed();
         String userInput = scanner.next();
         if (userInput.matches("PMS")){
             try {
@@ -74,15 +68,8 @@ public class ConsoleParsing {
                 return sport;
             }
         }
-        printSports();
+        ConsoleInformation.provideSports();
         return parseMovementSpeed();
-    }
-
-    private static void printSports(){
-        System.out.println("Available Sports are");
-        for (Sport sport:Sport.values()) {
-            System.out.println(sport.name().toLowerCase());
-        }
     }
 
     public static MovementSpeed pathsToMovementSpeeds() throws InsufficientDataException {
@@ -93,7 +80,7 @@ public class ConsoleParsing {
             try {
                 tours.add(xmlParser.parseTour(s));
             }catch (NoTourException e){
-                System.out.println(s + "does not lead to a tour");
+                ConsoleInformation.alertWrongFileType(s, "tour");
             }
         }
         return SpeedCalculator.predictPersonalMovementSpeed(tours.toArray(Tour[]::new));

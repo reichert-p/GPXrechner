@@ -4,6 +4,7 @@ import GPXrechner.Calculations.SpeedHeuristics;
 import GPXrechner.Interfaces.InvalidStateException;
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
+import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.WayModel.Entities.Tour;
 
 public class GetTimeTaken implements Instruction{
@@ -16,9 +17,9 @@ public class GetTimeTaken implements Instruction{
     public State execute(State state) throws InvalidStateException {
         if (state instanceof TourLoaded){
             Tour tour = (Tour)state.getPath();
-            System.out.println(SpeedHeuristics.calculateTime(tour));
+            ConsoleInformation.infoTimeTaken(tour.toString(),SpeedHeuristics.calculateTime(tour));
         }
-        return state;
+        throw new InvalidStateException("TourLoaded", state);
     }
 
     @Override

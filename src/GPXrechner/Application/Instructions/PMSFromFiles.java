@@ -2,6 +2,7 @@ package GPXrechner.Application.Instructions;
 
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Interfaces.InvalidStateException;
+import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.Interfaces.Parsing.ConsoleParsing;
 import GPXrechner.Application.States.State;
 
@@ -14,7 +15,7 @@ public class PMSFromFiles implements  Instruction{
     @Override
     public State execute(State state) throws InvalidStateException {
         try {
-            System.out.println(ConsoleParsing.pathsToMovementSpeeds());
+            ConsoleInformation.infoPMS(ConsoleParsing.pathsToMovementSpeeds());
         } catch (InsufficientDataException e) {
             e.printStackTrace();
         }

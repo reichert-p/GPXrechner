@@ -1,5 +1,6 @@
 package GPXrechner.Application.Instructions;
 
+import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.WayModel.Entities.Tour;
 import GPXrechner.WayModel.Entities.Track;
 import GPXrechner.Interfaces.InvalidStateException;
@@ -18,15 +19,17 @@ public class GenerateTrack implements Instruction {
         if (state instanceof TourLoaded){
             Tour tour = (Tour)state.getPath();
             Track track = tour.getTrack();
-            System.out.println("Generated Track " + track.toString());
+            ConsoleInformation.infoGeneratedTrack(track.toString());
             return new TrackLoaded(track);
         }
-        return null;
+        throw new InvalidStateException("TourLoaded",state);
     }
 
     @Override
     public String getRegex() {
         return "generate track";
     }
-} //TODO eine Ausgabe von Touren/Tracks im gpx Format
+}
 //TODO Test vervollständigen
+//TODO sinnvolle Instruction für Evolutionären algorithmus
+//TODO andere Zielfunktion für Übernachtungen

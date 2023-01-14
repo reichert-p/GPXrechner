@@ -1,8 +1,12 @@
 package GPXrechner.Application.Instructions;
 
+import GPXrechner.Application.States.TourLoaded;
+import GPXrechner.Application.States.TrackLoaded;
 import GPXrechner.Calculations.DistanceCalculator;
+import GPXrechner.Calculations.SpeedCalculator;
 import GPXrechner.Interfaces.InvalidStateException;
 import GPXrechner.Application.States.State;
+import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.WayModel.Entities.Path;
 
 public class GetDistance implements Instruction{
@@ -13,15 +17,12 @@ public class GetDistance implements Instruction{
 
     @Override
     public State execute(State state) throws InvalidStateException {
-        Path path;
-        try {
-            path = state.getPath();
-        }catch (NullPointerException e){
-            System.out.println("gpx track needs to be loaded to get it's distance");
+        if (state instanceof TourLoaded || state instanceof TrackLoaded){
+            Path path = state.getPath();
+            ConsoleInformation.infoPathLength(path.toString(), DistanceCalculator.calc3dDistance(path).toString());
             return state;
         }
-        System.out.println("Length of Path " + path.toString() + ": " + DistanceCalculator.calc3dDistance(path));
-        return state;
+        throw new InvalidStateException("Tour loaded, Track loaded", state);
     }
 
     @Override

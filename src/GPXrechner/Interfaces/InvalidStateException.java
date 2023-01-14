@@ -4,7 +4,7 @@ import GPXrechner.Application.Instructions.Instruction;
 import GPXrechner.Application.States.State;
 
 public class InvalidStateException extends Exception {
-    public InvalidStateException(Instruction instruction, State state){
-        super(instruction.getDescription() + " in state " + state.toString());
+    public InvalidStateException(String expected, State actual){
+        super("Expected " + expected + " but got " + actual.toString());
     }
 }
