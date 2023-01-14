@@ -1,11 +1,11 @@
 package GPXrechner.Application.Instructions;
 
+import GPXrechner.Application.States.State;
+import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.SpeedCalculator;
 import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Application.States.State;
-import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.WayModel.Entities.Tour;
 

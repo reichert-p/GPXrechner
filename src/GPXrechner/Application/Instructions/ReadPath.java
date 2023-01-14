@@ -1,11 +1,11 @@
 package GPXrechner.Application.Instructions;
 
-import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Interfaces.Output.ConsoleInformation;
-import GPXrechner.Interfaces.Parsing.*;
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
+import GPXrechner.Interfaces.InvalidStateException;
+import GPXrechner.Interfaces.Output.ConsoleInformation;
+import GPXrechner.Interfaces.Parsing.*;
 import GPXrechner.WayModel.Entities.Tour;
 import GPXrechner.WayModel.Entities.Track;
 
@@ -28,7 +28,7 @@ public class ReadPath implements Instruction{
                     Track track = XMLParser.parseTrack(s);
                     return new TrackLoaded(track);
                 }catch (NoTrackException f){
-                    ConsoleInformation.alertWrongFileType("s", "gpx path");
+                    ConsoleInformation.alertWrongFileType(s, "gpx path");
                 }
             }
         }

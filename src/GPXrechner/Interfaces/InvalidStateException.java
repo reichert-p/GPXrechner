@@ -1,6 +1,5 @@
 package GPXrechner.Interfaces;
 
-import GPXrechner.Application.Instructions.Instruction;
 import GPXrechner.Application.States.State;
 
 public class InvalidStateException extends Exception {

@@ -19,6 +19,11 @@ public class WayPoint implements Location{
     }
 
     @Override
+    public String toString() {
+        return description;
+    }
+
+    @Override
     public Latitude getLat() {
         return tp.getLat();
     }

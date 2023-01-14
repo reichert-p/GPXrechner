@@ -4,12 +4,12 @@ import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Interfaces.Parsing.DOMParser;
 import GPXrechner.Interfaces.Parsing.NoTourException;
 import GPXrechner.Interfaces.Parsing.XMLParser;
-import GPXrechner.WayModel.Profiles.SpeedProfile;
 import GPXrechner.WayModel.Entities.Tour;
+import GPXrechner.WayModel.Profiles.SpeedProfile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SpeedProfileTest {
     @Test

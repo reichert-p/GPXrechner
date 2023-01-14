@@ -5,7 +5,6 @@ import GPXrechner.WayModel.Units.Latitude;
 import GPXrechner.WayModel.Units.Longitude;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class TourPoint implements Location{
     private TrackPoint tp;

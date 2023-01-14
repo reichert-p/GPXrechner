@@ -10,7 +10,9 @@ import GPXrechner.WayModel.WayPoint;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -63,6 +65,9 @@ public class DOMParser implements XMLParser{
             String name = getName(doc);
             WayPointSet wayPointSet = new WayPointSet(name);
             NodeList nodeList = doc.getElementsByTagName("wpt");
+            if (nodeList.getLength() == 0){
+                throw new NoWayPointsExeption();
+            }
             for (int itr = 0; itr < nodeList.getLength(); itr++) {
                 Node node = nodeList.item(itr);
                 TrackPoint trackPoint = parseTrackPoint(node);

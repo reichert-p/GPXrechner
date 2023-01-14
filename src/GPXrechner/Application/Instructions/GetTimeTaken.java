@@ -1,9 +1,9 @@
 package GPXrechner.Application.Instructions;
 
-import GPXrechner.Calculations.SpeedHeuristics;
-import GPXrechner.Interfaces.InvalidStateException;
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
+import GPXrechner.Calculations.SpeedHeuristics;
+import GPXrechner.Interfaces.InvalidStateException;
 import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.WayModel.Entities.Tour;
 

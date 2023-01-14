@@ -1,10 +1,10 @@
 package GPXrechner.Application.Instructions;
 
+import GPXrechner.Application.States.State;
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Interfaces.InvalidStateException;
 import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.Interfaces.Parsing.ConsoleParsing;
-import GPXrechner.Application.States.State;
 
 public class PMSFromFiles implements  Instruction{
     @Override

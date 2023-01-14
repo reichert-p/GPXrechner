@@ -1,6 +1,5 @@
 package GPXrechner.Calculations.TourSplitting;
 
-import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.WayPoint;
 
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.Arrays;
 public class WayPointSet {
 
     String description;
-    private ArrayList<Location> wayPoints = new ArrayList<>();
+    private ArrayList<WayPoint> wayPoints = new ArrayList<>();
 
     public WayPointSet(String description) {
         this.description = description;
@@ -28,7 +27,7 @@ public class WayPointSet {
         wayPoints.add(t);
     }
 
-    public ArrayList<Location> getWayPoints() {
+    public ArrayList<WayPoint> getWayPoints() {
         return wayPoints;
     }
 }

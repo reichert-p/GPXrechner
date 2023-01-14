@@ -1,11 +1,11 @@
 package GPXrechner.Interfaces.Output;
 
 import GPXrechner.Application.Instructions.Instruction;
-import GPXrechner.Calculations.DistanceCalculator;
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.MovementSpeed.Sport;
-import GPXrechner.Calculations.SpeedCalculator;
-import GPXrechner.Calculations.TimePrediction;
+import GPXrechner.Calculations.TourSplitting.Evaluation.EvaluationFunction;
+import GPXrechner.Calculations.TourSplitting.WayPointSet;
+import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.Profiles.ElevationProfile;
 import GPXrechner.WayModel.Profiles.SpeedProfile;
 
@@ -54,7 +54,7 @@ public class ConsoleInformation{
     }
 
     public static void alertGranularityTooHigh(int granularity){
-        System.out.println("granularity " + granularity + " too high for amount of Locations in Path");;
+        System.out.println("granularity " + granularity + " too high for amount of Locations in Path");
     }
 
     public static void showElevationProfile(String tourName, ElevationProfile elevationProfile){
@@ -106,5 +106,23 @@ public class ConsoleInformation{
     }
     public static void infoGeneratedTrack(String trackName){
         System.out.println("Generated Track " + trackName);
+    }
+
+    public static void infoWayPointsToSplit(WayPointSet splitPoints) {
+        System.out.println("Proposition to split Path at: ");
+        for (Location s: splitPoints.getWayPoints()) {
+            System.out.println(s.toString());
+        }
+    }
+
+    public static void info(String s) {
+        System.out.println(s);
+    }
+
+    public static void provideEvaluationFunctions(EvaluationFunction[] evaluationFunctions) {
+        System.out.println("Supported Evaluation Functions are: ");
+        for (EvaluationFunction i: evaluationFunctions) {
+            System.out.println(i.getDescription() + " (" + i.getRegex() + ")");
+        }
     }
 }

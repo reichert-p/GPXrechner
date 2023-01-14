@@ -2,8 +2,8 @@ package test.Calculations;
 
 import GPXrechner.Calculations.DistanceCalculator;
 import GPXrechner.Calculations.InsufficientDataException;
-import GPXrechner.WayModel.Entities.Track;
 import GPXrechner.WayModel.ElevationGain;
+import GPXrechner.WayModel.Entities.Track;
 import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.Units.Distance;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DistanceCalculatorTest {
     Track mountainTrack;

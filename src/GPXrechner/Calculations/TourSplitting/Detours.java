@@ -26,10 +26,14 @@ public class Detours {
         return possibleDetours;
     }
 
-    static class Detour{
+    public static class Detour{
         int position;
         WayPoint destination;
         Duration expenditure;
+
+        public Duration getExpenditure() {
+            return expenditure;
+        }
 
         public Detour(int position, WayPoint destination, Duration expenditure) {
             this.position = position;

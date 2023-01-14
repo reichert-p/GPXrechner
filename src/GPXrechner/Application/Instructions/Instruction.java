@@ -1,7 +1,7 @@
 package GPXrechner.Application.Instructions;
 
-import GPXrechner.Interfaces.InvalidStateException;
 import GPXrechner.Application.States.State;
+import GPXrechner.Interfaces.InvalidStateException;
 
 public interface Instruction {
     public String getDescription();

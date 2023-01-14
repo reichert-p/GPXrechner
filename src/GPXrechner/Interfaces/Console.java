@@ -1,9 +1,9 @@
 package GPXrechner.Interfaces;
 
 import GPXrechner.Application.Instructions.*;
-import GPXrechner.Interfaces.Parsing.ConsoleParsing;
 import GPXrechner.Application.States.Initial;
 import GPXrechner.Application.States.State;
+import GPXrechner.Interfaces.Parsing.ConsoleParsing;
 
 public class Console {
 
@@ -16,7 +16,7 @@ public class Console {
         handler();
     }
 
-    private void generateInstructions(){
+    private void generateInstructions(){ //allowed instructions are implemented here
         instructions = new Instruction[]{
                 new GenerateTrack(),
                 new GetElevationProfile(),
@@ -27,7 +27,8 @@ public class Console {
                 new PMSFromFiles(),
                 new PredictTime(),
                 new GetTimeTaken(),
-                new ReadPath()
+                new ReadPath(),
+                new SplitTour()
         };
     }
 

@@ -1,16 +1,14 @@
 package GPXrechner.Application.Instructions;
 
+import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
-import GPXrechner.Calculations.DistanceCalculator;
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Interfaces.InvalidStateException;
 import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.Interfaces.Parsing.ConsoleParsing;
-import GPXrechner.Application.States.State;
-import GPXrechner.WayModel.Profiles.ElevationProfile;
 import GPXrechner.WayModel.Entities.Path;
-import GPXrechner.WayModel.Profiles.SpeedProfile;
+import GPXrechner.WayModel.Profiles.ElevationProfile;
 
 public class GetElevationProfile implements Instruction{
     @Override

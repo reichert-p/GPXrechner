@@ -1,9 +1,8 @@
 package GPXrechner.Calculations;
 
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
-import GPXrechner.Calculations.TourSplitting.TimeHeuristic;
-import GPXrechner.WayModel.Entities.Path;
 import GPXrechner.WayModel.ElevationGain;
+import GPXrechner.WayModel.Entities.Path;
 import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.Units.Distance;
 

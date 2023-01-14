@@ -4,9 +4,8 @@ import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.MovementSpeed.PersonalSpeed;
 import GPXrechner.Calculations.MovementSpeed.Sport;
 import GPXrechner.WayModel.Entities.Tour;
-import GPXrechner.WayModel.Location;
-import GPXrechner.WayModel.Units.Pace;
 import GPXrechner.WayModel.TourPoint;
+import GPXrechner.WayModel.Units.Pace;
 
 import java.time.Duration;
 import java.util.List;

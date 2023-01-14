@@ -1,6 +1,5 @@
 package GPXrechner.Calculations.MovementSpeed;
 
-import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.WayModel.Units.Pace;
 
 public class PersonalSpeed implements MovementSpeed {

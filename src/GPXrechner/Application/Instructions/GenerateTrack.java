@@ -1,12 +1,12 @@
 package GPXrechner.Application.Instructions;
 
-import GPXrechner.Interfaces.Output.ConsoleInformation;
-import GPXrechner.WayModel.Entities.Tour;
-import GPXrechner.WayModel.Entities.Track;
-import GPXrechner.Interfaces.InvalidStateException;
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
+import GPXrechner.Interfaces.InvalidStateException;
+import GPXrechner.Interfaces.Output.ConsoleInformation;
+import GPXrechner.WayModel.Entities.Tour;
+import GPXrechner.WayModel.Entities.Track;
 
 public class GenerateTrack implements Instruction {
     @Override
@@ -31,5 +31,3 @@ public class GenerateTrack implements Instruction {
     }
 }
 //TODO Test vervollständigen
-//TODO sinnvolle Instruction für Evolutionären algorithmus
-//TODO andere Zielfunktion für Übernachtungen

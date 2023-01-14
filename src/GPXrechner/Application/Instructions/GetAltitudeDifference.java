@@ -1,10 +1,10 @@
 package GPXrechner.Application.Instructions;
 
+import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
 import GPXrechner.Calculations.DistanceCalculator;
 import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Application.States.State;
 import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.WayModel.Entities.Path;
 

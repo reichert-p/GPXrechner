@@ -1,13 +1,15 @@
 package GPXrechner.Interfaces.Parsing;
 
+import GPXrechner.Application.Instructions.Instruction;
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.MovementSpeed.Sport;
 import GPXrechner.Calculations.SpeedCalculator;
-import GPXrechner.Application.Instructions.Instruction;
+import GPXrechner.Calculations.TourSplitting.Evaluation.EvaluationFunction;
 import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.WayModel.Entities.Tour;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -86,4 +88,37 @@ public class ConsoleParsing {
         return SpeedCalculator.predictPersonalMovementSpeed(tours.toArray(Tour[]::new));
     }
 
+    public static EvaluationFunction parseEvaluationFunction(EvaluationFunction[] evaluationFunctions) {
+        Scanner scanner = new Scanner(System.in);
+        ConsoleInformation.info("Please provide evaluation function");
+        String userInput = scanner.nextLine();
+        for (EvaluationFunction i:evaluationFunctions) {
+            if (userInput.matches(i.getRegex())){
+                return i;
+            }
+        }
+        ConsoleInformation.provideEvaluationFunctions(evaluationFunctions);
+        return parseEvaluationFunction(evaluationFunctions);
+    }
+
+    public static Duration parseMaxDuration() {
+        Scanner scanner = new Scanner(System.in);
+        Duration output;
+        ConsoleInformation.info("Bitte maximale Gehzeit in Stunden / Minuten eingeben. Stunden:");
+        int temp = 0;
+        try {
+            temp = scanner.nextInt();
+        }catch (Exception e){
+
+        }
+        output = Duration.ofHours(temp);
+        ConsoleInformation.info("minuten");
+        try {
+            temp = scanner.nextInt();
+        }catch (Exception e){
+            temp = 0;
+        }
+        output = output.plus(Duration.ofMinutes(temp));
+        return output;
+    }
 }
