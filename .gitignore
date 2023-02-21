@@ -37,6 +37,9 @@ replay_pid*
 *.cb2
 .*.lb
 
+## inkscape
+svg-inkscape
+
 ## Build tool auxiliary files:
 *.fdb_latexmk
 *.synctex
