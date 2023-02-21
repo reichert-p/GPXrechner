@@ -28,7 +28,8 @@ public class Console {
                 new PredictTime(),
                 new GetTimeTaken(),
                 new ReadPath(),
-                new SplitTour()
+                new SplitTour(),
+                new Exit()
         };
     }
 
