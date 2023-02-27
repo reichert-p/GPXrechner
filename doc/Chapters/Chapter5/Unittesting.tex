@@ -2,18 +2,48 @@
 
 \subsection{10 Unit Tests}
 
-\begin{tabular}[h]{ll}
+\begin{tabularx}{16cm}{l X}
 
 Unit Test & Beschreibung \\
-ElevationGainTest\#addElevation & beschreibung \\
-ElevationGainTest\#getManhattenNorm & beschreibung \\
-DistanceCalculatorTest\#calc3dDistance & beschreibung \\
-DistanceCalculatorTest\#calcElevationGain & beschreibung \\
-ProfileCalculationTest\#split & beschreibung \\
-ProfileCalculationTest\#normalize & beschreibung \\
-TimePredictionTest\#predictTime & beschreibung \\
-ElevationProfileTest\#getProfile & beschreibung \\
-SpeedCalculatorTest\#predictPMSSingle & beschreibung \\
-SpeedHeuristicsTest\#getClimbingHeuristic & beschreibung \\
+ElevationGainTest\#addElevation & Test auf korrekte Summierung von a Auf- und Abstieg \\
+ElevationGainTest\#getManhattenNorm & Test auf korrekte Berechnung der Manhattennorm eines Elevationgains \\
+DistanceCalculatorTest\#calc3dDistance & Test auf korrekt genuge heuristische Berechnung im dreidimensionalen Raum \\
+DistanceCalculatorTest\#calcElevationGain & Test auf korrekte Berechnung einer Höhendifferenz zwische 2 Punken und eines gesamten GPX Tracks \\
+ProfileCalculationTest\#split & Test auf die Korrekte Aufteilung von Wegpunkten in Balken für Profile  \\
+ProfileCalculationTest\#normalize & Test auf die Korrekte Normalisierung von Datenpunkten für die Erstellung von Profilen \\
+SpeedHeuristicsTest\#calculateTime & Test auf die Korrekte Auswertung der tatsächlich benötigten Zeit aus Toursegmenten \\
+ElevationProfileTest\#getProfile & Test auf die Korrekte erstellung einer Matrix die ein Höhenprofil repräsentiert \\
+SpeedCalculatorTest\#predictPMSSingle &  Test auf die Korrekte erstellung eines Personal Movement Speeds (PMS) aus einer gegangenen Tour \\
+SpeedHeuristicsTest\#getClimbingHeuristic & Test auf genau genuge heuristische Berechnung einer Geschwindigkeit mit der Steigungen bezwungen werden \\
 
-\end{tabular}
+\end{tabularx}
+
+\subsection{ATRIP: Automatic}
+
+Automatic wurde realisiert indem per rechtem Mausklick auf Verzeichnis src/test und Auswahl der Option 'Run 'Tests in test'' alle Tests ausgeführt werden.
+
+\subsection{ATRIP: Thorough}
+
+\subsubsection{Positivbeispiel}
+TimePrediction mit TimePredictionTest %implementations TODO
+
+\subsubsection{Negativbeispiel}
+Instructions für die Konsole
+
+Dadurch, dass diese Klassen die Äußerste Schicht im Sinne der Clean Architecture darstellen und aufgrund der Anforderung auf Fokus ausserhalb der User Experience liegt sind diese Klassen weder besonders komplex noch in einem vollständig ausgearbeiteten Zustand, welcher ausserhalb einer Konsolenanwendung läge.
+
+Da die Hauptlogik in der Interaktion mit dem Benutzer liegt, wurden hier manuelle acceptence Tests angewandt %richtiger begriff?
+
+\subsection{ATRIP: Professional}
+
+\subsubsection{Positivbeispiel}
+
+\subsubsection{Negativbeispiel}
+
+\subsection{Code Coverage}
+%auf aktuellsten Stand bringen
+%TODO vielleicht noch paar Tests für meinen evolutionären Algorithmus schreiben?
+Aktuell liegt die Testabdeckung bei 68\% class coverage und 60\% line coverage. Der Grund hierfür ist hauptsächlich die geringe Testabdeckung der äußeren Schichten im Sinne der clean architecture die in den Verzeichnissen Application und Interfaces liegen.
+
+\subsection{Fakes und Mocks}
+ % TODO fake/mock Objekte nutzen

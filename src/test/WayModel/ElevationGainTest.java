@@ -36,7 +36,7 @@ class ElevationGainTest { //TODO change expected and actual
 
     @Test
     void addElevation() {
-        alt1.addElevationGain(alt2);
+        alt1.addElevationGain(alt2); //TODO macht addelevationGain mit mutability überhaupt Sinn?
         alt1.addElevationGain(alt3);
         Assertions.assertEquals(alt1.getUp(),500);
         Assertions.assertEquals(alt1.getDown(), 800);
@@ -47,6 +47,5 @@ class ElevationGainTest { //TODO change expected and actual
         Assertions.assertEquals(alt1.getManhattenNorm(),600);
         Assertions.assertEquals(alt2.getManhattenNorm(),300);
         Assertions.assertEquals(alt3.getManhattenNorm(),400);
-
     }
 }
