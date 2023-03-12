@@ -4,16 +4,14 @@ import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.TourSplitting.Evaluation.EvaluationFunction;
 import GPXrechner.WayModel.Entities.Path;
 import GPXrechner.WayModel.Location;
-import GPXrechner.WayModel.WayPoint;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class EvolutionaryDist {
+public class Hillclimbing {
 
     String description;
     final int generationSize = 10;
@@ -23,16 +21,18 @@ public class EvolutionaryDist {
     EvaluationFunction evaluationFunction;
     Representation[] representations = new Representation[generationSize];
 
-    public EvolutionaryDist(Path path, WayPointSet wayPointSet, MovementSpeed movementSpeed, EvaluationFunction evaluationFunction){
+    public Hillclimbing(Path path, WayPointSet wayPointSet, MovementSpeed movementSpeed, EvaluationFunction evaluationFunction){
         description = wayPointSet.description + " optimized for Path " + path.toString();
         this.path = path.getOrderedLocations();
         this.movementSpeed = movementSpeed;
         this.evaluationFunction = evaluationFunction;
-        initDetours(path,wayPointSet);
+        detours = Detours.initDetours(path,wayPointSet, movementSpeed);
         initRepresentations();
 
         this.hillClimbing();
     }
+
+
 
     public void hillClimbing(){
         int roundsWithoutImprovement;
@@ -42,17 +42,6 @@ public class EvolutionaryDist {
                 roundsWithoutImprovement = 0;
             }
         }
-    }
-
-    public WayPointSet getBestRepresentation(){
-        WayPointSet visitedWayPoints = new WayPointSet(description);
-        boolean[] bestSolution = representations[0].getBitstring();
-        for (int i = 0; i < bestSolution.length; i++) {
-            if (bestSolution[i]){
-                visitedWayPoints.addWayPoint(detours.possibleDetours.get(i).getDestination());
-            }
-        }
-        return visitedWayPoints;
     }
 
     private boolean EvolutionStep() {
@@ -108,31 +97,15 @@ public class EvolutionaryDist {
             representations[i] = new Representation(detours.getPossibleDetours().size());
         }
     }
-    private void initDetours(Path path,WayPointSet wayPointSet){
-        detours = new Detours();
-        for (Location wp: wayPointSet.getWayPoints()) {
-            detours.addDetour(getDetour(path,(WayPoint) wp,new DirectWayHeuristic()));
-        }
-    }
 
-    /**
-     *
-     * @param path  index of this path is the nearest point of path to location
-     * @param location
-     * @param th with help of this heuristic expense between two points is measured
-     * @return index on path from which location should be accessed
-     */
-    private Detours.Detour getDetour(Path path, WayPoint location, TimeHeuristic th){
-        ArrayList<Location> pathLocations = path.getOrderedLocations();
-        int bestIndex = -1;
-        Duration bestIndexDuration = Duration.ofDays(100);
-        for (int i = 0; i < path.getOrderedLocations().size();i++){
-            Duration durationSuggestion = th.predictTime(pathLocations.get(i),location, this.movementSpeed);
-            if (durationSuggestion.compareTo(bestIndexDuration) < 0){
-                bestIndexDuration = durationSuggestion;
-                bestIndex = i;
+    public WayPointSet getBestRepresentation(){
+        WayPointSet visitedWayPoints = new WayPointSet(description);
+        boolean[] bestSolution = representations[0].getBitString();
+        for (int i = 0; i < bestSolution.length; i++) {
+            if (bestSolution[i]){
+                visitedWayPoints.addWayPoint(detours.possibleDetours.get(i).getDestination());
             }
         }
-        return new Detours.Detour(bestIndex,location,bestIndexDuration);
+        return visitedWayPoints;
     }
 }

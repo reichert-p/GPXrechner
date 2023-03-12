@@ -19,10 +19,6 @@ public class WayPointSet {
         return description;
     }
 
-    public void addWayPoints(WayPoint[] t){
-        wayPoints.addAll(Arrays.stream(t).toList());
-    }
-
     public void addWayPoint(WayPoint t){
         wayPoints.add(t);
     }

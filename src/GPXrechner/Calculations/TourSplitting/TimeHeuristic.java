@@ -1,10 +1,9 @@
 package GPXrechner.Calculations.TourSplitting;
 
-import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.WayModel.Location;
 
 import java.time.Duration;
 
 public interface TimeHeuristic {
-    Duration predictTime(Location a, Location b, MovementSpeed movementSpeed);
+    Duration predictTime(Location a, Location b);
 }

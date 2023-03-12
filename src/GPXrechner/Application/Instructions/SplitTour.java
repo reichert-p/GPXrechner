@@ -7,7 +7,7 @@ import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.TourSplitting.Evaluation.EvaluationFunction;
 import GPXrechner.Calculations.TourSplitting.Evaluation.StayNightEvaluation;
 import GPXrechner.Calculations.TourSplitting.Evaluation.SupplyEvaluation;
-import GPXrechner.Calculations.TourSplitting.EvolutionaryDist;
+import GPXrechner.Calculations.TourSplitting.Hillclimbing;
 import GPXrechner.Calculations.TourSplitting.NoWayPointsExeption;
 import GPXrechner.Calculations.TourSplitting.WayPointSet;
 import GPXrechner.Interfaces.InvalidStateException;
@@ -35,7 +35,7 @@ public class SplitTour implements Instruction{
         MovementSpeed movementSpeed = ConsoleParsing.parseMovementSpeed();
         Duration maxduration = ConsoleParsing.parseMaxDuration();
         EvaluationFunction evaluationFunction = ConsoleParsing.parseEvaluationFunction(generateEvaluationFunctions(movementSpeed,maxduration));
-        EvolutionaryDist evo = new EvolutionaryDist(path,wayPointSet,movementSpeed,evaluationFunction);
+        Hillclimbing evo = new Hillclimbing(path,wayPointSet,movementSpeed,evaluationFunction);
         WayPointSet splitPoints = evo.getBestRepresentation();
         ConsoleInformation.infoWayPointsToSplit(splitPoints);
         return state;
