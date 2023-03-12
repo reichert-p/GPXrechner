@@ -8,6 +8,7 @@ import GPXrechner.Application.States.TrackLoaded;
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Calculations.SpeedCalculator;
 import GPXrechner.Interfaces.InvalidStateException;
+import GPXrechner.Interfaces.Parsing.NoTourException;
 import GPXrechner.Interfaces.Parsing.NoTrackException;
 import GPXrechner.WayModel.Entities.Track;
 import org.junit.jupiter.api.*;
@@ -31,7 +32,7 @@ public class InstructionsTest {
     }
 
     @Test
-    void GenerateTrackTest() throws InvalidStateException {
+    void GenerateTrackTest() throws InvalidStateException, NoTourException {
         GenerateTrack gt = new GenerateTrack();
         Assertions.assertThrows(InvalidStateException.class,()->gt.execute(StateFactory.getTrackLoaded()));
 

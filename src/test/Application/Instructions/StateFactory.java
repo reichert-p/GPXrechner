@@ -14,14 +14,10 @@ public class StateFactory {
         return new Initial();
     }
 
-    public static TourLoaded getTourLoaded() {
+    public static TourLoaded getTourLoaded() throws NoTourException {
         DOMParser domParser = new DOMParser();
         Tour tour = null;
-        try {
-            tour = domParser.parseTour("Files/GPX/TOUR/artificial.gpx");
-        }catch (Exception | NoTourException e) {
-
-        }
+        tour = domParser.parseTour("Files/GPX/TOUR/artificial.gpx");
         return new TourLoaded(tour);
     }
 

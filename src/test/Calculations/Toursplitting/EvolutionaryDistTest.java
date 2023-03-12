@@ -3,7 +3,7 @@ package test.Calculations.Toursplitting;
 import GPXrechner.Calculations.MovementSpeed.Sport;
 import GPXrechner.Calculations.TourSplitting.Evaluation.EvaluationFunction;
 import GPXrechner.Calculations.TourSplitting.Evaluation.SupplyEvaluation;
-import GPXrechner.Calculations.TourSplitting.EvolutionaryDist;
+import GPXrechner.Calculations.TourSplitting.Hillclimbing;
 import GPXrechner.Calculations.TourSplitting.NoWayPointsExeption;
 import GPXrechner.Calculations.TourSplitting.Representation;
 import GPXrechner.Calculations.TourSplitting.WayPointSet;
@@ -22,7 +22,7 @@ class EvolutionaryDistTest {
         DOMParser domParser = new DOMParser();
         Track watzmannTrack = domParser.parseTrack("Files\\GPX\\Track\\Watzmann.gpx");
         WayPointSet wasser = domParser.parseWayPoints("Files\\GPX\\Waypoints\\WatzmannWasser.gpx");
-        EvolutionaryDist evo = new EvolutionaryDist(watzmannTrack,wasser, Sport.HIKING,evaluationFunction);
+        Hillclimbing evo = new Hillclimbing(watzmannTrack,wasser, Sport.HIKING,evaluationFunction);
         Assertions.assertEquals(135900,evo.evaluationFunction(new Representation(new boolean[]{true,true,true})));
         Assertions.assertEquals(135849 ,evo.evaluationFunction(new Representation(new boolean[]{true,true,false})));
         Assertions.assertEquals(196117 ,evo.evaluationFunction(new Representation(new boolean[]{true,false,true})));
@@ -31,5 +31,9 @@ class EvolutionaryDistTest {
         Assertions.assertEquals(561527 , evo.evaluationFunction(new Representation(new boolean[]{false,true,false})));
         Assertions.assertEquals(620478 , evo.evaluationFunction(new Representation(new boolean[]{false,false,true})));
         Assertions.assertEquals( 936051,evo.evaluationFunction(new Representation(new boolean[]{false,false,false})));
+        var best = evo.getBestRepresentation().getWayPoints(); //this should statistically work over 99.999%
+        Assertions.assertEquals(2, best.size());
+        Assertions.assertEquals("Watzmannhaus", best.get(0).toString());
+        Assertions.assertEquals("Quelle Schönfeld", best.get(1).toString());
     }
 }

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ElevationGainTest { //TODO change expected and actual
+class ElevationGainTest {
     ElevationGain alt1,alt2,alt3;
     @BeforeEach
     void beforeEachTest(){
@@ -17,35 +17,35 @@ class ElevationGainTest { //TODO change expected and actual
 
     @Test
     void getUp() {
-        Assertions.assertEquals(alt1.getUp(),200);
-        Assertions.assertEquals(alt2.getUp(),300);
-        Assertions.assertEquals(alt3.getUp(),0);
+        Assertions.assertEquals(200, alt1.getUp());
+        Assertions.assertEquals(300, alt2.getUp());
+        Assertions.assertEquals(0, alt3.getUp());
     }
 
     @Test
     void getDown() {
-        Assertions.assertEquals(alt1.getDown(),400);
-        Assertions.assertEquals(alt2.getDown(),0);
-        Assertions.assertEquals(alt3.getDown(),400);
+        Assertions.assertEquals(400, alt1.getDown());
+        Assertions.assertEquals(0, alt2.getDown());
+        Assertions.assertEquals(400, alt3.getDown());
     }
 
     @Test
     void testToString() {
-        Assertions.assertEquals(alt1.toString(), "up: 200.0m down: 400.0m");
+        Assertions.assertEquals("up: 200.0m down: 400.0m", alt1.toString());
     }
 
     @Test
     void addElevation() {
-        alt1.addElevationGain(alt2); //TODO macht addelevationGain mit mutability überhaupt Sinn?
-        alt1.addElevationGain(alt3);
-        Assertions.assertEquals(alt1.getUp(),500);
-        Assertions.assertEquals(alt1.getDown(), 800);
+        alt1 = alt1.addElevationGain(alt2);
+        alt1 = alt1.addElevationGain(alt3);
+        Assertions.assertEquals(500,alt1.getUp());
+        Assertions.assertEquals(800,alt1.getDown());
     }
 
     @Test
-    void getManhattenNorm() {
-        Assertions.assertEquals(alt1.getManhattenNorm(),600);
-        Assertions.assertEquals(alt2.getManhattenNorm(),300);
-        Assertions.assertEquals(alt3.getManhattenNorm(),400);
+    void getManhattanNorm() {
+        Assertions.assertEquals(600, alt1.getManhattenNorm());
+        Assertions.assertEquals(300, alt2.getManhattenNorm());
+        Assertions.assertEquals(400, alt3.getManhattenNorm());
     }
 }

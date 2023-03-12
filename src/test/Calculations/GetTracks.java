@@ -18,4 +18,16 @@ public class GetTracks {
         t.addTrackPoints(pointList);
         return t;
     }
+
+    public static Track getStraightTrack(){ //Hochvogel traverse
+        Track t =  new Track("flaLine");
+        TrackPoint[] pointList = {
+                new TrackPoint(47.4, 10, 0),
+                new TrackPoint(47.5, 10, 0),
+                new TrackPoint(47.6, 10, 0),
+                new TrackPoint(47.7, 10, 0),
+        };
+        t.addTrackPoints(pointList);
+        return t;
+    }
 }
