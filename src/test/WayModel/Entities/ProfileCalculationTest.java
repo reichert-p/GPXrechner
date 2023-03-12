@@ -22,6 +22,18 @@ class ProfileCalculationTest {
     }
 
     @Test
+    void normalizeFlatDiff(){
+        List<Double> list = new ArrayList<>();
+        list.add(4.0);
+        list.add(4.0);
+        list.add(4.0);
+        list = ProfileCalculation.normalize(list);
+        assertEquals(1,list.get(0));
+        assertEquals(1,list.get(1));
+        assertEquals(1,list.get(2));
+    }
+
+    @Test
     void split(){
         int[] sections = ProfileCalculation.split(22,5);
         assertEquals(5,sections[0]);
@@ -29,5 +41,14 @@ class ProfileCalculationTest {
         assertEquals(4,sections[2]);
         assertEquals(4,sections[3]);
         assertEquals(4,sections[4]);
+    }
+
+    @Test
+    void splitTooSmallGranularity(){
+        int[] sections = ProfileCalculation.split(22,25);
+        assertEquals(1,sections[19]);
+        assertEquals(1,sections[20]);
+        assertEquals(1,sections[21]);
+        assertEquals(0,sections[22]);
     }
 }
