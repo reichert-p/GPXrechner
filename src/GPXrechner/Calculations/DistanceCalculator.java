@@ -51,7 +51,7 @@ public class DistanceCalculator {
         ElevationGain totalElevationDiff = new ElevationGain(0,0);
         for (int i = 1; i < locations.size();i++){
             ElevationGain diff = calcElevationGain(locations.get(i-1), locations.get(i));
-            totalElevationDiff.addElevationGain(diff);
+            totalElevationDiff = totalElevationDiff.addElevationGain(diff);
         }
         return totalElevationDiff;
     }

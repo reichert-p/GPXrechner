@@ -30,9 +30,11 @@ public class ElevationGain {
         return "up: " + up + "m down: " + down + "m";
     }
 
-    public void addElevationGain(ElevationGain diff) {
-        this.up += diff.up;
-        this.down += diff.down;
+    public ElevationGain addElevationGain(ElevationGain diff) {
+        return new ElevationGain(
+                this.up += diff.up,
+                this.down += diff.down
+        );
     }
 
     public double getManhattenNorm(){
