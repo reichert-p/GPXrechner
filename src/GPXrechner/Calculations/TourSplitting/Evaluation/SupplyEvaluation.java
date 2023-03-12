@@ -30,7 +30,7 @@ public class SupplyEvaluation implements EvaluationFunction {
 
     @Override
     public String getDescription() {
-        return "optimizing the necessary additional times used for gathering various resources (i.e. water, supermarket stuff, power)";
+        return "optimizing the necessary additional time used for gathering various resources (i.e. water, supermarket stuff, power)";
     }
 
     @Override
@@ -43,7 +43,7 @@ public class SupplyEvaluation implements EvaluationFunction {
         Duration sum = Duration.ZERO;
         Duration baseDuration = TimePrediction.predictTime(path, this.movementSpeed);
         for (int i = 0; i < detours.getPossibleDetours().size(); i++){
-            if (representation.getBitstring()[i]){
+            if (representation.getBitString()[i]){
                 sum = sum.plus(detours.getPossibleDetours().get(i).getExpenditure());
             }
         }
@@ -61,13 +61,7 @@ public class SupplyEvaluation implements EvaluationFunction {
      */
     private double getOvershoot(ArrayList<Location> path, Detours detours, Representation representation) {
         Duration max = Duration.ZERO;
-        List<Detours.Detour> visitedDetours = new ArrayList<>();
-        for (int i = 0; i < detours.getPossibleDetours().size();i++){
-            if (representation.getBitstring()[i]){
-                visitedDetours.add(detours.getPossibleDetours().get(i));
-            }
-        }
-        List<Detours.Detour> orderedVisitedDetours = visitedDetours.stream().sorted(Comparator.comparing(Detours.Detour::getPosition)).toList();
+        var orderedVisitedDetours = EvaluationHelper.getRepresentedDetoursOrdered(detours, representation);
         if(orderedVisitedDetours.isEmpty()){
             max = TimePrediction.predictTime(path, this.movementSpeed);
         }

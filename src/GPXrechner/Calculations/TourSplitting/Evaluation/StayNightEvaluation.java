@@ -32,7 +32,7 @@ public class StayNightEvaluation implements EvaluationFunction {
     public long evaluate(ArrayList<Location> path, Detours detours, Representation representation) {
         int days = 1;
         for (int i = 0; i < detours.getPossibleDetours().size(); i++){
-            if (representation.getBitstring()[i]){
+            if (representation.getBitString()[i]){
                 days++;
             }
         }
@@ -42,12 +42,12 @@ public class StayNightEvaluation implements EvaluationFunction {
 
     @Override
     public String getDescription() {
-        return "optimizing the total amount of Days needed for a Track";
+        return "evaluates the total amount of Days needed for a Track";
     }
 
     @Override
     public String getRegex() {
-        return "Stay night eval";
+        return "stay night eval";
     }
 
     /**
@@ -55,13 +55,7 @@ public class StayNightEvaluation implements EvaluationFunction {
      */
     private double getWeightedOvershoot(ArrayList<Location> path, Detours detours, Representation representation) {
         Duration sum = Duration.ZERO;
-        List<Detours.Detour> visitedDetours = new ArrayList<>();
-        for (int i = 0; i < detours.getPossibleDetours().size();i++){
-            if (representation.getBitstring()[i]){
-                visitedDetours.add(detours.getPossibleDetours().get(i));
-            }
-        }
-        List<Detours.Detour> orderedVisitedDetours = visitedDetours.stream().sorted(Comparator.comparing(Detours.Detour::getPosition)).toList();
+        var orderedVisitedDetours = EvaluationHelper.getRepresentedDetoursOrdered(detours,representation);
         if(orderedVisitedDetours.isEmpty()){
             sum = TimePrediction.predictTime(path, this.movementSpeed);
         }
