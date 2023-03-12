@@ -25,12 +25,59 @@ Automatic wurde realisiert indem per rechtem Mausklick auf Verzeichnis src/test 
 \subsection{ATRIP: Thorough}
 
 \subsubsection{Positivbeispiel}
-TimePrediction mit TimePredictionTest %implementations TODO
+ProfileCalculationTest der die Grundfunktionen für die Erstellung von Profilen bereitstellt. Das Thoroughe dabei ist dass alle Fehlerfälle abgedeckt sind die Mathematisch auftreten können, wie etwa die Eingabe von Nullparametern oder die Unterrepräsentation von Daten.
+
+\begin{lstlisting}
+
+@Test
+    void normalize(){
+        List<Double> list = new ArrayList<>();
+        list.add(-10.0);
+        list.add(0.0);
+        list.add(10.0);
+        list = ProfileCalculation.normalize(list);
+        assertEquals(0,list.get(0));
+        assertEquals(0.5,list.get(1));
+        assertEquals(1,list.get(2));
+    }
+
+    @Test
+    void normalizeFlatDiff(){
+        List<Double> list = new ArrayList<>();
+        list.add(4.0);
+        list.add(4.0);
+        list.add(4.0);
+        list = ProfileCalculation.normalize(list);
+        assertEquals(1,list.get(0));
+        assertEquals(1,list.get(1));
+        assertEquals(1,list.get(2));
+    }
+
+    @Test
+    void split(){
+        int[] sections = ProfileCalculation.split(22,5);
+        assertEquals(5,sections[0]);
+        assertEquals(5,sections[1]);
+        assertEquals(4,sections[2]);
+        assertEquals(4,sections[3]);
+        assertEquals(4,sections[4]);
+    }
+
+    @Test
+    void splitTooSmallGranularity(){
+        int[] sections = ProfileCalculation.split(22,25);
+        assertEquals(1,sections[19]);
+        assertEquals(1,sections[20]);
+        assertEquals(1,sections[21]);
+        assertEquals(0,sections[22]);
+    }
+
+\end{lstlisting}
 
 \subsubsection{Negativbeispiel}
 Instructions für die Konsole
 
-Dadurch, dass diese Klassen die Äußerste Schicht im Sinne der Clean Architecture darstellen und aufgrund der Anforderung auf Fokus ausserhalb der User Experience liegt sind diese Klassen weder besonders komplex noch in einem vollständig ausgearbeiteten Zustand, welcher ausserhalb einer Konsolenanwendung läge.
+Dadurch, dass diese Klassen die Äußerste Schicht im Sinne der Clean Architecture darstellen und aufgrund der Anforderung auf Fokus ausserhalb der User Experience liegt sind diese Klassen weder besonders komplex noch in einem vollständig ausgearbeiteten Zustand, welcher außerhalb einer Konsolenanwendung läge.
 
 Da die Hauptlogik in der Interaktion mit dem Benutzer liegt, wurden hier manuelle acceptence Tests angewandt %richtiger begriff?
 
@@ -38,12 +85,133 @@ Da die Hauptlogik in der Interaktion mit dem Benutzer liegt, wurden hier manuell
 
 \subsubsection{Positivbeispiel}
 
+The distanceCalculatortest Tests the correct interpretation of Distances from a real Track with an reduced amount of Waypoints.
+ Those waypoints are created in an extra Helper Class, since It's creation is not in the responsibility of the DistanceCalculator to be tested. They are Called before each Test, which ensures the tests are isolated from one another.
+Additionally, there are no big code smells in the Classes to be tested. 
+
+\begin{lstlisting}
+   Track mountainTrack;
+
+    @BeforeEach
+    void init() {
+        mountainTrack = GetTracks.getMountainTrack();
+    }
+
+    @Test
+    void calc2dDistance() {
+        Distance distanceToFirstHut2D = DistanceCalculator.calc2dDistance(mountainTrack.getOrderedLocations().get(0), mountainTrack.getOrderedLocations().get(1));
+        assertEquals(308, distanceToFirstHut2D.getValue(), 1);
+
+        Distance distanceOfWholeTrack2D = DistanceCalculator.calc2dDistance(mountainTrack);
+        assertEquals(7795, distanceOfWholeTrack2D.getValue(), 10);
+    }
+
+    @Test
+    void calc3dDistance() {
+        Distance distanceToFirstHut2D = DistanceCalculator.calc3dDistance(mountainTrack.getOrderedLocations().get(0), mountainTrack.getOrderedLocations().get(1));
+        assertEquals(310, distanceToFirstHut2D.getValue(), 1);
+
+        Distance distanceOfWholeTrack3D = DistanceCalculator.calc3dDistance(mountainTrack);
+        assertEquals(8315, distanceOfWholeTrack3D.getValue(), 10);
+    }
+
+    @Test
+    void calcElevationGain() {
+        ArrayList<Location> locations = mountainTrack.getOrderedLocations();
+        ElevationGain uphillSection = DistanceCalculator.calcElevationGain(locations.get(1), locations.get(2)); //uphill
+        assertEquals(569, uphillSection.getUp(), 1);
+        assertEquals(0, uphillSection.getDown(), 1);
+
+        ElevationGain downhillSection = DistanceCalculator.calcElevationGain(locations.get(4), locations.get(5)); //downhill
+        assertEquals(0, downhillSection.getUp(), 1);
+        assertEquals(539, downhillSection.getDown(), 1);
+
+        ElevationGain wholeTrack = DistanceCalculator.calcElevationGain(mountainTrack); //whole Track
+        assertEquals(1346, wholeTrack.getUp(), 1);
+        assertEquals(1493, wholeTrack.getDown(), 1);
+    }
+
+    @Test
+    void calcAltitudeData() throws InsufficientDataException {
+        List<Location> locations = mountainTrack.getOrderedLocations();
+        Elevation lowestPoint = DistanceCalculator.calcMinAlt(locations);
+        assertEquals(1096, lowestPoint.getValue(), 1);
+
+        Elevation highestPoint = DistanceCalculator.calcMaxAlt(locations);
+        assertEquals(2589, highestPoint.getValue(), 1);
+
+        Elevation averageAltitude = DistanceCalculator.calcAvgAlt(locations);
+        assertEquals(1778, averageAltitude.getValue(), 1);
+    }
+\end{lstlisting}
+
 \subsubsection{Negativbeispiel}
 
+Ein negativbeispiel ist die Methode evaluationFunction der Klasse EvolutionaryDistTest. Aufgrund der hohen komplexität des Algorithmus und der Eingabeparameter wird auf höchstem Level quasi eine Instruction mit gegebenen Usereingaben ausgeführt und der Status der Klasse danach überprüft. Allerdings werden auch DOMParser und Bewertungsfunktion mitgetested, was nicht professionell ist.
+
+\begin{lstlisting}
+   Track mountainTrack;
+
+    @BeforeEach
+    void init() {
+        mountainTrack = GetTracks.getMountainTrack();
+    }
+
+    @Test
+    void calc2dDistance() {
+        Distance distanceToFirstHut2D = DistanceCalculator.calc2dDistance(mountainTrack.getOrderedLocations().get(0), mountainTrack.getOrderedLocations().get(1));
+        assertEquals(308, distanceToFirstHut2D.getValue(), 1);
+
+        Distance distanceOfWholeTrack2D = DistanceCalculator.calc2dDistance(mountainTrack);
+        assertEquals(7795, distanceOfWholeTrack2D.getValue(), 10);
+    }
+
+    @Test
+    void calc3dDistance() {
+        Distance distanceToFirstHut2D = DistanceCalculator.calc3dDistance(mountainTrack.getOrderedLocations().get(0), mountainTrack.getOrderedLocations().get(1));
+        assertEquals(310, distanceToFirstHut2D.getValue(), 1);
+
+        Distance distanceOfWholeTrack3D = DistanceCalculator.calc3dDistance(mountainTrack);
+        assertEquals(8315, distanceOfWholeTrack3D.getValue(), 10);
+    }
+
+    @Test
+    void calcElevationGain() {
+        ArrayList<Location> locations = mountainTrack.getOrderedLocations();
+        ElevationGain uphillSection = DistanceCalculator.calcElevationGain(locations.get(1), locations.get(2)); //uphill
+        assertEquals(569, uphillSection.getUp(), 1);
+        assertEquals(0, uphillSection.getDown(), 1);
+
+        ElevationGain downhillSection = DistanceCalculator.calcElevationGain(locations.get(4), locations.get(5)); //downhill
+        assertEquals(0, downhillSection.getUp(), 1);
+        assertEquals(539, downhillSection.getDown(), 1);
+
+        ElevationGain wholeTrack = DistanceCalculator.calcElevationGain(mountainTrack); //whole Track
+        assertEquals(1346, wholeTrack.getUp(), 1);
+        assertEquals(1493, wholeTrack.getDown(), 1);
+    }
+
+    @Test
+    void calcAltitudeData() throws InsufficientDataException {
+        List<Location> locations = mountainTrack.getOrderedLocations();
+        Elevation lowestPoint = DistanceCalculator.calcMinAlt(locations);
+        assertEquals(1096, lowestPoint.getValue(), 1);
+
+        Elevation highestPoint = DistanceCalculator.calcMaxAlt(locations);
+        assertEquals(2589, highestPoint.getValue(), 1);
+
+        Elevation averageAltitude = DistanceCalculator.calcAvgAlt(locations);
+        assertEquals(1778, averageAltitude.getValue(), 1);
+    }
+    
+\end{lstlisting}
+
 \subsection{Code Coverage}
-%auf aktuellsten Stand bringen
-%TODO vielleicht noch paar Tests für meinen evolutionären Algorithmus schreiben?
-Aktuell liegt die Testabdeckung bei 68\% class coverage und 60\% line coverage. Der Grund hierfür ist hauptsächlich die geringe Testabdeckung der äußeren Schichten im Sinne der clean architecture die in den Verzeichnissen Application und Interfaces liegen.
+Aktuell liegt die Testabdeckung bei 78\% class coverage und 73\% line coverage. Der Grund hierfür ist hauptsächlich die geringe Testabdeckung der äußeren Schichten im Sinne der clean architecture die in den Verzeichnissen Application und Interfaces liegen, während die Verzeichnisse mit den komplizierten Berechnungen und der Grundstruktur bei 91 bzw. 94\% line coverage liegen. Die restlichen Prozente lassen sich durch auslassen trivialster Testfälle, etwa getter und setter, erklären.
 
 \subsection{Fakes und Mocks}
  % TODO fake/mock Objekte nutzen
+ 
+ \subsubsection{1. Mockobjekt}
+ 
+ \subsubsection{2. Mockobjekt}
