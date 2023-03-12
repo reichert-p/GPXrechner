@@ -80,7 +80,7 @@ public class DistanceCalculator {
         return new Elevation(sum/ list.size());
     }
 
-    public static Elevation calcMinAlt(List<Location> list) throws InsufficientDataException {
+    public static Elevation calcMinAlt(List<Location> list) throws InsufficientDataException { //TODO this alt should be elevation/ele
         if (list.size() == 0){
             throw new InsufficientDataException();
         }
