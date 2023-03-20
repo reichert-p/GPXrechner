@@ -1,0 +1,97 @@
+\section{Kapitel 7: Refactoring}
+
+\subsection{Code Smells}
+
+\subsubsection{Code Smell: Duplicated Code}
+
+(Ausgebessert in commit https://github.com/reichert-p/GPXrechner/commit/4039bc31f6310508875c59ed44b6b227f2f0510d )
+
+Um die Strafe von schlechten Aufteilungen im Toursplitting zu berechnen, müss bei allen Bewertungsfunktionen erst gefiltert werden welche Umwege tatsächlich genommen werden.
+
+Vorheriger Zustand:
+
+\begin{lstlisting}
+	class StayNightEvaluation {
+	private double getWeightedOvershoot(ArrayList<Location> path, Detours detours, Representation representation) {
+	 List<Detours.Detour> visitedDetours = new ArrayList<>();
+        for (int i = 0; i < detours.getPossibleDetours().size();i++){
+            if (representation.getBitstring()[i]){
+                visitedDetours.add(detours.getPossibleDetours().get(i));
+            }
+        }
+        List<Detours.Detour> orderedVisitedDetours = visitedDetours.stream().sorted(Comparator.comparing(Detours.Detour::getPosition)).toList();
+...	
+	}
+	}
+\end{lstlisting}
+
+\begin{lstlisting}
+
+	class SupplyEvaluation {
+	private double getOvershoot(ArrayList<Location> path, Detours detours, Representation representation) {
+	 List<Detours.Detour> visitedDetours = new ArrayList<>();
+        for (int i = 0; i < detours.getPossibleDetours().size();i++){
+            if (representation.getBitstring()[i]){
+                visitedDetours.add(detours.getPossibleDetours().get(i));
+            }
+        }
+        List<Detours.Detour> orderedVisitedDetours = visitedDetours.stream().sorted(Comparator.comparing(Detours.Detour::getPosition)).toList();
+...	
+	}
+	}
+
+
+\end{lstlisting}
+
+Lösung: Auslagerung dieser Funktionalität in externe statische Klasse EvaluationHelper.
+
+\begin{lstlisting}
+
+public class EvaluationHelper {
+    public static List<Detours.Detour> getRepresentedDetoursOrdered(Detours detours, Representation representation){
+        List<Detours.Detour> visitedDetours = new ArrayList<>();
+        for (int i = 0; i < detours.getPossibleDetours().size();i++){
+            if (representation.getBitString()[i]){
+                visitedDetours.add(detours.getPossibleDetours().get(i));
+            }
+        }
+        return visitedDetours.stream().sorted(Comparator.comparing(Detours.Detour::getPosition)).toList();
+    }
+}
+\end{lstlisting}
+
+Die Umsetzung in den einzelnen Bewertungsfunktionen sieht dann wie folgt aus:
+
+\begin{lstlisting}
+
+	class SupplyEvaluation {
+ var orderedVisitedDetours = EvaluationHelper.getRepresentedDetoursOrdered(detours, representation);
+...	
+	}
+}
+\end{lstlisting}
+
+
+
+\subsubsection{Code Smell: Code Comments}
+
+remove runaways Kommentar in der percentileandaverage Methode der Klasse SpeedHeuristics.
+
+
+\begin{lstlisting}
+
+for (double d:paceValues) {
+	if (i + 1 > paceValues.size() * 0.25 && i < paceValues.size() * 0.9) // remove runaways
+	sum += d;
+	instances ++;
+	i++;
+}
+\end{lstlisting}
+
+Die Lösung ist, die Funktionalität in eine Methode mit sprechendem Namen auszulagern.
+
+\subsection{2 Refactorings}
+
+\subsubsection{1. Refactoring}
+
+\subsubsection{2. Refactoring}

@@ -1,3 +1,44 @@
 \section{Kapitel 6: Domain Driven Design}
 
 \subsection{Ubiquitous Language}
+
+Track : sortierte Wegpunkte die chronologisch zusammenhängen zu einem gesamten Weg
+
+Tour : sortierte Wegpunkte die in der Vergangenheit zusammenhängen zu einem zu einem festgelegten begangenen gesamten Weg
+
+\subsection{Entities}
+
+Klasse Hillclimbing Verbindet eine Anzahl an Lösungen für ein spezielles Problem. 
+Zur Erstellung der Entität sind die vorgeschlagenen Lösungen noch trivial, mit der Lebenszeit der Entity verbessern sich die Qualitäten der Lösungen.
+
+\begin{figure}[h]
+  \centering
+  \includesvg[inkscapelatex = false, width = 300pt]{Chapters/Chapter6/Hillclimbing}
+  \caption{UML der Entity Hillclimbing}
+\end{figure}
+
+\subsection{Value Objects}
+
+Die Klasse Elevation setzt den Werte einer Höhe über dem Meeresspiegel um. Die klasse ist immutable und bei Erstellung wird geprüft ob sich der Wert in einem Auf der Erde Sinnvollen Rahmen bewegt (-500 bis 9000). 
+Eine Überschreibung der Hashfunktion oder der equals Methode wurde aufgrund von mangelnder Nötigkeit nicht Implementiert.
+
+
+\begin{figure}[h]
+  \centering
+  \includesvg[inkscapelatex = false, width = 150pt]{Chapters/Chapter6/Elevation}
+  \caption{UML des Elevation Value Objects}
+\end{figure}
+
+\subsection{Repositories}
+
+Wegpunkt + Lat + Lon + Elevation als Ortsbeschreibung ?? wahrscheinlich kein aggregate?
+
+\begin{figure}[h]
+  \centering
+  \includesvg[inkscapelatex = false, width = 300pt]{Chapters/Chapter6/WayPoint}
+  \caption{UML des Wegpunkt Repositories}
+\end{figure}
+
+\subsection{Aggregates}
+
+Keine, da keine persistente Datenspeicherung
