@@ -23,7 +23,7 @@ public class DistanceCalculator {
         ArrayList<Location> locations = path.getOrderedLocations();
         Distance total2dDistance = new Distance(0);
         for (int i = 1; i < locations.size();i++){
-            total2dDistance.addDistance(calc2dDistance(locations.get(i-1), locations.get(i)));
+            total2dDistance = total2dDistance.addDistance(calc2dDistance(locations.get(i-1), locations.get(i)));
         }
         return total2dDistance;
     }
@@ -64,7 +64,7 @@ public class DistanceCalculator {
         ArrayList<Location> locations = path.getOrderedLocations();
         Distance total3dDistance = new Distance(0);
         for (int i = 1; i < locations.size();i++){
-            total3dDistance.addDistance(calc3dDistance(locations.get(i-1), locations.get(i)));
+            total3dDistance = total3dDistance.addDistance(calc3dDistance(locations.get(i-1), locations.get(i)));
         }
         return total3dDistance;
     }

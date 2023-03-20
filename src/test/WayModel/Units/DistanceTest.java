@@ -28,9 +28,7 @@ class DistanceTest {
 
     @Test
     void addDistance() {
-        dist.addDistance(new Distance(500.5));
+        dist = dist.addDistance(new Distance(500.5));
         assertEquals(dist.getValue(),750.5);
     }
-
-
 }

@@ -3,8 +3,8 @@ package GPXrechner.WayModel.Units;
 /**
  * Distance in meter
  */
-public class Distance {
-    private double value;
+public final class Distance {
+    final private double value;
 
     @Override
     public String toString() {
@@ -16,12 +16,12 @@ public class Distance {
             this.value = value;
         }
         else{
-            throw new RuntimeException("Distance out of bounds: " + value + "Elevation must be a positive number");
+            throw new RuntimeException("Distance out of bounds: " + value + "Distance must be a positive number");
         }
     }
 
-    public void addDistance(Distance difference){
-        value += difference.getValue();
+    public Distance addDistance(Distance difference){
+        return new Distance(this.value + difference.getValue());
     }
 
     public double getValue() {
