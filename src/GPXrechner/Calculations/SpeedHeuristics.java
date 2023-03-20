@@ -94,15 +94,17 @@ public class SpeedHeuristics {
                 .map(Pace::getValue)
                 .sorted()
                 .toList();
-        int i = 0;
-        double sum = 0;
-        double instances = 0;
-        for (double d:paceValues) {
-            if (i + 1 > paceValues.size() * 0.25 && i < paceValues.size() * 0.9) // remove runaways
-                sum += d;
-            instances ++;
-            i++;
-        }
+        var consideredPaceValues = removeRunawaysfromSortedList(paceValues, 0.25, 0.9);
+        double sum = consideredPaceValues.stream().mapToDouble(f -> f).sum();
+        double instances = consideredPaceValues.size();
         return sum/instances;
+    }
+
+    private static List<Double> removeRunawaysfromSortedList(List<Double> input, double lowerBound, double upperBound){
+        if(lowerBound < 0 || lowerBound > 1 || upperBound < 0 || upperBound > 1){
+            throw new RuntimeException("Bounds in removeRunaways should be a value between 0 and 1");
+        }
+        int length = input.size();
+        return input.subList((int)(length*lowerBound),(int)Math.ceil(length*upperBound));
     }
 }

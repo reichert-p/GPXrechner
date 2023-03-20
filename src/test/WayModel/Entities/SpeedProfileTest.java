@@ -22,18 +22,18 @@ class SpeedProfileTest {
         boolean[][] matrix = speedProfile.getProfile();
         assertEquals(true , matrix[0][7]);
         assertEquals(false, matrix[0][8]);
-        assertEquals(true , matrix[1][4]);
-        assertEquals(false, matrix[1][5]);
-        assertEquals(true , matrix[2][6]);
-        assertEquals(false, matrix[2][7]);
-        assertEquals(true , matrix[3][6]);
-        assertEquals(false, matrix[3][7]);
+        assertEquals(true , matrix[1][3]);
+        assertEquals(false, matrix[1][4]);
+        assertEquals(true , matrix[2][4]);
+        assertEquals(false, matrix[2][5]);
+        assertEquals(true , matrix[3][5]);
+        assertEquals(false, matrix[3][6]);
+        assertEquals(true , matrix[4][7]);
         assertEquals(true , matrix[4][8]);
-        assertEquals(true , matrix[4][9]);
-        assertEquals(true , matrix[5][5]);
-        assertEquals(false, matrix[5][6]);
+        assertEquals(true , matrix[5][4]);
+        assertEquals(false, matrix[5][5]);
         assertEquals(true , matrix[6][0]);
-        assertEquals(false, matrix[6][1]); //beim Aufzeichnen Stoppen vergessen:)
+        assertEquals(false, matrix[6][1]);
     }
 
 }

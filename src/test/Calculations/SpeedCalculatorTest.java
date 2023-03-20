@@ -27,18 +27,18 @@ class SpeedCalculatorTest {
     @Test
     void predictPMSSingle() throws InsufficientDataException {
         PersonalSpeed personalSpeed = SpeedCalculator.predictPersonalMovementSpeed(tour[0]);
-        Assertions.assertEquals(15890,Math.round(personalSpeed.getHorizontalSpeed().getValue()));
-        Assertions.assertEquals(791,Math.round(personalSpeed.getDescendingSpeed().getValue()));
-        Assertions.assertEquals(912,Math.round(personalSpeed.getClimbingSpeed().getValue()));
+        Assertions.assertEquals(24425,Math.round(personalSpeed.getHorizontalSpeed().getValue()));
+        Assertions.assertEquals(1111,Math.round(personalSpeed.getDescendingSpeed().getValue()));
+        Assertions.assertEquals(1173,Math.round(personalSpeed.getClimbingSpeed().getValue()));
         Assertions.assertThrows(InsufficientDataException.class,()->SpeedCalculator.predictPersonalMovementSpeed(tour[1]));
         }
 
     @Test
     void testPredictPMSMultiple() throws InsufficientDataException {
         PersonalSpeed personalSpeed = SpeedCalculator.predictPersonalMovementSpeed(tour);
-        Assertions.assertEquals(15890,Math.round(personalSpeed.getHorizontalSpeed().getValue()));
-        Assertions.assertEquals(791,Math.round(personalSpeed.getDescendingSpeed().getValue()));
-        Assertions.assertEquals(912,Math.round(personalSpeed.getClimbingSpeed().getValue()));
+        Assertions.assertEquals(24425,Math.round(personalSpeed.getHorizontalSpeed().getValue()));
+        Assertions.assertEquals(1111,Math.round(personalSpeed.getDescendingSpeed().getValue()));
+        Assertions.assertEquals(1173,Math.round(personalSpeed.getClimbingSpeed().getValue()));
     }
 
     @Test
@@ -48,7 +48,7 @@ class SpeedCalculatorTest {
         section.addTourPoints(locations.toArray(TourPoint[]::new));
 
         double result = SpeedCalculator.calculateSpeedDeviation(tour[0],section);
-        Assertions.assertEquals(18,Math.round(result * 10));
+        Assertions.assertEquals(11,Math.round(result * 10));
     }
 
     @Test
