@@ -1,5 +1,8 @@
 package GPXrechner.Interfaces.Output;
 
+import GPXrechner.Interfaces.Parsing.DOMParser;
+import GPXrechner.Interfaces.Parsing.NoTrackException;
+import GPXrechner.Interfaces.Parsing.XMLParser;
 import GPXrechner.WayModel.Entities.Track;
 import GPXrechner.WayModel.Location;
 import org.w3c.dom.Document;
@@ -23,19 +26,11 @@ public class XMLGeneratorImplementation implements XMLGenerater{
     public void generateGPX(Track track, String fileLocation) throws ParserConfigurationException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
         Document doc = docBuilder.newDocument();
-        Element root = doc.createElement("gpx");
-        doc.appendChild(root);
-        Element metadata = doc.createElement("metadata");
-        root.appendChild(metadata);
 
-        Element name = doc.createElement("name");
-        metadata.appendChild(name);
-        name.setTextContent(track.toString());
-        Element desc = doc.createElement("desc");
-        metadata.appendChild(desc);
-        desc.setTextContent("File automatically created by Philipp Reichert's GPXCalculator");
+        Element root = doc.createElement("gpx");
+        generateHeader(doc,root,track.toString());
+        doc.appendChild(root);
 
         Element trk = doc.createElement("trk");
         root.appendChild(trk);
@@ -55,6 +50,18 @@ public class XMLGeneratorImplementation implements XMLGenerater{
         } catch (IOException | TransformerException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void generateHeader(Document doc, Element root, String trackName){
+        Element metadata = doc.createElement("metadata");
+        root.appendChild(metadata);
+
+        Element name = doc.createElement("name");
+        metadata.appendChild(name);
+        name.setTextContent(trackName);
+        Element desc = doc.createElement("desc");
+        metadata.appendChild(desc);
+        desc.setTextContent("File automatically created by Philipp Reichert's GPXCalculator");
     }
 
     private static void writeXml(Document doc, OutputStream output)
