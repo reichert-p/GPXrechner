@@ -90,8 +90,27 @@ for (double d:paceValues) {
 
 Die Lösung ist, die Funktionalität in eine Methode mit sprechendem Namen auszulagern.
 
+\begin{lstlisting}
+	...
+	var consideredPaceValues = removeRunawaysfromSortedList(paceValues, 0.25, 0.9);
+	...
+
+private static List<Double> removeRunawaysfromSortedList(List<Double> input, double lowerBound, double upperBound){
+        if(lowerBound < 0 || lowerBound > 1 || upperBound < 0 || upperBound > 1){
+            throw new RuntimeException("Bounds in removeRunaways should be a value between 0 and 1");
+        }
+        int length = input.size();
+        return input.subList((int)(length*lowerBound),(int)Math.ceil(length*upperBound));
+    }
+
+\end{lstlisting}
+
 \subsection{2 Refactorings}
 
-\subsubsection{1. Refactoring}
+\subsubsection{1. Refactoring: Rename Class}
 
-\subsubsection{2. Refactoring}
+https://github.com/reichert-p/GPXrechner/commit/7947597903210e73647ffbc20d07e6b5b257cff2#diff-a3b6bacc77a02d2a1746cbbbd776a467bf3fcd7920bfefbef1e892af10172e50 
+
+Umbenennung der Klasse EvolutionaryDist zu Hillclimbing, da der Name besser zum Inhalt der Klasse passt. Da sich beim UML nur der Name ändert wird auf ein zweites Diagramm verzichtet.
+
+\subsubsection{2. Refactoring: Extract Method}
