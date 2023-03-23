@@ -30,21 +30,9 @@ public class XMLGeneratorImplementation implements XMLGenerater{
 
         Element root = doc.createElement("gpx");
         generateHeader(doc,root,track.toString());
+        generateTrkBody(doc, root, track);
         doc.appendChild(root);
 
-        Element trk = doc.createElement("trk");
-        root.appendChild(trk);
-        Element trkSeg = doc.createElement("trkseg");
-        trk.appendChild(trkSeg);
-        for (Location trackPoint: track.getOrderedLocations()) {
-            Element trkpt = doc.createElement("trkpt");
-            trkpt.setAttribute("lat", String.valueOf(trackPoint.getLat().getValue()));
-            trkpt.setAttribute("lon", String.valueOf(trackPoint.getLon().getValue()));
-            Element ele = doc.createElement("ele");
-            trkpt.appendChild(ele);
-            ele.setTextContent(String.valueOf(trackPoint.getEle().getValue()));
-            trkSeg.appendChild(trkpt);
-        }
         try (FileOutputStream output = new FileOutputStream(fileLocation)) {
             writeXml(doc, output);
         } catch (IOException | TransformerException e) {
@@ -62,6 +50,23 @@ public class XMLGeneratorImplementation implements XMLGenerater{
         Element desc = doc.createElement("desc");
         metadata.appendChild(desc);
         desc.setTextContent("File automatically created by Philipp Reichert's GPXCalculator");
+    }
+
+    private static void generateTrkBody(Document doc, Element root, Track track){
+        Element trk = doc.createElement("trk");
+        root.appendChild(trk);
+
+        Element trkSeg = doc.createElement("trkseg");
+        trk.appendChild(trkSeg);
+        for (Location trackPoint: track.getOrderedLocations()) {
+            Element trkpt = doc.createElement("trkpt");
+            trkpt.setAttribute("lat", String.valueOf(trackPoint.getLat().getValue()));
+            trkpt.setAttribute("lon", String.valueOf(trackPoint.getLon().getValue()));
+            Element ele = doc.createElement("ele");
+            trkpt.appendChild(ele);
+            ele.setTextContent(String.valueOf(trackPoint.getEle().getValue()));
+            trkSeg.appendChild(trkpt);
+        }
     }
 
     private static void writeXml(Document doc, OutputStream output)
