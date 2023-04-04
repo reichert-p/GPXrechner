@@ -212,6 +212,23 @@ Aktuell liegt die Testabdeckung bei 78\% class coverage und 73\% line coverage. 
 \subsection{Fakes und Mocks}
  % TODO fake/mock Objekte nutzen
  
- \subsubsection{1. Mockobjekt}
+ \subsubsection{1. Mockobjekt: DirectWayHeuristik}
  
- \subsubsection{2. Mockobjekt}
+ Hier wurde beim Test der Erstellung von Umwegen ein Mockobjekt für die Bestimmung der Zeit für die Umleitung verwendet. Dies ist Sinnvoll, da hier die Korrekte Initialisierung der Umwege an der richtigen Stelle getestet werden soll und nicht die Bestimmung der Zeit, die man benötigt um sich eine Gewisse Strecke zu bewegen.
+ 
+ \begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, width = 200pt]{Chapters/Chapter5/DetoursTestMock.svg}
+  \caption{UML Diagramm des Mocks für DetoursTests}
+\end{figure}
+
+ 
+ \subsubsection{2. Mockobjekt: EvaluationFunction}
+ 
+ Hier wurde beim Test des Hillclimbingalgorithmus die Bewertung der einzelnen Tests gemockt. Die Bewertungsfunktion bewertet alle Lösungen gleich gut bis auf die Lösung wahr,wahr,falsch, die bevorzugt bewertet wird. Dies macht deutlich, dass diese Lösung als Lokales (und globales) Optimum beim Hillclimbingalgorithmus herauskommen soll, da es das einzige existierende Optimum ist. Das Mock Objekt ist sinnvoll, da die Bewertungsfunktion in anderen Tests abgedeckt ist und es lediglich um das Korrekte finden Lokaler Optimums geht bei der Hillclimbing-Klasse.
+ 
+  \begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, width = 200pt]{Chapters/Chapter5/Hillclimbing.svg}
+  \caption{UML Diagramm des Mocks für eine Bewertungsfunktion}
+\end{figure}

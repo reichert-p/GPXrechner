@@ -2,8 +2,23 @@
 
 \subsection{Entwurfsmuster Fabrik}
 
-DOMParser ist eine Fabrik
+Zur Erzeugung verschiedener Objekte aus GPX Dateien wurde das Entwurfsmuster Fabrik eingesetzt. Da aus der GPX nicht eindeutig erkennbar ist welches Objekt erzeugt werden muss, muss diese Logik vom Nutzer mitgegeben werden.
+
+FÜr das Entwurfsmuster wurde sich entschieden um die Lesbarkeit des Programmcodes zu erhöhen und die Logik in eigene Klassen zu Kapseln.
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, width = 300pt]{Chapters/Chapter8/NoDataException.svg}
+  \caption{UML Diagramm der Fabrik für die Erzeugung von Objekten aus GPX Dateien}
+\end{figure}
 
 \subsection{Entwurfsmuster Strategie}
 
-Bewertungsfunktion ist eine Strategie
+Bei der Evolutionären Optimierung von Umwegen wird müssen erzeugte Lösungen bewertet werden. Abhängig vom Anwendungsfall können diese Bewertungsalgorithmen stark voneinander Abweichen.
+Um dies flexibel umzusetzen und weitere Bewertungsfunktionen zukünftig gut umsetzen zu können und die Übersichtlichkeit sowie Testbarkeit zu verbessern wurde auf das Strategie-Entwurfsmuster zurückgegriffen.
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, width = 300pt]{Chapters/Chapter8/EvaluationFunction.svg}
+  \caption{UML Diagramm der Strategie für die Bewertung von Umwegsoptimierungen}
+\end{figure}

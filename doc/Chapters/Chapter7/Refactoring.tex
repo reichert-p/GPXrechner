@@ -109,8 +109,36 @@ private static List<Double> removeRunawaysfromSortedList(List<Double> input, dou
 
 \subsubsection{1. Refactoring: Rename Class}
 
-https://github.com/reichert-p/GPXrechner/commit/7947597903210e73647ffbc20d07e6b5b257cff2#diff-a3b6bacc77a02d2a1746cbbbd776a467bf3fcd7920bfefbef1e892af10172e50 
+https://github.com/reichert-p/GPXrechner/commit/7947597903210e73647ffbc20d07e6b5b257cff2\#diff-a3b6bacc77a02d2a1746cbbbd776a467bf3fcd7920bfefbef1e892af10172e50 
 
 Umbenennung der Klasse EvolutionaryDist zu Hillclimbing, da der Name besser zum Inhalt der Klasse passt. Da sich beim UML nur der Name ändert wird auf ein zweites Diagramm verzichtet.
 
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, width = 90pt]{Chapters/Chapter7/EvolutionaryDist.svg}
+  \caption{UML Diagramm der Klasse EvolutionaryDist}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, width = 90pt]{Chapters/Chapter7/HillClimbing.svg}
+  \caption{UML Diagramm der Klasse unter dem Namen HillClimbing}
+\end{figure}
+
 \subsubsection{2. Refactoring: Extract Method}
+
+commit 59f9045a2ac73496111bba87c35016c2b26108e2 und an selber Stelle im Anschluss 7d57943bb5fcdf2d23e76f05c0157f7753f6c05e.
+
+Die Methode generateGPX zur Erstellung einer .gpx Datei aus gespeicherten Touren und Tracks war 35 Zeilen lang und Spaghetticode in Reinform. Mithilfe der Extraction der beiden Methoden wurde Struktur in den Code gebracht und die Sprechenden Methodennamen helfen später beim Verständniß des Codes.
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, width = 90pt]{Chapters/Chapter7/XMLGenSpaghetti.svg}
+  \caption{UML Diagramm der Klasse XMLGeneratorImplementation vor dem Refactoring}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, width = 90pt]{Chapters/Chapter7/XMLGenRefactored.svg}
+  \caption{UML Diagramm der Klasse XMLGeneratorImplementation vor dem Refactoring}
+\end{figure}
