@@ -5,15 +5,12 @@ import GPXrechner.Calculations.TourSplitting.Detour;
 import GPXrechner.Calculations.TourSplitting.Detours;
 import GPXrechner.Calculations.TourSplitting.Evaluation.StayNightEvaluation;
 import GPXrechner.Calculations.TourSplitting.Representation;
-import GPXrechner.WayModel.Entities.Path;
 import GPXrechner.WayModel.WayPoint;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import test.Calculations.GetTracks;
+import test.GetTracks;
 
 import java.time.Duration;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class StayNightEvaluationTest {
     @Test

@@ -4,7 +4,7 @@ import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.WayModel.Profiles.ElevationProfile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import test.Calculations.GetTracks;
+import test.GetTracks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -7,7 +7,7 @@ import GPXrechner.Calculations.TourSplitting.TimeHeuristic;
 import GPXrechner.WayModel.Entities.Path;
 import GPXrechner.WayModel.WayPoint;
 import org.junit.jupiter.api.Test;
-import test.Calculations.GetTracks;
+import test.GetTracks;
 
 
 import static org.junit.jupiter.api.Assertions.*;

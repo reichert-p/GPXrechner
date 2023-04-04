@@ -24,14 +24,14 @@ public class Detours {
         return possibleDetours;
     }
 
-    public static Detours initDetours(Path path, WayPointSet wayPointSet, MovementSpeed movementSpeed){
+    public static Detours initDetours(Path path, WayPointSet wayPointSet, TimeHeuristic timeHeuristic){
         Detours allPossibleDetours = new Detours();
         for (Location wp: wayPointSet.getWayPoints()) {
             allPossibleDetours.addDetour(
                 Detour.createDetour(
                         path,
                         (WayPoint) wp,
-                        new DirectWayHeuristic(movementSpeed)
+                        timeHeuristic
                 )
             );
         }

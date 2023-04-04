@@ -1,4 +1,4 @@
-package test.Calculations;
+package test;
 
 import GPXrechner.WayModel.Entities.Track;
 import GPXrechner.WayModel.TrackPoint;

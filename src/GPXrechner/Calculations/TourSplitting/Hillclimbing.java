@@ -26,7 +26,7 @@ public class Hillclimbing {
         this.path = path.getOrderedLocations();
         this.movementSpeed = movementSpeed;
         this.evaluationFunction = evaluationFunction;
-        detours = Detours.initDetours(path,wayPointSet, movementSpeed);
+        detours = Detours.initDetours(path,wayPointSet, new DirectWayHeuristic(movementSpeed));
         initRepresentations();
 
         this.hillClimbing();
