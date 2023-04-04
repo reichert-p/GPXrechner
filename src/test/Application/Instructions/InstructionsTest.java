@@ -8,6 +8,7 @@ import GPXrechner.Application.States.TrackLoaded;
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Calculations.SpeedCalculator;
 import GPXrechner.Interfaces.InvalidStateException;
+import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
 import GPXrechner.Interfaces.Parsing.NoTourException;
 import GPXrechner.Interfaces.Parsing.NoTrackException;
 import GPXrechner.WayModel.Entities.Track;
@@ -32,7 +33,7 @@ public class InstructionsTest {
     }
 
     @Test
-    void GenerateTrackTest() throws InvalidStateException, NoTourException {
+    void GenerateTrackTest() throws InvalidStateException, NoDataException {
         GenerateTrack gt = new GenerateTrack();
         Assertions.assertThrows(InvalidStateException.class,()->gt.execute(StateFactory.getTrackLoaded()));
 
@@ -46,7 +47,7 @@ public class InstructionsTest {
     }
 
     @Test
-    void GetAltitudeDifferenceTest() throws InvalidStateException{
+    void GetAltitudeDifferenceTest() throws InvalidStateException, NoDataException{
         GetAltitudeDifference gad = new GetAltitudeDifference();
         Assertions.assertThrows(InvalidStateException.class,()->gad.execute(StateFactory.getInitialState()));
 
@@ -55,7 +56,7 @@ public class InstructionsTest {
         assertEquals("Elevation difference of Path Im Haus: up: 19.0m down: 19.0m\r\n", outContent.toString());
     }
     @Test
-    void GetDistanceTest() throws InvalidStateException{
+    void GetDistanceTest() throws InvalidStateException, NoDataException{
         GetDistance gd = new GetDistance();
         Assertions.assertThrows(InvalidStateException.class,()->gd.execute(StateFactory.getInitialState()));
 

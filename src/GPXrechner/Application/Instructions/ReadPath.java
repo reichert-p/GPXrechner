@@ -6,6 +6,9 @@ import GPXrechner.Application.States.TrackLoaded;
 import GPXrechner.Interfaces.InvalidStateException;
 import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.Interfaces.Parsing.*;
+import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTour;
+import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTrack;
+import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
 import GPXrechner.WayModel.Entities.Tour;
 import GPXrechner.WayModel.Entities.Track;
 
@@ -17,17 +20,20 @@ public class ReadPath implements Instruction{
 
     @Override
     public State execute(State state) throws InvalidStateException {
-        XMLParser XMLParser = new DOMParser();
         while (true){
             String s = ConsoleParsing.readPath();
             try {
-                Tour tour = XMLParser.parseTour(s);
+                GPXToTour tourParser = new GPXToTour();
+                tourParser.read(s);
+                Tour tour = tourParser.getTour();
                 return new TourLoaded(tour);
-            }catch (NoTourException e){
+            }catch (NoDataException e){
                 try {
-                    Track track = XMLParser.parseTrack(s);
+                    GPXToTrack trackParser = new GPXToTrack();
+                    trackParser.read(s);
+                    Track track = trackParser.getTrack();
                     return new TrackLoaded(track);
-                }catch (NoTrackException f){
+                }catch (NoDataException f){
                     ConsoleInformation.alertWrongFileType(s, "gpx path");
                 }
             }

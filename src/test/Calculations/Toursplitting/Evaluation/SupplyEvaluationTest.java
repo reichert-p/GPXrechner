@@ -4,17 +4,13 @@ import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.MovementSpeed.Sport;
 import GPXrechner.Calculations.TourSplitting.Detours;
 import GPXrechner.Calculations.TourSplitting.Evaluation.StayNightEvaluation;
-import GPXrechner.Calculations.TourSplitting.Representation;
-import GPXrechner.Interfaces.Parsing.DOMParser;
+import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTrack;
+import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
 import GPXrechner.Interfaces.Parsing.NoTrackException;
 import GPXrechner.WayModel.Entities.Path;
-import GPXrechner.WayModel.Location;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SupplyEvaluationTest {
 
@@ -27,13 +23,14 @@ class SupplyEvaluationTest {
     }
 
     @Test
-    void evaluate() throws NoTrackException {
+    void evaluate() throws NoDataException {
         MovementSpeed movementSpeed = Sport.HIKING;
         Duration maxDailyMovementTime = Duration.ofHours(8);
         StayNightEvaluation stayNightEvaluation = new StayNightEvaluation(movementSpeed, maxDailyMovementTime);
 
-        DOMParser domParser = new DOMParser();
-        Path path = domParser.parseTrack("Files/GPX/Track/Watzmann.gpx") ;
+        GPXToTrack trackParser = new GPXToTrack();
+        trackParser.read("Files/GPX/Track/Watzmann.gpx") ;
+        Path path = trackParser.getTrack();
         Detours detours = new Detours();
         /* detours.addDetour();
         Representation representation = new Representation(5);

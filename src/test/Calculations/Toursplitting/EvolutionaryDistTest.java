@@ -7,7 +7,9 @@ import GPXrechner.Calculations.TourSplitting.Hillclimbing;
 import GPXrechner.Calculations.TourSplitting.NoWayPointsExeption;
 import GPXrechner.Calculations.TourSplitting.Representation;
 import GPXrechner.Calculations.TourSplitting.WayPointSet;
-import GPXrechner.Interfaces.Parsing.DOMParser;
+import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTrack;
+import GPXrechner.Interfaces.Parsing.GPXReader.GPXToWayPointSet;
+import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
 import GPXrechner.Interfaces.Parsing.NoTrackException;
 import GPXrechner.WayModel.Entities.Track;
 import org.junit.jupiter.api.Assertions;
@@ -17,11 +19,16 @@ import java.time.Duration;
 
 class EvolutionaryDistTest {
     @Test
-    void evaluationFunction() throws NoTrackException, NoWayPointsExeption {
+    void evaluationFunction() throws NoDataException {
         EvaluationFunction evaluationFunction = new SupplyEvaluation(Sport.HIKING, Duration.ofHours(5));
-        DOMParser domParser = new DOMParser();
-        Track watzmannTrack = domParser.parseTrack("Files\\GPX\\Track\\Watzmann.gpx");
-        WayPointSet wasser = domParser.parseWayPoints("Files\\GPX\\Waypoints\\WatzmannWasser.gpx");
+        GPXToTrack trackParser = new GPXToTrack();
+        trackParser.read("Files\\GPX\\Track\\Watzmann.gpx");
+        Track watzmannTrack = trackParser.getTrack();
+
+        GPXToWayPointSet wayPointParser = new GPXToWayPointSet();
+        wayPointParser.read("Files\\GPX\\Waypoints\\WatzmannWasser.gpx");
+        WayPointSet wasser = wayPointParser.getWayPointSet();
+
         Hillclimbing evo = new Hillclimbing(watzmannTrack,wasser, Sport.HIKING,evaluationFunction);
         Assertions.assertEquals(135900,evo.evaluationFunction(new Representation(new boolean[]{true,true,true})));
         Assertions.assertEquals(135849 ,evo.evaluationFunction(new Representation(new boolean[]{true,true,false})));

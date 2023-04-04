@@ -1,9 +1,8 @@
 package test.WayModel.Entities;
 
 import GPXrechner.Calculations.InsufficientDataException;
-import GPXrechner.Interfaces.Parsing.DOMParser;
-import GPXrechner.Interfaces.Parsing.NoTourException;
-import GPXrechner.Interfaces.Parsing.XMLParser;
+import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTour;
+import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
 import GPXrechner.WayModel.Entities.Tour;
 import GPXrechner.WayModel.Profiles.SpeedProfile;
 import org.junit.jupiter.api.Assertions;
@@ -13,10 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SpeedProfileTest {
     @Test
-    void getProfile() throws InsufficientDataException, NoTourException {
-        XMLParser xmlParser = new DOMParser();
-        Tour tour1 = xmlParser.parseTour("Files\\GPX\\Tour\\radtour.gpx");
-        Tour tour2 = xmlParser.parseTour("Files\\GPX\\Tour\\artificial.gpx");
+    void getProfile() throws InsufficientDataException, NoDataException {
+        GPXToTour tourParser = new GPXToTour();
+        tourParser.read("Files\\GPX\\Tour\\radtour.gpx");
+        Tour tour1 = tourParser.getTour();
+        tourParser.read("Files\\GPX\\Tour\\artificial.gpx");
+        Tour tour2 = tourParser.getTour();
         Assertions.assertThrows(InsufficientDataException.class ,()-> new SpeedProfile(tour2));
         SpeedProfile speedProfile = new SpeedProfile(tour1,7);
         boolean[][] matrix = speedProfile.getProfile();
@@ -35,5 +36,4 @@ class SpeedProfileTest {
         assertEquals(true , matrix[6][0]);
         assertEquals(false, matrix[6][1]);
     }
-
 }

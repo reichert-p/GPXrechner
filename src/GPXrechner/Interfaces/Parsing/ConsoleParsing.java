@@ -7,6 +7,8 @@ import GPXrechner.Calculations.MovementSpeed.Sport;
 import GPXrechner.Calculations.SpeedCalculator;
 import GPXrechner.Calculations.TourSplitting.Evaluation.EvaluationFunction;
 import GPXrechner.Interfaces.Output.ConsoleInformation;
+import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
+import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTour;
 import GPXrechner.WayModel.Entities.Tour;
 
 import java.time.Duration;
@@ -75,13 +77,14 @@ public class ConsoleParsing {
     }
 
     public static MovementSpeed pathsToMovementSpeeds() throws InsufficientDataException {
-        XMLParser xmlParser = new DOMParser();
+        GPXToTour tourParser = new GPXToTour();
         String[] paths = ConsoleParsing.readPaths();
         List<Tour> tours= new ArrayList<>();
             for (String s:paths) {
             try {
-                tours.add(xmlParser.parseTour(s));
-            }catch (NoTourException e){
+                tourParser.read(s);
+                tours.add(tourParser.getTour());
+            }catch (NoDataException e){
                 ConsoleInformation.alertWrongFileType(s, "tour");
             }
         }

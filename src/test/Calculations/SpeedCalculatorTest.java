@@ -3,9 +3,9 @@ package test.Calculations;
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Calculations.MovementSpeed.PersonalSpeed;
 import GPXrechner.Calculations.SpeedCalculator;
-import GPXrechner.Interfaces.Parsing.DOMParser;
+import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTour;
+import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
 import GPXrechner.Interfaces.Parsing.NoTourException;
-import GPXrechner.Interfaces.Parsing.XMLParser;
 import GPXrechner.WayModel.Entities.Tour;
 import GPXrechner.WayModel.Location;
 import GPXrechner.WayModel.TourPoint;
@@ -18,10 +18,12 @@ import java.util.List;
 class SpeedCalculatorTest {
     Tour[] tour = new Tour[2];
     @BeforeEach
-    void setUp() throws NoTourException {
-        XMLParser xmlParser = new DOMParser();
-        tour[0] = xmlParser.parseTour("Files\\GPX\\Tour\\radtour.gpx");
-        tour[1] = xmlParser.parseTour("Files\\GPX\\Tour\\Gartenstrasse.gpx");
+    void setUp() throws NoDataException {
+        GPXToTour tourParser = new GPXToTour();
+        tourParser.read("Files\\GPX\\Tour\\radtour.gpx");
+        tour[0] = tourParser.getTour();
+        tourParser.read("Files\\GPX\\Tour\\Gartenstrasse.gpx");
+        tour[1] = tourParser.getTour();
     }
 
     @Test

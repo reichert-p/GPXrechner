@@ -8,13 +8,12 @@ import GPXrechner.Calculations.TourSplitting.Evaluation.EvaluationFunction;
 import GPXrechner.Calculations.TourSplitting.Evaluation.StayNightEvaluation;
 import GPXrechner.Calculations.TourSplitting.Evaluation.SupplyEvaluation;
 import GPXrechner.Calculations.TourSplitting.Hillclimbing;
-import GPXrechner.Calculations.TourSplitting.NoWayPointsExeption;
 import GPXrechner.Calculations.TourSplitting.WayPointSet;
 import GPXrechner.Interfaces.InvalidStateException;
 import GPXrechner.Interfaces.Output.ConsoleInformation;
 import GPXrechner.Interfaces.Parsing.ConsoleParsing;
-import GPXrechner.Interfaces.Parsing.DOMParser;
-import GPXrechner.Interfaces.Parsing.XMLParser;
+import GPXrechner.Interfaces.Parsing.GPXReader.GPXToWayPointSet;
+import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
 import GPXrechner.WayModel.Entities.Path;
 
 import java.time.Duration;
@@ -53,9 +52,10 @@ public class SplitTour implements Instruction{
         WayPointSet wayPointSet;
         String s = ConsoleParsing.readPath();
         try {
-            XMLParser XMLParser = new DOMParser();
-            wayPointSet = XMLParser.parseWayPoints(s);
-        } catch (NoWayPointsExeption e) {
+            GPXToWayPointSet wayPointParser = new GPXToWayPointSet();
+            wayPointParser.read(s);
+            wayPointSet = wayPointParser.getWayPointSet();
+        } catch (NoDataException e) {
            ConsoleInformation.alertWrongFileType(s, "gpx path containing Waypoints");
            return getWayPontSet();
         }

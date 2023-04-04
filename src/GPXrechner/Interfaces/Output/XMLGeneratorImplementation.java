@@ -1,8 +1,5 @@
 package GPXrechner.Interfaces.Output;
 
-import GPXrechner.Interfaces.Parsing.DOMParser;
-import GPXrechner.Interfaces.Parsing.NoTrackException;
-import GPXrechner.Interfaces.Parsing.XMLParser;
 import GPXrechner.WayModel.Entities.Track;
 import GPXrechner.WayModel.Location;
 import org.w3c.dom.Document;
