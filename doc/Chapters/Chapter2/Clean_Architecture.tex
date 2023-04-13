@@ -2,27 +2,38 @@
 
 \subsection{Was ist Clean Architecture?}
 
-Clean Architecture ist der Aufbau von Anwendungen in verschiedenen Schichten, die nach innen hin immer beständiger werden. Äussere Schichten können dabei von inneren Schichten Abhängen, innere jedoch nicht von äusseren.
+Clean Architecture ist ein Softwarearchitekturmuster welches darauf abzielt Code klar zu organisieren und leicht wartbar, testbar und erweiterbar zu machen.
+Hierfür werden die Bestandteile einer Anwendung in verschiedenen hierarchische Schichten so gekapselt, dass außen liegende Schichten von inneren abhängen könne, innere aber nicht von äußeren. Tiefere Schichten sind langlebiger als außenliegende.
 
-\subsection{Analyse der Dependency Rule}
+
+\subsection{Analyse der Dependency Rule} %TODO
 
 \subsubsection{Positiv-Beispiel: Dependency Rule}
 
-Das Positivbeispiel ist die Klasse Speedprofile. Die einzige Methode mit Abhängigkeiten ist 
+Das Positivbeispiel ist die Klasse GetDistance, die eine Implementation einer Instruction ist. Sie liegt in der Anwendungsschicht. Um den Weg zu erhalten, für den die Strecke berechnet werden soll greift sie auf den Anwendungszustand auf der Anwendungsschicht zu. Die Strecke wird über das UserOutput Interface mitgeteilt, welches auch in der Anwendungsschicht liegt. Die eigentliche Berechnung findet mithilfe der Klasse DistanceCalculator statt, welche in der Domänenschicht liegt auf die im Sinne der clean architecture Abhängigkeiten bestehen dürfen.
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includesvg[inkscapelatex = false, width = 300pt]{Chapters/Chapter2/positive}
-  \caption{Abhängigkeiten der Klassse Speedprofile}
+  \includesvg[inkscapelatex = false, width = 300pt]{Chapters/Chapter2/positiv1}
+  \caption{Abhängigkeiten der Klasse GetDistance}
 \end{figure}
 
 
-\subsubsection{Negativ-Beispiel: Dependency Rule}
+\subsubsection{Negativ-Beispiel 2: Dependency Rule}
+
+Die Dependency Rule wird beim Zugriff auf die Klasse GPXToTour verletzt, die in der Plugin Schicht liegt und aus GPX Dateien ein Tour Objekt generiert. Sie wird von der Instruction ReadPath verwendet, welche in der Anwendungsschicht liegt. Somit besteht eine Abhängigkeit von der inneren Anwendungsschicht zur ausserhalb liegenden Plugin Schicht, was eine Verletzung der Dependency Rule darstellt.
+
+\begin{figure}[H]
+  \centering
+  \includesvg[inkscapelatex = false, width = 300pt]{Chapters/Chapter2/negativ}
+  \caption{Abhängigkeiten auf die Klasse GPXToTour}
+\end{figure}
 
 \subsubsection{Schicht: Domain Code}
 
 Die Klasse DistanceCalculator ist dafür Zuständig verschiedene Distanzen zwischen Orten oder einer chronologischen Abfolgen von Orten im Sexalsystem zu berechnen.
-Die (zugegeben heuristische) Berechnung von Distanzen im Sexalsystem basieren auf grundlegenden Zusammenhängen und werden sich in absehbarer Zeit nicht ändern und sind Grundlegend für alle Auswertungen von Daten, welche im Sexalsystem abgespeichert sind.
+Die (angemessen genaue) Berechnung von Distanzen im Sexalsystem basieren auf grundlegenden geometrischen Zusammenhängen, welche sich in absehbarer Zeit nicht ändern. 
+Diese Berechnungen Grundlegend für alle Auswertungen von Daten die im Sexalsystem gespeichert sind, so wie beispielsweise GPS Daten im GPS Exchange format(GPX).
 
 \begin{figure}[H]
   \centering
@@ -32,8 +43,9 @@ Die (zugegeben heuristische) Berechnung von Distanzen im Sexalsystem basieren au
 
 \subsubsection{Schicht: Plugins}
 
-Die Klasse ConsoleParsing ist dafür Zuständig bestimmte vorgegebene Werte von der Konsole zu lesen. Bei Eingabe unvorhergesehener Werte werden Vorschläge ausgegeben.
-Die Klasse stellt einen wesentlichen Bestandteil der Benutzerschnittstelle dar. Ein Austausch der Klasse durch beispielsweise ein tolles GUI mit Drop-Downs in Zukunft ist wahrscheinlich und lässt sich entsprechend einfach umsetzen.
+Die Klasse ConsoleParsing ist dafür Zuständig verschiedene Formen Input von Benutzern zu erfassen. Dies umfasst den Pfad zu GPX Dateien, die Wahl einer Sportart oder Geschwindigkeit oder die Eingabe einer Zeit.
+Somit stellt die Klasse einen wesentlichen Bestandteil der Benutzerschnittstelle dar.
+Ein Austausch der Klasse durch eine Grafische Benutzerschnittstelle wäre denkbar.
 
 \begin{figure}[H]
   \centering
