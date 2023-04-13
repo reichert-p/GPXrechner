@@ -3,10 +3,18 @@ package GPXrechner.Application.Instructions;
 import GPXrechner.Application.States.State;
 import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Interfaces.Output.ConsoleInformation;
-import GPXrechner.Interfaces.Parsing.ConsoleParsing;
+import GPXrechner.Interfaces.Output.UserOutput;
+import GPXrechner.Interfaces.Parsing.UserInput;
 
-public class PMSFromFiles implements  Instruction{
+public class PMSFromFiles implements Instruction {
+    UserOutput userOutput;
+    UserInput userInput;
+
+    public PMSFromFiles(UserOutput userOutput, UserInput userInput) {
+        this.userOutput = userOutput;
+        this.userInput = userInput;
+    }
+
     @Override
     public String getDescription() {
         return "calculate a personal movement speed from tour paths";
@@ -15,7 +23,7 @@ public class PMSFromFiles implements  Instruction{
     @Override
     public State execute(State state) throws InvalidStateException {
         try {
-            ConsoleInformation.infoPMS(ConsoleParsing.pathsToMovementSpeeds());
+            userOutput.infoPMS(userInput.pathsToMovementSpeeds());
         } catch (InsufficientDataException e) {
             e.printStackTrace();
         }

@@ -6,7 +6,7 @@ import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.MovementSpeed.Sport;
 import GPXrechner.Calculations.SpeedCalculator;
 import GPXrechner.Calculations.TourSplitting.Evaluation.EvaluationFunction;
-import GPXrechner.Interfaces.Output.ConsoleInformation;
+import GPXrechner.Interfaces.Output.UserOutput;
 import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
 import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTour;
 import GPXrechner.WayModel.Entities.Tour;
@@ -16,18 +16,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ConsoleParsing {
+public class ConsoleParsing implements UserInput{
+    UserOutput userOutput;
+    public ConsoleParsing(UserOutput userOutput){
+        this.userOutput = userOutput;
+    }
 
-    public static String readPath(){
+    public String readPath(){
         Scanner scanner = new Scanner(System.in);
-        ConsoleInformation.userToGiveClassPath("Files/GPX");
+        userOutput.userToGiveClassPath("Files/GPX");
         return "Files\\GPX\\" + scanner.next();
     }
 
-    public static String[] readPaths() {
+    public String[] readPaths() {
         List<String> output = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        ConsoleInformation.userToGiveClassPath("Files/GPX", "x");
+        userOutput.userToGiveClassPath("Files/GPX", "x");
         while (true){
             String in = scanner.next();
             if (in.matches("x")){
@@ -37,28 +41,28 @@ public class ConsoleParsing {
         }
     }
 
-    public static Instruction getInstruction(Instruction[] instructions){
+    public Instruction getInstruction(Instruction[] instructions){
         Scanner scanner = new Scanner(System.in);
-        ConsoleInformation.userToProvideInstruction();
+        userOutput.userToProvideInstruction();
         String userInput = scanner.nextLine();
         for (Instruction i:instructions) {
             if (userInput.matches(i.getRegex())){
                 return i;
             }
         }
-        ConsoleInformation.provideInstructions(instructions);
+        userOutput.provideInstructions(instructions);
         return getInstruction(instructions);
     }
 
-    public static int getGranularity(){
+    public int getGranularity(){
         Scanner scanner = new Scanner(System.in);
-        ConsoleInformation.userToProvideGranularity();
+        userOutput.userToProvideGranularity();
         return scanner.nextInt();
     }
 
-    public static MovementSpeed parseMovementSpeed() {
+    public MovementSpeed parseMovementSpeed() {
         Scanner scanner = new Scanner(System.in);
-        ConsoleInformation.userToProvideMovementSpeed();
+        userOutput.userToProvideMovementSpeed();
         String userInput = scanner.next();
         if (userInput.matches("PMS")){
             try {
@@ -72,42 +76,42 @@ public class ConsoleParsing {
                 return sport;
             }
         }
-        ConsoleInformation.provideSports();
+        userOutput.provideSports();
         return parseMovementSpeed();
     }
 
-    public static MovementSpeed pathsToMovementSpeeds() throws InsufficientDataException {
+    public MovementSpeed pathsToMovementSpeeds() throws InsufficientDataException {
         GPXToTour tourParser = new GPXToTour();
-        String[] paths = ConsoleParsing.readPaths();
+        String[] paths = this.readPaths();
         List<Tour> tours= new ArrayList<>();
             for (String s:paths) {
             try {
                 tourParser.read(s);
                 tours.add(tourParser.getTour());
             }catch (NoDataException e){
-                ConsoleInformation.alertWrongFileType(s, "tour");
+                userOutput.alertWrongFileType(s, "tour");
             }
         }
         return SpeedCalculator.predictPersonalMovementSpeed(tours.toArray(Tour[]::new));
     }
 
-    public static EvaluationFunction parseEvaluationFunction(EvaluationFunction[] evaluationFunctions) {
+    public EvaluationFunction parseEvaluationFunction(EvaluationFunction[] evaluationFunctions) {
         Scanner scanner = new Scanner(System.in);
-        ConsoleInformation.info("Please provide evaluation function");
+        userOutput.info("Please provide evaluation function");
         String userInput = scanner.nextLine();
         for (EvaluationFunction i:evaluationFunctions) {
             if (userInput.matches(i.getRegex())){
                 return i;
             }
         }
-        ConsoleInformation.provideEvaluationFunctions(evaluationFunctions);
+        userOutput.provideEvaluationFunctions(evaluationFunctions);
         return parseEvaluationFunction(evaluationFunctions);
     }
 
-    public static Duration parseMaxDuration() {
+    public Duration parseMaxDuration() {
         Scanner scanner = new Scanner(System.in);
         Duration output;
-        ConsoleInformation.info("Bitte maximale Gehzeit in Stunden / Minuten eingeben. Stunden:");
+        userOutput.info("Bitte maximale Gehzeit in Stunden / Minuten eingeben. Stunden:");
         int temp = 0;
         try {
             temp = scanner.nextInt();
@@ -115,7 +119,7 @@ public class ConsoleParsing {
 
         }
         output = Duration.ofHours(temp);
-        ConsoleInformation.info("minuten");
+        userOutput.info("minuten");
         try {
             temp = scanner.nextInt();
         }catch (Exception e){

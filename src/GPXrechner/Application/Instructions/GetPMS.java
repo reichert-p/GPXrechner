@@ -6,10 +6,17 @@ import GPXrechner.Calculations.InsufficientDataException;
 import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Calculations.SpeedCalculator;
 import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Interfaces.Output.ConsoleInformation;
+import GPXrechner.Interfaces.Output.UserOutput;
 import GPXrechner.WayModel.Entities.Tour;
 
-public class GetPMS implements Instruction{
+public class GetPMS implements Instruction {
+
+    UserOutput userOutput;
+
+    public GetPMS(UserOutput consoleInformation) {
+        this.userOutput = consoleInformation;
+    }
+
     @Override
     public String getDescription() {
         return "see the personal movement speed of the tour";
@@ -17,14 +24,14 @@ public class GetPMS implements Instruction{
 
     @Override
     public State execute(State state) throws InvalidStateException {
-        if (!(state instanceof TourLoaded)){
-            throw new InvalidStateException("TourLoaded",state);
+        if (!(state instanceof TourLoaded)) {
+            throw new InvalidStateException("TourLoaded", state);
         }
-        Tour tour = (Tour)state.getPath();
+        Tour tour = (Tour) state.getPath();
         try {
             MovementSpeed pms = SpeedCalculator.predictPersonalMovementSpeed(tour);
-            ConsoleInformation.infoPMSofTour(tour.toString(),pms);
-        }catch (InsufficientDataException e){
+            userOutput.infoPMSofTour(tour.toString(), pms);
+        } catch (InsufficientDataException e) {
             e.printStackTrace();
         }
         return state;

@@ -3,7 +3,7 @@ package GPXrechner.Application.Instructions;
 import GPXrechner.Application.States.State;
 import GPXrechner.Interfaces.InvalidStateException;
 
-public class Exit implements Instruction{
+public class Exit implements Instruction {
     @Override
     public String getDescription() {
         return "exit the program";
