@@ -1,14 +1,15 @@
 package GPXrechner.Application.States;
 
-import GPXrechner.WayModel.Entities.Path;
-import GPXrechner.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
 
-public class TourLoaded implements State{
+public class TourLoaded implements State {
+
+    Tour tour;
 
     public TourLoaded(Tour tour) {
         this.tour = tour;
     }
-    Tour tour;
 
     @Override
     public Path getPath() {

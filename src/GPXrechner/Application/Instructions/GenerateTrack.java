@@ -3,10 +3,10 @@ package GPXrechner.Application.Instructions;
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
-import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Interfaces.Output.UserOutput;
-import GPXrechner.WayModel.Entities.Tour;
-import GPXrechner.WayModel.Entities.Track;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Track;
+import GPXrechner.Plugin.InvalidStateException;
+import GPXrechner.Application.UserOutput;
 
 public class GenerateTrack implements Instruction {
     UserOutput userOutput;

@@ -1,17 +1,12 @@
 package test.Calculations.Toursplitting;
 
-import GPXrechner.Calculations.MovementSpeed.Sport;
-import GPXrechner.Calculations.TourSplitting.Detours;
-import GPXrechner.Calculations.TourSplitting.DirectWayHeuristic;
-import GPXrechner.Calculations.TourSplitting.TimeHeuristic;
-import GPXrechner.Calculations.TourSplitting.WayPointSet;
-import GPXrechner.WayModel.Entities.Path;
-import GPXrechner.WayModel.Location;
+import GPXrechner.Domain.Calculations.TourSplitting.Detours;
+import GPXrechner.Domain.Calculations.TourSplitting.TimeHeuristic;
+import GPXrechner.Domain.Calculations.TourSplitting.WayPointSet;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
 import org.junit.jupiter.api.Test;
 import test.GetTracks;
 import test.GetWayPointSets;
-
-import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 

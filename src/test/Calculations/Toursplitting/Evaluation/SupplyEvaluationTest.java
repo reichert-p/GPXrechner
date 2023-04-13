@@ -1,13 +1,12 @@
 package test.Calculations.Toursplitting.Evaluation;
 
-import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
-import GPXrechner.Calculations.MovementSpeed.Sport;
-import GPXrechner.Calculations.TourSplitting.Detours;
-import GPXrechner.Calculations.TourSplitting.Evaluation.StayNightEvaluation;
-import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTrack;
-import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
-import GPXrechner.Interfaces.Parsing.NoTrackException;
-import GPXrechner.WayModel.Entities.Path;
+import GPXrechner.Domain.Calculations.MovementSpeed.MovementSpeed;
+import GPXrechner.Domain.Calculations.MovementSpeed.Sport;
+import GPXrechner.Domain.Calculations.TourSplitting.Detours;
+import GPXrechner.Domain.Calculations.TourSplitting.Evaluation.StayNightEvaluation;
+import GPXrechner.Plugin.Parsing.GPXReader.GPXToTrack;
+import GPXrechner.Plugin.Parsing.GPXReader.NoDataException;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;

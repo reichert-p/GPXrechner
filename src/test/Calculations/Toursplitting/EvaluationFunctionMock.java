@@ -1,9 +1,9 @@
 package test.Calculations.Toursplitting;
 
-import GPXrechner.Calculations.TourSplitting.Detours;
-import GPXrechner.Calculations.TourSplitting.Evaluation.EvaluationFunction;
-import GPXrechner.Calculations.TourSplitting.Representation;
-import GPXrechner.WayModel.Location;
+import GPXrechner.Domain.Calculations.TourSplitting.Detours;
+import GPXrechner.Domain.Calculations.TourSplitting.Evaluation.EvaluationFunction;
+import GPXrechner.Domain.Calculations.TourSplitting.Representation;
+import GPXrechner.Domain.WayModel.WayModel.Location;
 
 import java.util.ArrayList;
 

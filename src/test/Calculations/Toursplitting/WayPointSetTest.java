@@ -1,11 +1,9 @@
 package test.Calculations.Toursplitting;
 
-import GPXrechner.Calculations.TourSplitting.WayPointSet;
-import GPXrechner.WayModel.WayPoint;
+import GPXrechner.Domain.Calculations.TourSplitting.WayPointSet;
+import GPXrechner.Domain.WayModel.WayModel.WayPoint;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 class WayPointSetTest {
 

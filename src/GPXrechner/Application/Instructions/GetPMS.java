@@ -2,12 +2,12 @@ package GPXrechner.Application.Instructions;
 
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
-import GPXrechner.Calculations.InsufficientDataException;
-import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
-import GPXrechner.Calculations.SpeedCalculator;
-import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Interfaces.Output.UserOutput;
-import GPXrechner.WayModel.Entities.Tour;
+import GPXrechner.Domain.Calculations.InsufficientDataException;
+import GPXrechner.Domain.Calculations.MovementSpeed.MovementSpeed;
+import GPXrechner.Domain.Calculations.SpeedCalculator;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
+import GPXrechner.Plugin.InvalidStateException;
+import GPXrechner.Application.UserOutput;
 
 public class GetPMS implements Instruction {
 

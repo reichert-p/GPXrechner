@@ -1,19 +1,15 @@
 package test.Calculations.Toursplitting;
 
-import GPXrechner.Calculations.MovementSpeed.Sport;
-import GPXrechner.Calculations.TourSplitting.Evaluation.EvaluationFunction;
-import GPXrechner.Calculations.TourSplitting.Evaluation.SupplyEvaluation;
-import GPXrechner.Calculations.TourSplitting.Hillclimbing;
-import GPXrechner.Calculations.TourSplitting.Representation;
-import GPXrechner.Calculations.TourSplitting.WayPointSet;
-import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTrack;
-import GPXrechner.Interfaces.Parsing.GPXReader.GPXToWayPointSet;
-import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
-import GPXrechner.WayModel.Entities.Track;
+import GPXrechner.Domain.Calculations.MovementSpeed.Sport;
+import GPXrechner.Domain.Calculations.TourSplitting.Evaluation.EvaluationFunction;
+import GPXrechner.Domain.Calculations.TourSplitting.Hillclimbing;
+import GPXrechner.Domain.Calculations.TourSplitting.WayPointSet;
+import GPXrechner.Plugin.Parsing.GPXReader.GPXToTrack;
+import GPXrechner.Plugin.Parsing.GPXReader.GPXToWayPointSet;
+import GPXrechner.Plugin.Parsing.GPXReader.NoDataException;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Track;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.time.Duration;
 
 class HillClimbingTest {
     @Test

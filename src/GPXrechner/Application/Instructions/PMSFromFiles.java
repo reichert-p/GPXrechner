@@ -1,10 +1,10 @@
 package GPXrechner.Application.Instructions;
 
 import GPXrechner.Application.States.State;
-import GPXrechner.Calculations.InsufficientDataException;
-import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Interfaces.Output.UserOutput;
-import GPXrechner.Interfaces.Parsing.UserInput;
+import GPXrechner.Domain.Calculations.InsufficientDataException;
+import GPXrechner.Plugin.InvalidStateException;
+import GPXrechner.Application.UserOutput;
+import GPXrechner.Application.UserInput;
 
 public class PMSFromFiles implements Instruction {
     UserOutput userOutput;

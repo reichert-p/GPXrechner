@@ -3,12 +3,12 @@ package GPXrechner.Application.Instructions;
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
-import GPXrechner.Calculations.MovementSpeed.MovementSpeed;
-import GPXrechner.Calculations.TimePrediction;
-import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Interfaces.Output.UserOutput;
-import GPXrechner.Interfaces.Parsing.UserInput;
-import GPXrechner.WayModel.Entities.Path;
+import GPXrechner.Domain.Calculations.MovementSpeed.MovementSpeed;
+import GPXrechner.Domain.Calculations.TimePrediction;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
+import GPXrechner.Plugin.InvalidStateException;
+import GPXrechner.Application.UserOutput;
+import GPXrechner.Application.UserInput;
 
 public class PredictTime implements Instruction {
     UserOutput userOutput;

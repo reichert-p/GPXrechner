@@ -1,10 +1,10 @@
 package test.WayModel.Entities;
 
-import GPXrechner.Calculations.InsufficientDataException;
-import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTour;
-import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
-import GPXrechner.WayModel.Entities.Tour;
-import GPXrechner.WayModel.Profiles.SpeedProfile;
+import GPXrechner.Domain.Calculations.InsufficientDataException;
+import GPXrechner.Plugin.Parsing.GPXReader.GPXToTour;
+import GPXrechner.Plugin.Parsing.GPXReader.NoDataException;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.WayModel.Profiles.SpeedProfile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

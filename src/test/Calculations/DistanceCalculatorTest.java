@@ -1,12 +1,12 @@
 package test.Calculations;
 
-import GPXrechner.Calculations.DistanceCalculator;
-import GPXrechner.Calculations.InsufficientDataException;
-import GPXrechner.WayModel.ElevationGain;
-import GPXrechner.WayModel.Entities.Track;
-import GPXrechner.WayModel.Location;
-import GPXrechner.WayModel.Units.Distance;
-import GPXrechner.WayModel.Units.Elevation;
+import GPXrechner.Domain.Calculations.DistanceCalculator;
+import GPXrechner.Domain.Calculations.InsufficientDataException;
+import GPXrechner.Domain.WayModel.WayModel.ElevationGain;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Track;
+import GPXrechner.Domain.WayModel.WayModel.Location;
+import GPXrechner.Domain.WayModel.WayModel.Units.Distance;
+import GPXrechner.Domain.WayModel.WayModel.Units.Elevation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.GetTracks;

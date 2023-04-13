@@ -1,6 +1,6 @@
 package test.Calculations.Toursplitting;
 
-import GPXrechner.Calculations.TourSplitting.Representation;
+import GPXrechner.Domain.Calculations.TourSplitting.Representation;
 
 import org.junit.jupiter.api.Test;
 

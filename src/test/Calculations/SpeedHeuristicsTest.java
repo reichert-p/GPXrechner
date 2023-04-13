@@ -1,14 +1,13 @@
 package test.Calculations;
 
-import GPXrechner.Calculations.InsufficientDataException;
-import GPXrechner.Calculations.SpeedHeuristics;
-import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTour;
-import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
-import GPXrechner.Interfaces.Parsing.NoTourException;
-import GPXrechner.WayModel.Entities.Tour;
-import GPXrechner.WayModel.Location;
-import GPXrechner.WayModel.TourPoint;
-import GPXrechner.WayModel.Units.Pace;
+import GPXrechner.Domain.Calculations.InsufficientDataException;
+import GPXrechner.Domain.Calculations.SpeedHeuristics;
+import GPXrechner.Plugin.Parsing.GPXReader.GPXToTour;
+import GPXrechner.Plugin.Parsing.GPXReader.NoDataException;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.WayModel.Location;
+import GPXrechner.Domain.WayModel.WayModel.TourPoint;
+import GPXrechner.Domain.WayModel.WayModel.Units.Pace;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

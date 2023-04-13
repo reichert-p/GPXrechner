@@ -3,12 +3,12 @@ package GPXrechner.Application.Instructions;
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
-import GPXrechner.Calculations.InsufficientDataException;
-import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Interfaces.Output.UserOutput;
-import GPXrechner.Interfaces.Parsing.UserInput;
-import GPXrechner.WayModel.Entities.Path;
-import GPXrechner.WayModel.Profiles.ElevationProfile;
+import GPXrechner.Domain.Calculations.InsufficientDataException;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
+import GPXrechner.Domain.WayModel.WayModel.Profiles.ElevationProfile;
+import GPXrechner.Plugin.InvalidStateException;
+import GPXrechner.Application.UserOutput;
+import GPXrechner.Application.UserInput;
 
 public class GetElevationProfile implements Instruction {
     UserOutput userOutput;

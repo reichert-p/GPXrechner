@@ -3,14 +3,14 @@ package GPXrechner.Application.Instructions;
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
-import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Interfaces.Output.UserOutput;
-import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTour;
-import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTrack;
-import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
-import GPXrechner.Interfaces.Parsing.UserInput;
-import GPXrechner.WayModel.Entities.Tour;
-import GPXrechner.WayModel.Entities.Track;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Track;
+import GPXrechner.Plugin.InvalidStateException;
+import GPXrechner.Application.UserOutput;
+import GPXrechner.Plugin.Parsing.GPXReader.GPXToTour;
+import GPXrechner.Plugin.Parsing.GPXReader.GPXToTrack;
+import GPXrechner.Plugin.Parsing.GPXReader.NoDataException;
+import GPXrechner.Application.UserInput;
 
 public class ReadPath implements Instruction {
     UserOutput userOutput;

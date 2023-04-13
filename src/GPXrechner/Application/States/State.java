@@ -1,7 +1,7 @@
 package GPXrechner.Application.States;
 
-import GPXrechner.WayModel.Entities.Path;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
 
 public interface State {
-    public Path getPath();
+    Path getPath();
 }

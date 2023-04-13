@@ -1,7 +1,7 @@
 package GPXrechner.Application.Instructions;
 
 import GPXrechner.Application.States.State;
-import GPXrechner.Interfaces.InvalidStateException;
+import GPXrechner.Plugin.InvalidStateException;
 
 public class Exit implements Instruction {
     @Override

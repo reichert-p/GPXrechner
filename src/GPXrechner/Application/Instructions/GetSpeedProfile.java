@@ -2,12 +2,12 @@ package GPXrechner.Application.Instructions;
 
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
-import GPXrechner.Calculations.InsufficientDataException;
-import GPXrechner.Interfaces.InvalidStateException;
-import GPXrechner.Interfaces.Output.UserOutput;
-import GPXrechner.Interfaces.Parsing.UserInput;
-import GPXrechner.WayModel.Entities.Tour;
-import GPXrechner.WayModel.Profiles.SpeedProfile;
+import GPXrechner.Domain.Calculations.InsufficientDataException;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.WayModel.Profiles.SpeedProfile;
+import GPXrechner.Plugin.InvalidStateException;
+import GPXrechner.Application.UserOutput;
+import GPXrechner.Application.UserInput;
 
 public class GetSpeedProfile implements Instruction {
 

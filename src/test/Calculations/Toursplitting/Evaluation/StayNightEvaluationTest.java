@@ -1,11 +1,11 @@
 package test.Calculations.Toursplitting.Evaluation;
 
-import GPXrechner.Calculations.MovementSpeed.Sport;
-import GPXrechner.Calculations.TourSplitting.Detour;
-import GPXrechner.Calculations.TourSplitting.Detours;
-import GPXrechner.Calculations.TourSplitting.Evaluation.StayNightEvaluation;
-import GPXrechner.Calculations.TourSplitting.Representation;
-import GPXrechner.WayModel.WayPoint;
+import GPXrechner.Domain.Calculations.MovementSpeed.Sport;
+import GPXrechner.Domain.Calculations.TourSplitting.Detour;
+import GPXrechner.Domain.Calculations.TourSplitting.Detours;
+import GPXrechner.Domain.Calculations.TourSplitting.Evaluation.StayNightEvaluation;
+import GPXrechner.Domain.Calculations.TourSplitting.Representation;
+import GPXrechner.Domain.WayModel.WayModel.WayPoint;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import test.GetTracks;

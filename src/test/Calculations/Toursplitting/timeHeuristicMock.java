@@ -1,7 +1,7 @@
 package test.Calculations.Toursplitting;
 
-import GPXrechner.Calculations.TourSplitting.TimeHeuristic;
-import GPXrechner.WayModel.Location;
+import GPXrechner.Domain.Calculations.TourSplitting.TimeHeuristic;
+import GPXrechner.Domain.WayModel.WayModel.Location;
 
 import java.time.Duration;
 

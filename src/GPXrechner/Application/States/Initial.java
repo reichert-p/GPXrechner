@@ -1,10 +1,10 @@
 package GPXrechner.Application.States;
 
-import GPXrechner.WayModel.Entities.Path;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
 
-public class Initial implements State{
+public class Initial implements State {
     @Override
-    public Path getPath() throws NullPointerException{
+    public Path getPath() throws NullPointerException {
         throw new NullPointerException();
     }
 }

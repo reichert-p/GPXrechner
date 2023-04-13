@@ -3,13 +3,11 @@ package test.Application.Instructions;
 import GPXrechner.Application.States.Initial;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
-import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTour;
-import GPXrechner.Interfaces.Parsing.GPXReader.GPXToTrack;
-import GPXrechner.Interfaces.Parsing.GPXReader.NoDataException;
-import GPXrechner.Interfaces.Parsing.NoTourException;
-import GPXrechner.Interfaces.Parsing.NoTrackException;
-import GPXrechner.WayModel.Entities.Tour;
-import GPXrechner.WayModel.Entities.Track;
+import GPXrechner.Plugin.Parsing.GPXReader.GPXToTour;
+import GPXrechner.Plugin.Parsing.GPXReader.GPXToTrack;
+import GPXrechner.Plugin.Parsing.GPXReader.NoDataException;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.WayModel.Entities.Track;
 
 public class StateFactory {
     public static Initial getInitialState(){

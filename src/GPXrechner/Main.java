@@ -1,6 +1,6 @@
 package GPXrechner;
 
-import GPXrechner.Interfaces.Console;
+import GPXrechner.Plugin.Console;
 
 public class Main {
     public static void main(String[] args) {
