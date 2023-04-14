@@ -2,7 +2,7 @@ package GPXrechner.Domain.Calculations.TourSplitting.Evaluation;
 
 import GPXrechner.Domain.Calculations.TourSplitting.Detours;
 import GPXrechner.Domain.Calculations.TourSplitting.Representation;
-import GPXrechner.Domain.WayModel.WayModel.Location;
+import GPXrechner.Domain.WayModel.Location;
 
 import java.util.ArrayList;
 

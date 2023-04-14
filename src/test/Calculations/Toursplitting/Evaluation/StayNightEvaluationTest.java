@@ -5,7 +5,7 @@ import GPXrechner.Domain.Calculations.TourSplitting.Detour;
 import GPXrechner.Domain.Calculations.TourSplitting.Detours;
 import GPXrechner.Domain.Calculations.TourSplitting.Evaluation.StayNightEvaluation;
 import GPXrechner.Domain.Calculations.TourSplitting.Representation;
-import GPXrechner.Domain.WayModel.WayModel.WayPoint;
+import GPXrechner.Domain.WayModel.WayPoint;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import test.GetTracks;
@@ -29,6 +29,4 @@ class StayNightEvaluationTest {
         var expWithDet = eval.evaluate(path,detours,new Representation(new boolean[]{true}));
         Assertions.assertTrue(expDirect > expWithDet);
     }
-
-
 }

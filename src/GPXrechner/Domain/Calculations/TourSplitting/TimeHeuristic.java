@@ -1,6 +1,6 @@
 package GPXrechner.Domain.Calculations.TourSplitting;
 
-import GPXrechner.Domain.WayModel.WayModel.Location;
+import GPXrechner.Domain.WayModel.Location;
 
 import java.time.Duration;
 

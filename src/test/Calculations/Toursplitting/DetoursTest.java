@@ -3,7 +3,7 @@ package test.Calculations.Toursplitting;
 import GPXrechner.Domain.Calculations.TourSplitting.Detours;
 import GPXrechner.Domain.Calculations.TourSplitting.TimeHeuristic;
 import GPXrechner.Domain.Calculations.TourSplitting.WayPointSet;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
+import GPXrechner.Domain.WayModel.Entities.Path;
 import org.junit.jupiter.api.Test;
 import test.GetTracks;
 import test.GetWayPointSets;
@@ -11,15 +11,6 @@ import test.GetWayPointSets;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DetoursTest {
-
-    @Test
-    void addDetour() {
-    }
-
-    @Test
-    void getPossibleDetours() {
-    }
-
     @Test
     void initDetours(){
         Path path = GetTracks.getMountainTrack();
@@ -34,6 +25,4 @@ class DetoursTest {
         assertEquals(0 ,firstDetour.getExpenditure().toSeconds());
         assertEquals(0 ,firstDetour.getPosition());
     }
-
-
 }

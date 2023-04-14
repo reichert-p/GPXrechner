@@ -4,8 +4,8 @@ import GPXrechner.Application.Instructions.Instruction;
 import GPXrechner.Domain.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Domain.Calculations.TourSplitting.Evaluation.EvaluationFunction;
 import GPXrechner.Domain.Calculations.TourSplitting.WayPointSet;
-import GPXrechner.Domain.WayModel.WayModel.Profiles.ElevationProfile;
-import GPXrechner.Domain.WayModel.WayModel.Profiles.SpeedProfile;
+import GPXrechner.Domain.WayModel.Profiles.ElevationProfile;
+import GPXrechner.Domain.WayModel.Profiles.SpeedProfile;
 
 import java.time.Duration;
 

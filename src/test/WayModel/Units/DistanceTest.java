@@ -1,6 +1,6 @@
 package test.WayModel.Units;
 
-import GPXrechner.Domain.WayModel.WayModel.Units.Distance;
+import GPXrechner.Domain.WayModel.Units.Distance;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

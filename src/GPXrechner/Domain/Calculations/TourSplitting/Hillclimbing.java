@@ -2,8 +2,8 @@ package GPXrechner.Domain.Calculations.TourSplitting;
 
 import GPXrechner.Domain.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Domain.Calculations.TourSplitting.Evaluation.EvaluationFunction;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
-import GPXrechner.Domain.WayModel.WayModel.Location;
+import GPXrechner.Domain.WayModel.Entities.Path;
+import GPXrechner.Domain.WayModel.Location;
 
 import java.util.ArrayList;
 import java.util.Arrays;

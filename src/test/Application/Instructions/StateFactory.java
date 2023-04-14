@@ -6,8 +6,8 @@ import GPXrechner.Application.States.TrackLoaded;
 import GPXrechner.Plugin.Parsing.GPXReader.GPXToTour;
 import GPXrechner.Plugin.Parsing.GPXReader.GPXToTrack;
 import GPXrechner.Plugin.Parsing.GPXReader.NoDataException;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Track;
+import GPXrechner.Domain.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.Entities.Track;
 
 public class StateFactory {
     public static Initial getInitialState(){

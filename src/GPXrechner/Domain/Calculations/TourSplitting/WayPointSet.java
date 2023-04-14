@@ -1,6 +1,6 @@
 package GPXrechner.Domain.Calculations.TourSplitting;
 
-import GPXrechner.Domain.WayModel.WayModel.WayPoint;
+import GPXrechner.Domain.WayModel.WayPoint;
 
 import java.util.ArrayList;
 

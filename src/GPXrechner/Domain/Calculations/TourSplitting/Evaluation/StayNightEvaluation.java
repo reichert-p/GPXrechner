@@ -5,7 +5,7 @@ import GPXrechner.Domain.Calculations.MovementSpeed.Sport;
 import GPXrechner.Domain.Calculations.TimePrediction;
 import GPXrechner.Domain.Calculations.TourSplitting.Detours;
 import GPXrechner.Domain.Calculations.TourSplitting.Representation;
-import GPXrechner.Domain.WayModel.WayModel.Location;
+import GPXrechner.Domain.WayModel.Location;
 
 import java.time.Duration;
 import java.util.ArrayList;

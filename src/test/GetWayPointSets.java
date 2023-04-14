@@ -1,7 +1,7 @@
 package test;
 
 import GPXrechner.Domain.Calculations.TourSplitting.WayPointSet;
-import GPXrechner.Domain.WayModel.WayModel.WayPoint;
+import GPXrechner.Domain.WayModel.WayPoint;
 
 public class GetWayPointSets {
 

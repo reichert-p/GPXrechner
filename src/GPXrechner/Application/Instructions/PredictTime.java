@@ -5,7 +5,7 @@ import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
 import GPXrechner.Domain.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Domain.Calculations.TimePrediction;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
+import GPXrechner.Domain.WayModel.Entities.Path;
 import GPXrechner.Plugin.InvalidStateException;
 import GPXrechner.Application.UserOutput;
 import GPXrechner.Application.UserInput;

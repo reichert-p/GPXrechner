@@ -7,7 +7,7 @@ import GPXrechner.Domain.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Domain.Calculations.MovementSpeed.Sport;
 import GPXrechner.Domain.Calculations.SpeedCalculator;
 import GPXrechner.Domain.Calculations.TourSplitting.Evaluation.EvaluationFunction;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.Entities.Tour;
 import GPXrechner.Application.UserOutput;
 import GPXrechner.Plugin.Parsing.GPXReader.GPXToTour;
 import GPXrechner.Plugin.Parsing.GPXReader.NoDataException;

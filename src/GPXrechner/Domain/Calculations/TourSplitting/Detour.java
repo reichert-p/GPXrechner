@@ -1,8 +1,8 @@
 package GPXrechner.Domain.Calculations.TourSplitting;
 
-import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
-import GPXrechner.Domain.WayModel.WayModel.Location;
-import GPXrechner.Domain.WayModel.WayModel.WayPoint;
+import GPXrechner.Domain.WayModel.Entities.Path;
+import GPXrechner.Domain.WayModel.Location;
+import GPXrechner.Domain.WayModel.WayPoint;
 
 import java.time.Duration;
 import java.util.ArrayList;

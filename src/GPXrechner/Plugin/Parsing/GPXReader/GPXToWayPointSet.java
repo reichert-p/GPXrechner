@@ -2,8 +2,8 @@ package GPXrechner.Plugin.Parsing.GPXReader;
 
 import GPXrechner.Application.XMLParser;
 import GPXrechner.Domain.Calculations.TourSplitting.WayPointSet;
-import GPXrechner.Domain.WayModel.WayModel.TrackPoint;
-import GPXrechner.Domain.WayModel.WayModel.WayPoint;
+import GPXrechner.Domain.WayModel.TrackPoint;
+import GPXrechner.Domain.WayModel.WayPoint;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

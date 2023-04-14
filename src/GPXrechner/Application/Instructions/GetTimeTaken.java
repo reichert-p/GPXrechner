@@ -3,7 +3,7 @@ package GPXrechner.Application.Instructions;
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Domain.Calculations.SpeedHeuristics;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.Entities.Tour;
 import GPXrechner.Plugin.InvalidStateException;
 import GPXrechner.Application.UserOutput;
 

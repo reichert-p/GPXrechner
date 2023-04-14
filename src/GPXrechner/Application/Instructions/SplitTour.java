@@ -9,7 +9,7 @@ import GPXrechner.Domain.Calculations.TourSplitting.Evaluation.StayNightEvaluati
 import GPXrechner.Domain.Calculations.TourSplitting.Evaluation.SupplyEvaluation;
 import GPXrechner.Domain.Calculations.TourSplitting.Hillclimbing;
 import GPXrechner.Domain.Calculations.TourSplitting.WayPointSet;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
+import GPXrechner.Domain.WayModel.Entities.Path;
 import GPXrechner.Plugin.InvalidStateException;
 import GPXrechner.Application.UserOutput;
 import GPXrechner.Plugin.Parsing.GPXReader.GPXToWayPointSet;

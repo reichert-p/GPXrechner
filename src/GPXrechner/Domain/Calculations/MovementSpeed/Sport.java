@@ -1,6 +1,6 @@
 package GPXrechner.Domain.Calculations.MovementSpeed;
 
-import GPXrechner.Domain.WayModel.WayModel.Units.Pace;
+import GPXrechner.Domain.WayModel.Units.Pace;
 
 public enum Sport implements MovementSpeed {
     HIKING(4000, 400, 600),

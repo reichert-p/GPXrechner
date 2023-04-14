@@ -1,9 +1,9 @@
-package GPXrechner.Domain.WayModel.WayModel.Profiles;
+package GPXrechner.Domain.WayModel.Profiles;
 
 import GPXrechner.Domain.Calculations.InsufficientDataException;
 import GPXrechner.Domain.Calculations.SpeedCalculator;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
-import GPXrechner.Domain.WayModel.WayModel.TourPoint;
+import GPXrechner.Domain.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.TourPoint;
 
 import java.util.ArrayList;
 import java.util.List;

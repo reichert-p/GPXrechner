@@ -1,8 +1,8 @@
 package GPXrechner.Plugin.Output;
 
 import GPXrechner.Application.XMLGenerater;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Track;
-import GPXrechner.Domain.WayModel.WayModel.Location;
+import GPXrechner.Domain.WayModel.Entities.Track;
+import GPXrechner.Domain.WayModel.Location;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

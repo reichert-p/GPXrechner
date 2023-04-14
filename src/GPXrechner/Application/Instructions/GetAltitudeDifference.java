@@ -4,7 +4,7 @@ import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
 import GPXrechner.Domain.Calculations.DistanceCalculator;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
+import GPXrechner.Domain.WayModel.Entities.Path;
 import GPXrechner.Plugin.InvalidStateException;
 import GPXrechner.Application.UserOutput;
 

@@ -7,7 +7,7 @@ import GPXrechner.Application.States.State;
 import GPXrechner.Plugin.InvalidStateException;
 import GPXrechner.Plugin.Output.ConsoleInformation;
 import GPXrechner.Plugin.Parsing.GPXReader.NoDataException;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Track;
+import GPXrechner.Domain.WayModel.Entities.Track;
 import org.junit.jupiter.api.*;
 
 import java.io.ByteArrayOutputStream;

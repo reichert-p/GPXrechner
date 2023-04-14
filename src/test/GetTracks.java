@@ -1,7 +1,7 @@
 package test;
 
-import GPXrechner.Domain.WayModel.WayModel.Entities.Track;
-import GPXrechner.Domain.WayModel.WayModel.TrackPoint;
+import GPXrechner.Domain.WayModel.Entities.Track;
+import GPXrechner.Domain.WayModel.TrackPoint;
 
 public class GetTracks {
     public static Track getMountainTrack(){ //Hochvogel traverse

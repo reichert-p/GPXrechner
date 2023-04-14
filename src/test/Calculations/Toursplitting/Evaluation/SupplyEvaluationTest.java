@@ -6,20 +6,12 @@ import GPXrechner.Domain.Calculations.TourSplitting.Detours;
 import GPXrechner.Domain.Calculations.TourSplitting.Evaluation.StayNightEvaluation;
 import GPXrechner.Plugin.Parsing.GPXReader.GPXToTrack;
 import GPXrechner.Plugin.Parsing.GPXReader.NoDataException;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
+import GPXrechner.Domain.WayModel.Entities.Path;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 
 class SupplyEvaluationTest {
-
-    @Test
-    void getDescription() {
-    }
-
-    @Test
-    void getRegex() {
-    }
 
     @Test
     void evaluate() throws NoDataException {

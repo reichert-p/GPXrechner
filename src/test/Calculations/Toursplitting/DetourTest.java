@@ -4,8 +4,8 @@ import GPXrechner.Domain.Calculations.MovementSpeed.Sport;
 import GPXrechner.Domain.Calculations.TourSplitting.Detour;
 import GPXrechner.Domain.Calculations.TourSplitting.DirectWayHeuristic;
 import GPXrechner.Domain.Calculations.TourSplitting.TimeHeuristic;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Path;
-import GPXrechner.Domain.WayModel.WayModel.WayPoint;
+import GPXrechner.Domain.WayModel.Entities.Path;
+import GPXrechner.Domain.WayModel.WayPoint;
 import org.junit.jupiter.api.Test;
 import test.GetTracks;
 

@@ -1,6 +1,6 @@
 package GPXrechner.Plugin.Parsing.GPXReader;
 
-import GPXrechner.Domain.WayModel.WayModel.TrackPoint;
+import GPXrechner.Domain.WayModel.TrackPoint;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 

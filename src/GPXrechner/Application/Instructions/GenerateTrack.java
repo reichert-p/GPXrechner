@@ -3,8 +3,8 @@ package GPXrechner.Application.Instructions;
 import GPXrechner.Application.States.State;
 import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Application.States.TrackLoaded;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Track;
+import GPXrechner.Domain.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.Entities.Track;
 import GPXrechner.Plugin.InvalidStateException;
 import GPXrechner.Application.UserOutput;
 

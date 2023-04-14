@@ -3,9 +3,9 @@ package GPXrechner.Domain.Calculations;
 import GPXrechner.Domain.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Domain.Calculations.MovementSpeed.PersonalSpeed;
 import GPXrechner.Domain.Calculations.MovementSpeed.Sport;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
-import GPXrechner.Domain.WayModel.WayModel.TourPoint;
-import GPXrechner.Domain.WayModel.WayModel.Units.Pace;
+import GPXrechner.Domain.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.TourPoint;
+import GPXrechner.Domain.WayModel.Units.Pace;
 
 import java.time.Duration;
 import java.util.List;

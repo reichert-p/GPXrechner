@@ -2,11 +2,11 @@ package test.Calculations;
 
 import GPXrechner.Domain.Calculations.DistanceCalculator;
 import GPXrechner.Domain.Calculations.InsufficientDataException;
-import GPXrechner.Domain.WayModel.WayModel.ElevationGain;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Track;
-import GPXrechner.Domain.WayModel.WayModel.Location;
-import GPXrechner.Domain.WayModel.WayModel.Units.Distance;
-import GPXrechner.Domain.WayModel.WayModel.Units.Elevation;
+import GPXrechner.Domain.WayModel.ElevationGain;
+import GPXrechner.Domain.WayModel.Entities.Track;
+import GPXrechner.Domain.WayModel.Location;
+import GPXrechner.Domain.WayModel.Units.Distance;
+import GPXrechner.Domain.WayModel.Units.Elevation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.GetTracks;
@@ -35,8 +35,8 @@ class DistanceCalculatorTest {
 
     @Test
     void calc3dDistance() {
-        Distance distanceToFirstHut2D = DistanceCalculator.calc3dDistance(mountainTrack.getOrderedLocations().get(0), mountainTrack.getOrderedLocations().get(1));
-        assertEquals(310, distanceToFirstHut2D.getValue(), 1);
+        Distance distanceToFirstHut3D = DistanceCalculator.calc3dDistance(mountainTrack.getOrderedLocations().get(0), mountainTrack.getOrderedLocations().get(1));
+        assertEquals(310, distanceToFirstHut3D.getValue(), 1);
 
         Distance distanceOfWholeTrack3D = DistanceCalculator.calc3dDistance(mountainTrack);
         assertEquals(8315, distanceOfWholeTrack3D.getValue(), 10);
@@ -45,15 +45,15 @@ class DistanceCalculatorTest {
     @Test
     void calcElevationGain() {
         ArrayList<Location> locations = mountainTrack.getOrderedLocations();
-        ElevationGain uphillSection = DistanceCalculator.calcElevationGain(locations.get(1), locations.get(2)); //uphill
+        ElevationGain uphillSection = DistanceCalculator.calcElevationGain(locations.get(1), locations.get(2));
         assertEquals(569, uphillSection.getUp(), 1);
         assertEquals(0, uphillSection.getDown(), 1);
 
-        ElevationGain downhillSection = DistanceCalculator.calcElevationGain(locations.get(4), locations.get(5)); //downhill
+        ElevationGain downhillSection = DistanceCalculator.calcElevationGain(locations.get(4), locations.get(5));
         assertEquals(0, downhillSection.getUp(), 1);
         assertEquals(539, downhillSection.getDown(), 1);
 
-        ElevationGain wholeTrack = DistanceCalculator.calcElevationGain(mountainTrack); //whole Track
+        ElevationGain wholeTrack = DistanceCalculator.calcElevationGain(mountainTrack);
         assertEquals(1346, wholeTrack.getUp(), 1);
         assertEquals(1493, wholeTrack.getDown(), 1);
     }

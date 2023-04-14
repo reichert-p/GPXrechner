@@ -5,7 +5,7 @@ import GPXrechner.Application.States.TourLoaded;
 import GPXrechner.Domain.Calculations.InsufficientDataException;
 import GPXrechner.Domain.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Domain.Calculations.SpeedCalculator;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Tour;
+import GPXrechner.Domain.WayModel.Entities.Tour;
 import GPXrechner.Plugin.InvalidStateException;
 import GPXrechner.Application.UserOutput;
 

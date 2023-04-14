@@ -1,4 +1,4 @@
-package GPXrechner.Domain.WayModel.WayModel;
+package GPXrechner.Domain.WayModel;
 
 /**
  * The elevation Difference of a Path

@@ -49,3 +49,5 @@ svg-inkscape
 *.pdfsync
 
 /svg-inkscape/
+
+*.puml

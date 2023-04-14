@@ -1,7 +1,7 @@
-package GPXrechner.Domain.WayModel.WayModel.Entities;
+package GPXrechner.Domain.WayModel.Entities;
 
-import GPXrechner.Domain.WayModel.WayModel.Location;
-import GPXrechner.Domain.WayModel.WayModel.TrackPoint;
+import GPXrechner.Domain.WayModel.Location;
+import GPXrechner.Domain.WayModel.TrackPoint;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,8 +1,8 @@
-package GPXrechner.Domain.WayModel.WayModel.Entities;
+package GPXrechner.Domain.WayModel.Entities;
 
-import GPXrechner.Domain.WayModel.WayModel.Location;
-import GPXrechner.Domain.WayModel.WayModel.TourPoint;
-import GPXrechner.Domain.WayModel.WayModel.TrackPoint;
+import GPXrechner.Domain.WayModel.Location;
+import GPXrechner.Domain.WayModel.TourPoint;
+import GPXrechner.Domain.WayModel.TrackPoint;
 
 import java.time.Duration;
 import java.util.ArrayList;

@@ -2,7 +2,7 @@ package GPXrechner.Domain.Calculations.TourSplitting;
 
 import GPXrechner.Domain.Calculations.MovementSpeed.MovementSpeed;
 import GPXrechner.Domain.Calculations.TimePrediction;
-import GPXrechner.Domain.WayModel.WayModel.Location;
+import GPXrechner.Domain.WayModel.Location;
 
 import java.time.Duration;
 

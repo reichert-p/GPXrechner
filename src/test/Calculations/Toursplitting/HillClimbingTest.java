@@ -7,13 +7,13 @@ import GPXrechner.Domain.Calculations.TourSplitting.WayPointSet;
 import GPXrechner.Plugin.Parsing.GPXReader.GPXToTrack;
 import GPXrechner.Plugin.Parsing.GPXReader.GPXToWayPointSet;
 import GPXrechner.Plugin.Parsing.GPXReader.NoDataException;
-import GPXrechner.Domain.WayModel.WayModel.Entities.Track;
+import GPXrechner.Domain.WayModel.Entities.Track;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class HillClimbingTest {
     @Test
-    void evaluationFunction() throws NoDataException {
+    void hillClimbing() throws NoDataException {
         EvaluationFunction evaluationFunction = new EvaluationFunctionMock();
         GPXToTrack trackParser = new GPXToTrack();
         trackParser.read("Files\\GPX\\Track\\Watzmann.gpx");

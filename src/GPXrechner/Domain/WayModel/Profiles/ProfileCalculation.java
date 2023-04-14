@@ -1,4 +1,4 @@
-package GPXrechner.Domain.WayModel.WayModel.Profiles;
+package GPXrechner.Domain.WayModel.Profiles;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,6 +6,9 @@ import java.util.List;
 
 public class ProfileCalculation {
     public static List<Double> normalize(List<Double> plist) {
+        if (plist.isEmpty()){
+            return plist;
+        }
         Double min = Collections.min(plist);
         Double max = Collections.max(plist);
         double diff = max - min;
@@ -22,6 +25,9 @@ public class ProfileCalculation {
     }
 
     public static int[] split(int pool, int sections) {
+        if ( pool < 0 || sections <= 0){
+            return new int[0];
+        }
         int[] output = new int[sections];
         int base = pool / sections;
         int remainder = pool % sections;
