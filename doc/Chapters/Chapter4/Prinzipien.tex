@@ -5,30 +5,69 @@
 
 \subsubsection{Positiv-Beispiel}
 
+Abbildung \ref{fig:GKGut} zeigt das Positiv-Beispiel für geringe Kopplung.
+Die verschiedenen Klassen im Package Instructions implementieren die Abläufe verschiedener Anwendungsfälle inklusive der Entscheidungen, die Anwender während der Nutzung treffen müssen.
+Die Klasse ConsoleParsing parsed Nutzereingaben von der Konsole.
+ Das Interface UserInput entkoppelt die Instructions von dem Parsing von Konsoleneingaben. Damit wird eine direkte Abhängigkeit der Anwendungslogik vermieden. Das macht eine Änderung auf eine nicht-Konsolen-Applikation einfach umsetzbar, was die geringe Kopplung gut ausnutzt. 
+
+\begin{figure}[H]
+  \label{fig:GKGut}
+  \centering
+  \includesvg[inkscapelatex = false, scale = 0.25]{Chapters/Chapter4/GeringeKopplungGut}
+  \caption{UML Diagramm des Interfaces UserInput}
+\end{figure}
 
 \subsubsection{Negativ-Beispiel}
+
+Abbildung \ref{fig:GKBad} zeigt das Negativ-Beispiel für geringe Kopplung.
+Die Klasse Hillclimbing implementiert die Annäherung (und im Optimalfall das Erreichen) einer Lösung eines (möglicherweise NP-)\footnote{Der Beweis der Komplexität des Problems übersteigt leider meine Möglichkeiten im Rahmen des Projekts} schweren Problems zur Mitnahme von Wichtigen Wegpunkten, die eine Abweichung des Eigentlichen Weges erfordern.
+Die Klasse Detours stellt alle in Betracht zu ziehenden Umwege dar. 
+Die Klasse Representation stellt eine Lösung des Problems in Form eines Bitstrings dar. Eine 0 an der n-ten Stelle steht dabei für ein Auslassen des n-ten Umweges, eine 1 entsprechend für die Mitnahme des Umwegs.
+Eine EvaluationFunction bewertet Lösungen des Problems, das MovementSpeed stellt die Geschwindigkeit dar, mit der sich auf dem Pfad bewegt wird.
+
+ Die Klasse Hillclimbing besitzt zwar eine Kopplung zur Bewertungsfunktion, Bewegungsgeschwindigkeit und Pfaden hat, so herrscht doch eine starke Kopplung zwischen der Hillclimbing Klasse und sowohl der Repräsentation der Lösungen und den einbindbaren Umwegen (Realisiert in der Klasse Detours).
+
+\begin{figure}[H]
+ \label{fig:GKBad}
+  \centering
+  \includesvg[inkscapelatex = false, scale = 0.25]{Chapters/Chapter4/GeringeKopplungBad}
+  \caption{UML Diagramm der Klasse Hillclimbing}
+\end{figure}
+
+Die Kopplungen könnten gelöst werden, indem zwischen Detours und Hillclimbing sowie zwischen Representation und Hillclimbing jeweils ein Interface genutzt würde. Diese Interfaces müssten dann auch in die EvaluationFunction übergeben werden. Dadurch könnte sowohl eine neue Repräsentation für Lösungen für die Representation sowie eine neue Implementation von Möglichen Lösungsbestandteilen aufgrund der geringeren Kopplung implementiert werden.
+
+In der Praxis macht dies aber wenig Sinn, da Beide Klassen nur Zusammen sinnvoll in eine Bewertungsfunktion übegebbar sind, da beide Bestandteil einer Lösung sind. 
+Aus sicht der Performance ist es jedoch kaum Sinnvoll, sie deshalb als eine Klasse zu implementieren, da Detours den gleichbleibenden Teil der Lösung darstellen, während die Menge der möglichen Repräsentation exponentiell mit der Menge and Detours steigt. 
+Das würde zu Milliardenfacher Kopie der Selben Datenstruktur führen, was vermutlich schlecht für den Speicheraufwand der Applikation wäre \footnote{Auch hier leider kein Beweis sondern lediglich schlüssige Vermutungen}.
 
 
 \subsection{Analyse GRASP: Hohe Kohäsion}
 
+Die Klasse Trackpoint referenziert eine Länge, eine Breite und eine Höhe über dem Meeresspiegel. Insgesamt Repräsentiert ein Trackpoint also einen genauen Ort auf der Erde. Die Kohäsion ist also sehr hoch, da genau diese Werte zusammen ein wohldefinierten Punkt im dreidimensionalen Raum abbilden.
+
+
+\begin{figure}[H]
+ \label{fig:HighKohesion}
+  \centering
+  \includesvg[inkscapelatex = false, scale = 0.5]{Chapters/Chapter4/Highkohesion}
+  \caption{UML Diagramm der Klasse Hillclimbing}
+\end{figure}
 
 
 \subsection{Don’t Repeat Yourself (DRY)}
 
-Erstellen der Helferklasse ProfileCalcultion für die Berechnung von Profilen, welchen von den Klassen (damals)ElevationProfile un d SpeedProfile verwendet wird (\href{https://github.com/reichert-p/GPXrechner/commit/8ffd648d794563fea2c8662debe12ca1277b1b3e#diff-3be7b5bf425b2c9794272cdc879a4e9b0ed23bab55acbdf71756fbda1356ff80}{commit 8ffd648d794563fea2c8662debe12ca1277b1b3e} ).
-Da die Methoden jeweils unabhängig vom Inhalt des jeweiligen Profils ausgeführt werden und genau Dasselbe tun können sie ausgelagert und dann darauf zugegriffen werden. Dies verhindert eine wiederholte Implementierung, hat aber keinerlei Auswirkungen auf das Ergebnis. In einem Anschliessenden Commit wird dieser Effekt sogar noch Ausgeweitet, indem anstelle von Minima und Maxima zur Normalisierung nur die Liste selbst angegeben wird und diese Werte dann in der ausgelagerten Methode berechnet werden (\href{https://github.com/reichert-p/GPXrechner/commit/996f066a8f26f78852df00c85888f7236b87b458#diff-3be7b5bf425b2c9794272cdc879a4e9b0ed23bab55acbdf71756fbda1356ff80}{commit 996f066a8f26f78852df00c85888f7236b87b458}).
+Im Commit (\href{https://github.com/reichert-p/GPXrechner/commit/8ffd648d794563fea2c8662debe12ca1277b1b3e#diff-3be7b5bf425b2c9794272cdc879a4e9b0ed23bab55acbdf71756fbda1356ff80}{commit 8ffd648d794563fea2c8662debe12ca1277b1b3e}{8ffd648}) wird der duplizierte Code aus den Klassen ElevationProfile und SpeedProfile aufgelöst.
 
-\subsubsection{Vorher}
+Da beide Klassen Profile ausrechnen gibt es Berechnungen, die unabhängig vom Inhalt des Profils durchgeführt werden müssen. Beispielhaft wird hier die Methode normalize betrachtet, die jeweils den Wertebereich der Profile auf Zahlen zwischen 0 und 1 normiert. 
 
-\begin{lstlisting}
-public class SpeedProfile {
-	private boolean[][] calculateSpeedProfile(Tour tour, int xGranularity) {
-		...
-		int[] sectionLength = split(tourPoints.size() , xGranularity);
-		...
+
+\begin{lstlisting}[caption={Sich wiederholender Code vor dem Commit}]
+
+// SpeedProfile.java (Zeile 39)
+
 		speeds = normalize(speeds,min,max);
-		...
-	}
+		
+// (Zeile 50-58)
 
     private List<Double> normalize(List<Double> list,double min, double max){
         double diff = max - min;
@@ -38,32 +77,14 @@ public class SpeedProfile {
             list.set(i,normalizedVal);
         }
         return list;
-    }
+	}
+    
 
-    private int[] split(int pool,int sections){
-        int[] output = new int[sections];
-        int base = pool/sections;
-        int remainder = pool % sections;
-        for (int i = 0; i < output.length; i++){
-            if (remainder <= i){
-                output[i] = base;
-            }
-            if (remainder > i){
-                output[i] = 1+base;
-            }
-        }
-        return output;
-    }
-}
+// ElevationProfile.java (Zeile 37)
 
-public class ElevationProfile {
-	private boolean[][] calculateSpeedProfile(Tour tour, int xGranularity) {
-		...
-		int[] sectionLength = split(locations.size() , xGranularity);
-		...
 		heights = normalize(heights,min,max);
-		...
-	}
+		
+// (Zeile 48-56)
 
     private List<Double> normalize(List<Double> list,double min, double max){
         double diff = max - min;
@@ -74,50 +95,29 @@ public class ElevationProfile {
         }
         return list;
     }
-
-    private int[] split(int pool,int sections){
-        int[] output = new int[sections];
-        int base = pool/sections;
-        int remainder = pool % sections;
-        for (int i = 0; i < output.length; i++){
-            if (remainder <= i){
-                output[i] = base;
-            }
-            if (remainder > i){
-                output[i] = 1+base;
-            }
-        }
-        return output;
-    }
-}
 
 \end{lstlisting}
 
 
+
 \subsubsection{Nacher}
 
-\begin{lstlisting}
-public class SpeedProfile {
-	private boolean[][] calculateSpeedProfile(Tour tour, int xGranularity) {
-		...
-		int[] sectionLength = ProfileCalculation.split(tourPoints.size() , xGranularity);
-		...
-		speeds = normalize(speeds,min,max);
-		...
-	}
-}
+\begin{lstlisting}[caption={Angewandtes DRY-Prinzip nach dem Commit}]
 
-public class ElevationProfile {
-	private boolean[][] calculateSpeedProfile(Tour tour, int xGranularity) {
-		...
-		int[] sectionLength = ProfileCalculation.split(locations.size() , xGranularity);
-		...
-		heights = ProfileCalculation.normalize(heights.stream().map(e->e.getValue()).toList(),min.getValue(),max.getValue());
-		...
-	}
-}
+// SpeedProfile.java (Zeile 39)
 
-public class ProfileCalculation {
+		speeds = ProfileCalculation.normalize(speeds,min,max);
+		
+		
+// ElevationProfile.java (Zeile 37)
+
+		heights = ProfileCalculation.normalize(heights.stream().map(e->e.getValue()).toList(),
+		min.getValue(),
+		max.getValue());
+
+
+// ProfileCalculation.java (Zeile 6-14)
+
     public static List<Double> normalize(List<Double> list, double min, double max){
         double diff = max - min;
         for (int i = 0; i < list.size(); i++) {
@@ -128,21 +128,5 @@ public class ProfileCalculation {
         return list;
     }
 
-    public static int[] split(int pool,int sections){
-        int[] output = new int[sections];
-        int base = pool/sections;
-        int remainder = pool % sections;
-        for (int i = 0; i < output.length; i++){
-            if (remainder <= i){
-                output[i] = base;
-            }
-            if (remainder > i){
-                output[i] = 1+base;
-            }
-        }
-        return output;
-    }
-}
- 
 
 \end{lstlisting}

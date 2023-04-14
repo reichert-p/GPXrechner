@@ -4,104 +4,92 @@
 
 \subsubsection{Code Smell: Duplicated Code}
 
-(Ausgebessert in commit https://github.com/reichert-p/GPXrechner/commit/4039bc31f6310508875c59ed44b6b227f2f0510d )
+%(Ausgebessert in commit https://github.com/reichert-p/GPXrechner/commit/4039bc31f6310508875c59ed44b6b227f2f0510d )
 
-Um die Strafe von schlechten Aufteilungen im Toursplitting zu berechnen, müss bei allen Bewertungsfunktionen erst gefiltert werden welche Umwege tatsächlich genommen werden.
+Um Lösungen zu bewerten, muss bei Bitstringcodierung (welche in der Klasse Representation verwendet wird) gefiltert werden welche Umwege tatsächlich genommen werden.
 
 Vorheriger Zustand:
 
 \begin{lstlisting}
-	class StayNightEvaluation {
-	private double getWeightedOvershoot(ArrayList<Location> path, Detours detours, Representation representation) {
-	 List<Detours.Detour> visitedDetours = new ArrayList<>();
-        for (int i = 0; i < detours.getPossibleDetours().size();i++){
-            if (representation.getBitstring()[i]){
-                visitedDetours.add(detours.getPossibleDetours().get(i));
-            }
-        }
-        List<Detours.Detour> orderedVisitedDetours = visitedDetours.stream().sorted(Comparator.comparing(Detours.Detour::getPosition)).toList();
-...	
-	}
-	}
-\end{lstlisting}
+// in Klasse StayNightEvaluation 
 
-\begin{lstlisting}
-
-	class SupplyEvaluation {
-	private double getOvershoot(ArrayList<Location> path, Detours detours, Representation representation) {
-	 List<Detours.Detour> visitedDetours = new ArrayList<>();
-        for (int i = 0; i < detours.getPossibleDetours().size();i++){
-            if (representation.getBitstring()[i]){
-                visitedDetours.add(detours.getPossibleDetours().get(i));
-            }
-        }
-        List<Detours.Detour> orderedVisitedDetours = visitedDetours.stream().sorted(Comparator.comparing(Detours.Detour::getPosition)).toList();
-...	
-	}
-	}
-
-
-\end{lstlisting}
-
-Lösung: Auslagerung dieser Funktionalität in externe statische Klasse EvaluationHelper.
-
-\begin{lstlisting}
-
-public class EvaluationHelper {
-    public static List<Detours.Detour> getRepresentedDetoursOrdered(Detours detours, Representation representation){
-        List<Detours.Detour> visitedDetours = new ArrayList<>();
-        for (int i = 0; i < detours.getPossibleDetours().size();i++){
-            if (representation.getBitString()[i]){
-                visitedDetours.add(detours.getPossibleDetours().get(i));
-            }
-        }
-        return visitedDetours.stream().sorted(Comparator.comparing(Detours.Detour::getPosition)).toList();
+private double getWeightedOvershoot(ArrayList<Location> path, Detours detours, Representation representation) {
+  List<Detours.Detour> visitedDetours = new ArrayList<>();
+  for (int i = 0; i < detours.getPossibleDetours().size();i++){
+    if (representation.getBitstring()[i]){
+      visitedDetours.add(detours.getPossibleDetours().get(i));
     }
+  }
+    List<Detours.Detour> orderedVisitedDetours = visitedDetours.stream().sorted(Comparator.comparing(Detours.Detour::getPosition)).toList();
+...
 }
+
 \end{lstlisting}
 
-Die Umsetzung in den einzelnen Bewertungsfunktionen sieht dann wie folgt aus:
+\begin{lstlisting}
+// in Klasse SupplyEvaluation 
+	
+private double getOvershoot(ArrayList<Location> path, Detours detours, Representation representation) {
+  List<Detours.Detour> visitedDetours = new ArrayList<>();
+  for (int i = 0; i < detours.getPossibleDetours().size();i++){
+    if (representation.getBitstring()[i]){
+      visitedDetours.add(detours.getPossibleDetours().get(i));
+    }
+  }
+List<Detours.Detour> orderedVisitedDetours = visitedDetours.stream().sorted(Comparator.comparing(Detours.Detour::getPosition)).toList();
+...	
+}
+	
+\end{lstlisting}
+
+Der in Commit \href{commit https://github.com/reichert-p/GPXrechner/commit/4039bc31f6310508875c59ed44b6b227f2f0510d}{4039bc3} gewählte Lösungsweg lagert die duplizierte Funktionalität aus in die externe statische Klasse EvaluationHelper. In den einzelnen Bewertungsfunktionen wird die Funktionalität aus der EvaluationHelper Klasse aufgerufen.
 
 \begin{lstlisting}
 
-	class SupplyEvaluation {
- var orderedVisitedDetours = EvaluationHelper.getRepresentedDetoursOrdered(detours, representation);
-...	
-	}
-}
-\end{lstlisting}
+// in der Klasse EvaluationHelper 
 
+public static List<Detours.Detour> getRepresentedDetoursOrdered(Detours detours, Representation representation){
+  List<Detours.Detour> visitedDetours = new ArrayList<>();
+  for (int i = 0; i < detours.getPossibleDetours().size();i++){
+    if (representation.getBitString()[i]){
+      visitedDetours.add(detours.getPossibleDetours().get(i));
+    }
+  }
+  return visitedDetours.stream().sorted(Comparator.comparing(Detours.Detour::getPosition)).toList();
+}
+
+\end{lstlisting}
 
 
 \subsubsection{Code Smell: Code Comments}
 
-remove runaways Kommentar in der percentileandaverage Methode der Klasse SpeedHeuristics.
+Der Kommentar 'remove runaways' in der Methode percentileandaverage der Klasse SpeedHeuristics ist ein Anzeichen dafür, dass die Funktionalität des Codes ohne den Kommentar nicht verständlich ist.
 
 
 \begin{lstlisting}
 
 for (double d:paceValues) {
-	if (i + 1 > paceValues.size() * 0.25 && i < paceValues.size() * 0.9) // remove runaways
-	sum += d;
-	instances ++;
-	i++;
+  if (i + 1 > paceValues.size() * 0.25 && i < paceValues.size() * 0.9) // remove runaways
+  sum += d;
+  instances ++;
+  i++;
 }
 \end{lstlisting}
 
-Die Lösung ist, die Funktionalität in eine Methode mit sprechendem Namen auszulagern.
+Der gewählte Lösungsweg ist die Auslagerung der Funktionalität in eine Methode mit sprechendem Namen auszulagern.
 
 \begin{lstlisting}
-	...
-	var consideredPaceValues = removeRunawaysfromSortedList(paceValues, 0.25, 0.9);
-	...
+...
+var consideredPaceValues = removeRunawaysfromSortedList(paceValues, 0.25, 0.9);
+...
 
 private static List<Double> removeRunawaysfromSortedList(List<Double> input, double lowerBound, double upperBound){
-        if(lowerBound < 0 || lowerBound > 1 || upperBound < 0 || upperBound > 1){
-            throw new RuntimeException("Bounds in removeRunaways should be a value between 0 and 1");
-        }
-        int length = input.size();
-        return input.subList((int)(length*lowerBound),(int)Math.ceil(length*upperBound));
-    }
+  if(lowerBound < 0 || lowerBound > 1 || upperBound < 0 || upperBound > 1){
+     throw new RuntimeException("Bounds in removeRunaways should be a value between 0 and 1");
+  }
+  int length = input.size();
+  return input.subList((int)(length*lowerBound),(int)Math.ceil(length*upperBound));
+}
 
 \end{lstlisting}
 
@@ -109,9 +97,10 @@ private static List<Double> removeRunawaysfromSortedList(List<Double> input, dou
 
 \subsubsection{1. Refactoring: Rename Class}
 
-https://github.com/reichert-p/GPXrechner/commit/7947597903210e73647ffbc20d07e6b5b257cff2\#diff-a3b6bacc77a02d2a1746cbbbd776a467bf3fcd7920bfefbef1e892af10172e50 
+\href{https://github.com/reichert-p/GPXrechner/commit/7947597903210e73647ffbc20d07e6b5b257cff2\#diff-a3b6bacc77a02d2a1746cbbbd776a467bf3fcd7920bfefbef1e892af10172e50 }{a3b6bac}
 
-Umbenennung der Klasse EvolutionaryDist zu Hillclimbing, da der Name besser zum Inhalt der Klasse passt. Da sich beim UML nur der Name ändert wird auf ein zweites Diagramm verzichtet.
+Die Klasse EvolutionaryDist implementiert die evolutionäre Suche nach lokalen Optima nach dem Hillclimbing-Verfahren.
+Das Refactoring ist die Umbenennung der Klasse EvolutionaryDist zu Hillclimbing, da der Name besser zum Inhalt der Klasse passt.
 
 \begin{figure}[H]
   \centering
@@ -127,9 +116,12 @@ Umbenennung der Klasse EvolutionaryDist zu Hillclimbing, da der Name besser zum 
 
 \subsubsection{2. Refactoring: Extract Method}
 
-commit 59f9045a2ac73496111bba87c35016c2b26108e2 und an selber Stelle im Anschluss 7d57943bb5fcdf2d23e76f05c0157f7753f6c05e.
-
-Die Methode generateGPX zur Erstellung einer .gpx Datei aus gespeicherten Touren und Tracks war 35 Zeilen lang und Spaghetticode in Reinform. Mithilfe der Extraction der beiden Methoden wurde Struktur in den Code gebracht und die Sprechenden Methodennamen helfen später beim Verständniß des Codes.
+Die Methode generateGPX zur Erstellung einer .gpx Datei aus gespeicherten Touren und Tracks besteht aus 35 Zeilen langem Spaghetticode. 
+In den Commits 
+\href{https://github.com/reichert-p/GPXrechner/commit/59f9045a2ac73496111bba87c35016c2b26108e2}{59f9045}
+und 
+\href{https://github.com/reichert-p/GPXrechner/commit/7d57943bb5fcdf2d23e76f05c0157f7753f6c05e}{7d57943} 
+wurde mithilfe von Method Struktur in den Code gebracht, die Länge der einzelnen Methoden reduziert und das Verständnis des Codes durch Sprechenden Methodennamen verbessert.
 
 \begin{figure}[H]
   \centering
