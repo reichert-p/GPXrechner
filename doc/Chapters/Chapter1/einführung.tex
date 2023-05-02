@@ -1,19 +1,21 @@
-\section{Kapitel 1:Einführung}
+\section{Kapitel 1: Einführung}
 
 
 \subsection{Übersicht über die Applikation}
 
-Bei der Applikation handelt es sich um ein Programm zur Auswertung von GPS Exchange Format (GPX) Dateien.
+Bei der Applikation handelt es sich um ein Programm zur Auswertung von GPS Exchange Format (GPX) Dateien.\\
 
-Allgemein wird Unterschieden zwischen geplanten Strecken (Track) und bereits bestrittenen Touren welche Zeitstempel an allen Koordinaten haben (Tour).
-Für beide kann die Höhendifferenz und die Strecke berechnet werden. Außerdem kann ein Höhenprofil generiert und in der Konsole Angezeigt werden. %Beispiel
+Allgemein wird unterschieden zwischen geplanten Strecken (Track) und bereits bestrittenen Strecken welche an allen Koordinaten Zeitstempel haben (Tour).
+Für beide kann die Höhendifferenz und die Strecke berechnet werden.
+Ein Höhenprofil von Strecken kann in der Konsole angezeigt werden.\\
 
-Mit Hilfe von Bewegungsgeschwindigkeiten kann die voraussichtliche Dauer einer Begehung eines Tracks vorhergesagt werden. Dabei kann die Bewegungsgeschwindigkeit entweder aus bereits begangen Touren kalkuliert werden oder einer Auswahl an Sportarten gewählt werden (Wandern, Radfahren, ...).
-Um die eigene Geschwindigkeit herauszufinden kann man sich die aus Touren gewonnene Bewegungsgeschwindigkeit auch isoliert anzeigen lassen oder ein Geschwindigkeit-Zeit-Diagramm der Tour anzeigen lassen.
+Mithilfe von Bewegungsgeschwindigkeiten kann die voraussichtliche Dauer einer Begehung einer Strecke vorhergesagt werden. Dabei kann die Bewegungsgeschwindigkeit entweder aus bereits begangenen Strecken berechnet werden oder es kann eine Sportart aus einer Auswahl (Wandern, Radfahren, ...) gewählt werden.
+Um Schlüsse über die eigene Geschwindigkeit herauszufinden, kann man sich entweder die aus Touren gewonnene Bewegungsgeschwindigkeit anzeigen lassen oder ein Geschwindigkeit-Zeit-Diagramm einer Tour anzeigen lassen.\\
 
-Bei langen Touren ist es häufig nötig, Umwege zur Übernachtung oder zum Auffüllen von Vorräten nach einer gewissen Zeit einzulegen. 
-Da die Lösung des Problems nicht trivial ist (nach einstündiger, ergebnisloser Überlegung wurde auf die Erstellung einer Reduzierung auf das Knapsack-Problem verzichtet, da es über den Umfang des Projekts hinausgeht) wurde ein Evolutionärer Hillclimb-Algorithmus zur möglichst optimalen Wahl der Stützpunkte gewählt.
-Hierfür muss eine Tour oder ein Track anhand einer Auswahl an Wegpunkten (etwa Hütten oder Supermärkte), einer Bewegungsgeschwindigkeit und einer Dauer, die man ohne die Ressource auskommt angegeben werden, um die zu besuchenden Wegpunkte zu erhalten.
+Auf langen Touren kann es notwendig sein, Umwege einzulegen, um zu Übernachten oder Vorräte aufzufüllen.
+Da die Wahl der optimalen Umwege nicht trivial ist\footnote{nach einstündiger, ergebnisloser Überlegung wurde auf die Erstellung einer Reduzierung auf das Knapsack-Problem verzichtet, da dies über den Umfang des Projekts hinausginge}, wurde ein evolutionärer Hillclimb-Algorithmus zur möglichst optimalen Wahl der Stützpunkte gewählt.
+Hierfür muss bei eine Tour oder ein Track anhand einer Auswahl an Wegpunkten (etwa Hütten oder Supermärkten) entschieden werden, welche davon besucht werden müssen.
+Mithilfe einer Bewegungsgeschwindigkeit und einer maximale Dauer zwischen den Stützpunkten können die (möglichst) optimalen zu wählenden Stützpunkte berechnet werden.
 
 
 \subsection{Wie startet man die Applikation?}
@@ -25,17 +27,18 @@ Diese liegt im Pfad \textit{src/GPXrechner/Main.java}.
 
 \subsubsection{Erste Schritte}
 
-Nun läuft das Command Line Interface der Applikation und man wird aufgefordert, eine Instruktion einzugeben.
- Gibt man eine nicht zulässigen Befehl oder \textit{help} ein, so bekommt man eine Übersicht über alle möglichen Instruktionen.
+Nun läuft das Command Line Interface der Applikation und man wird aufgefordert, einen Befehl einzugeben.
+ Gibt man eine nicht zulässigen Befehl oder \textit{help} ein, so bekommt man eine Übersicht über alle möglichen Befehle.\\
  
-Um etwas über mit einer Tour oder einem Track zu tun, muss sie geladen werden. Dies funktioniert mit dem Befehl \textit{load gpx}.\\
+Der erste Befehl ist üblicherweise \textit{load gpx}, um eine Tour oder Track aus einer GPX Datei zu laden. Dies wird benötigt, um Informationen oder Analysen der Tour oder des Tracks zu bekommen.
+\\
 
-Da alle GPX-Dateien in dem dafür vorgesehenen Ordner abgelegt sind, muss der Pfad zu ihnen relativ zu diesem Ordner angegeben werden. Beispielhaft zum Laden eines Tracks der die berühmte Watzmann Überschreitung beinhaltet wäre der Pfad \textit{Track/Watzmann.gpx}.
+Da alle GPX-Dateien in dem dafür vorgesehenen Ordner abgelegt sind, muss der Pfad zu ihnen relativ zu diesem Ordner angegeben werden.
 
-
+Möchte man beispielsweise einen Track der berühmten (und im Repository vorhandenen) Watzmann Überschreitung laden, gibt man den Pfad \textit{Track/Watzmann.gpx} an.
 
 \subsection{Wie testet man die Applikation?}
 
 Die Tests befinden sich unter \textit{src/test/}.
 
-Zum Testen der Applikation führt man diese mithilfe der IDE aus, in IntelliJ mit rechtem Mausklick auf das Directory und Auswahl von 'Run 'Tests in 'test''.
+Zum Testen der Applikation führt man diese mithilfe seiner IDE aus, in IntelliJ mit rechtem Mausklick auf das Directory und Auswahl von \textit{Run 'Tests in 'test''}.
