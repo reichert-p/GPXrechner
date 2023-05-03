@@ -2,15 +2,20 @@
 
 \subsection{Was ist Clean Architecture?}
 
-Clean Architecture ist ein Softwarearchitekturmuster welches darauf abzielt Code klar zu organisieren und leicht wartbar, testbar und erweiterbar zu machen.
-Hierfür werden die Bestandteile einer Anwendung in verschiedenen hierarchische Schichten so gekapselt, dass außen liegende Schichten von inneren abhängen könne, innere aber nicht von äußeren. Tiefere Schichten sind langlebiger als außenliegende.
+Clean Architecture ist ein Softwarearchitekturmuster, das darauf abzielt, Code klar zu organisieren und leicht wartbar, testbar und erweiterbar zu machen. Hierfür werden die Bestandteile einer Anwendung in verschiedenen hierarchischen Schichten gekapselt, sodass äußere Schichten von inneren abhängen können, jedoch nicht umgekehrt. Tiefere Schichten sind langlebiger als äußere Schichten.
 
 
-\subsection{Analyse der Dependency Rule} %TODO
+\subsection{Analyse der Dependency Rule}
 
 \subsubsection{Positiv-Beispiel: Dependency Rule}
 
-Das Positivbeispiel ist die Klasse GetDistance, die eine Implementation einer Instruction ist. Sie liegt in der Anwendungsschicht. Um den Weg zu erhalten, für den die Strecke berechnet werden soll greift sie auf den Anwendungszustand auf der Anwendungsschicht zu. Die Strecke wird über das UserOutput Interface mitgeteilt, welches auch in der Anwendungsschicht liegt. Die eigentliche Berechnung findet mithilfe der Klasse DistanceCalculator statt, welche in der Domänenschicht liegt auf die im Sinne der clean architecture Abhängigkeiten bestehen dürfen.
+Das Positivbeispiel ist die Klasse \textit{GetDistance}, die eine Implementation eines \textit{Instruction} Interfaces ist. Sie liegt in der Anwendungsschicht.
+Sie implementiert den Anwendungsfall, dass Benutzer die Strecke eines Weges erfahren wollen.
+
+Um den Weg zu erhalten, für den die Strecke berechnet werden soll, greift sie auf den \textit{State} auf der Anwendungsschicht zu.
+Die eigentliche Berechnung findet mithilfe der Klasse \textit{DistanceCalculator} statt, welche in der Domain-Schicht liegt.
+ Die Strecke wird über das \textit{UserOutput} Interface mitgeteilt, welches in der Anwendungsschicht liegt.
+ Damit hat die Klasse \textit{GetDistance} lediglich Abhängigkeiten auf die eigene und tiefere Schichten und erfüllt die Dependency Rule.
 
 \begin{figure}[H]
   \centering
@@ -19,9 +24,9 @@ Das Positivbeispiel ist die Klasse GetDistance, die eine Implementation einer In
 \end{figure}
 
 
-\subsubsection{Negativ-Beispiel 2: Dependency Rule}
+\subsubsection{Negativ-Beispiel: Dependency Rule}
 
-Die Dependency Rule wird beim Zugriff auf die Klasse GPXToTour verletzt, die in der Plugin Schicht liegt und aus GPX Dateien ein Tour Objekt generiert. Sie wird von der Instruction ReadPath verwendet, welche in der Anwendungsschicht liegt. Somit besteht eine Abhängigkeit von der inneren Anwendungsschicht zur ausserhalb liegenden Plugin Schicht, was eine Verletzung der Dependency Rule darstellt.
+Die Dependency Rule wird beim Zugriff auf die Klasse \textit{GPXToTour} verletzt, die in der Plugin-Schicht liegt und aus GPX Dateien ein Tour Objekt generiert. Sie wird von der Klasse \textit{ReadPath} verwendet, welche in der Anwendungsschicht liegt. Somit besteht eine Abhängigkeit von der inneren Anwendungsschicht zur äußeren Plugin-Schicht, was eine Verletzung der Dependency Rule darstellt.
 
 \begin{figure}[H]
   \centering
@@ -31,25 +36,26 @@ Die Dependency Rule wird beim Zugriff auf die Klasse GPXToTour verletzt, die in 
 
 \subsubsection{Schicht: Domain Code}
 
-Die Klasse DistanceCalculator ist dafür Zuständig verschiedene Distanzen zwischen Orten oder einer chronologischen Abfolgen von Orten im Sexalsystem zu berechnen.
-Die (angemessen genaue) Berechnung von Distanzen im Sexalsystem basieren auf grundlegenden geometrischen Zusammenhängen, welche sich in absehbarer Zeit nicht ändern. 
-Diese Berechnungen Grundlegend für alle Auswertungen von Daten die im Sexalsystem gespeichert sind, so wie beispielsweise GPS Daten im GPS Exchange format(GPX).
+Die Klasse \textit{DistanceCalculator} ist dafür zuständig, verschiedene Distanzen zwischen Orten oder einer chronologischen Abfolgen von Orten im Sexagesimalsystem zu berechnen.
+Die (angemessen genaue) Berechnung von Distanzen im Sexagesimalsystem basieren auf grundlegenden geometrischen Zusammenhängen, die sich in absehbarer Zeit nicht ändern werden. 
+Diese Berechnungen sind grundlegend für alle Auswertungen von Daten, die im Sexagesimalsystem gespeichert sind, so wie beispielsweise GPS-Daten im GPS Exchange Format(GPX).
 
 \begin{figure}[H]
   \centering
-  \includesvg[inkscapelatex = false, width = 90pt]{Chapters/Chapter2/ClassUML1}
+  \includesvg[inkscapelatex = false, width = 100pt]{Chapters/Chapter2/ClassUML1}
   \caption{UML Diagramm der Klasse DistanceCalculator}
 \end{figure}
 
 \subsubsection{Schicht: Plugins}
 
-Die Klasse ConsoleParsing ist dafür Zuständig verschiedene Formen Input von Benutzern zu erfassen. Dies umfasst den Pfad zu GPX Dateien, die Wahl einer Sportart oder Geschwindigkeit oder die Eingabe einer Zeit.
+Die Klasse \textit{ConsoleParsing} ist dafür zuständig, verschiedene Formen Input von Benutzern zu erfassen.
+Dies umfasst beispielsweise den Pfad zu GPX Dateien, die Wahl einer Sportart oder Geschwindigkeit sowie die Eingabe einer Zeit.
 Somit stellt die Klasse einen wesentlichen Bestandteil der Benutzerschnittstelle dar.
-Ein Austausch der Klasse durch eine Grafische Benutzerschnittstelle wäre denkbar.
+Es wäre denkbar, die Klasse durch eine grafische Benutzerschnittstelle zu ersetzen.
 
 \begin{figure}[H]
   \centering
-  \includesvg[inkscapelatex = false, width = 90pt]{Chapters/Chapter2/ClassUML2}
+  \includesvg[inkscapelatex = false, width = 100pt]{Chapters/Chapter2/ClassUML2}
   \caption{UML Diagramm der Klasse ConsoleParsing}
 \end{figure}
 
