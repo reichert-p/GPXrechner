@@ -5,128 +5,128 @@
 
 \subsubsection{Positiv-Beispiel}
 
-Abbildung \ref{fig:GKGut} zeigt das Positiv-Beispiel für geringe Kopplung.
-Die verschiedenen Klassen im Package Instructions implementieren die Abläufe verschiedener Anwendungsfälle inklusive der Entscheidungen, die Anwender während der Nutzung treffen müssen.
-Die Klasse ConsoleParsing parsed Nutzereingaben von der Konsole.
- Das Interface UserInput entkoppelt die Instructions von dem Parsing von Konsoleneingaben. Damit wird eine direkte Abhängigkeit der Anwendungslogik vermieden. Das macht eine Änderung auf eine nicht-Konsolen-Applikation einfach umsetzbar, was die geringe Kopplung gut ausnutzt. 
+Die Abbildung zeigt das Positiv-Beispiel für geringe Kopplung.
+Die verschiedenen Klassen im Package \textit{Instructions} implementieren die Abläufe verschiedener Anwendungsfälle. Dabei müssen Entscheidungen von Anwendern während der Nutzung berücksichtigt werden.
+Die Klasse \textit{ConsoleParsing} nimmt Nutzereingaben von der Konsole entgegen.
+ Das Interface \textit{UserInput} entkoppelt die \textit{Instructions} von den Benutzereingaben über die Konsole.
+Damit wird eine direkte Abhängigkeit der Anwendungslogik vermieden.
+ Das erleichtert eine Änderung auf eine nicht-Konsolen-Applikation, was einen Vorteil der darstellt. 
 
 \begin{figure}[H]
   \label{fig:GKGut}
   \centering
   \includesvg[inkscapelatex = false, scale = 0.25]{Chapters/Chapter4/GeringeKopplungGut}
-  \caption{UML Diagramm des Interfaces UserInput}
+  \caption{UML Diagramm des Interfaces \textit{UserInput}}
 \end{figure}
 
 \subsubsection{Negativ-Beispiel}
 
-Abbildung \ref{fig:GKBad} zeigt das Negativ-Beispiel für geringe Kopplung.
-Die Klasse Hillclimbing implementiert die Annäherung (und im Optimalfall das Erreichen) einer Lösung eines (möglicherweise NP-)\footnote{Der Beweis der Komplexität des Problems übersteigt leider meine Möglichkeiten im Rahmen des Projekts} schweren Problems zur Mitnahme von Wichtigen Wegpunkten, die eine Abweichung des Eigentlichen Weges erfordern.
-Die Klasse Detours stellt alle in Betracht zu ziehenden Umwege dar. 
-Die Klasse Representation stellt eine Lösung des Problems in Form eines Bitstrings dar. Eine 0 an der n-ten Stelle steht dabei für ein Auslassen des n-ten Umweges, eine 1 entsprechend für die Mitnahme des Umwegs.
-Eine EvaluationFunction bewertet Lösungen des Problems, das MovementSpeed stellt die Geschwindigkeit dar, mit der sich auf dem Pfad bewegt wird.
+Die Abbildung zeigt das Negativ-Beispiel für geringe Kopplung.
+Die Klasse \textit{Hillclimbing} implementiert eine Annäherung\footnote{Insbesondere bei kleinen Datenmengen ist auch ein Erreichen möglich. Dies kann aber aufgrund der Komplexität des Problems (oder möglicherweise meinem fehlenden Verständnis) nicht garantiert werden} an eine optimale Lösung zur Mitnahme von wichtigen Wegpunkten, die eine Abweichung vom eigentlichen Wege erfordern.
+\\
 
- Die Klasse Hillclimbing besitzt zwar eine Kopplung zur Bewertungsfunktion, Bewegungsgeschwindigkeit und Pfaden hat, so herrscht doch eine starke Kopplung zwischen der Hillclimbing Klasse und sowohl der Repräsentation der Lösungen und den einbindbaren Umwegen (Realisiert in der Klasse Detours).
+Die Klasse \textit{Detours} stellt alle in Betracht zu ziehenden Umwege dar. 
+Die Klasse \textit{Representation} stellt in Kombination mit Detours eine Lösung des Problems in Form eines Bitstrings dar.
+Eine \textit{EvaluationFunction} bewertet Lösungen des Problems.
+\textit{MovementSpeed} stellt die Geschwindigkeit dar, mit der sich auf dem Weg bewegt wird.
+
+ Die Klasse \textit{Hillclimbing} besitzt zwar eine geringe Kopplung zu \textit{EvaluationFunction}, \textit{MovementSpeed} und den zugrundeliegenden Wegpunkten über das \textit{Location} Interface.
+ Allerdings besteht eine starke Kopplung zwischen der \textit{Hillclimbing} Klasse und sowohl der Repräsentation der Lösungen und den mögliche Umwegen (Realisiert in den Klassen \textit{Representation} und \textit{Detours}), da die Klasse \textit{Hillclimbing} von der Detailumsetzung der Umwege und insbesondere der Darstellung von Lösungen abhängt.
 
 \begin{figure}[H]
  \label{fig:GKBad}
   \centering
   \includesvg[inkscapelatex = false, scale = 0.25]{Chapters/Chapter4/GeringeKopplungBad}
-  \caption{UML Diagramm der Klasse Hillclimbing}
+  \caption{UML Diagramm der Klasse \textit{Hillclimbing}}
 \end{figure}
 
-Die Kopplungen könnten gelöst werden, indem zwischen Detours und Hillclimbing sowie zwischen Representation und Hillclimbing jeweils ein Interface genutzt würde. Diese Interfaces müssten dann auch in die EvaluationFunction übergeben werden. Dadurch könnte sowohl eine neue Repräsentation für Lösungen für die Representation sowie eine neue Implementation von Möglichen Lösungsbestandteilen aufgrund der geringeren Kopplung implementiert werden.
+Die Kopplungen könnten gelöst werden, indem zwischen \textit{Detours} und \textit{Hillclimbing} sowie zwischen \textit{Representation} und \textit{Hillclimbing} jeweils ein Interface genutzt würde.
+Diese Interfaces müssten dann auch in die \textit{EvaluationFunction} übergeben werden, da auch diese eine hohe Kopplung zu den beiden Klassen hat.
+Mithilfe dieser Umsetzung könnte sowohl eine neue Repräsentation für Lösungen sowie eine neue Umsetzung möglicher Lösungsbestandteilen aufgrund der geringeren Kopplung implementiert werden.
 
-In der Praxis macht dies aber wenig Sinn, da Beide Klassen nur Zusammen sinnvoll in eine Bewertungsfunktion übegebbar sind, da beide Bestandteil einer Lösung sind. 
-Aus sicht der Performance ist es jedoch kaum Sinnvoll, sie deshalb als eine Klasse zu implementieren, da Detours den gleichbleibenden Teil der Lösung darstellen, während die Menge der möglichen Repräsentation exponentiell mit der Menge and Detours steigt. 
-Das würde zu Milliardenfacher Kopie der Selben Datenstruktur führen, was vermutlich schlecht für den Speicheraufwand der Applikation wäre \footnote{Auch hier leider kein Beweis sondern lediglich schlüssige Vermutungen}.
+Dies würde allerdings zu einigen Problemen führen. Beide Klassen nur miteinander sinnvoll von einer Bewertungsfunktion auswertbar sind, da beide Bestandteil einer Lösung sind und damit eine hohe Kohäsion haben. 
+Sinnvoller wäre wohl, das Prinzip der hohen Kohäsion anzuwenden, und die so erstellte Lösungskombination gering zu koppeln.
 
 
 \subsection{Analyse GRASP: Hohe Kohäsion}
 
-Die Klasse Trackpoint referenziert eine Länge, eine Breite und eine Höhe über dem Meeresspiegel. Insgesamt Repräsentiert ein Trackpoint also einen genauen Ort auf der Erde. Die Kohäsion ist also sehr hoch, da genau diese Werte zusammen ein wohldefinierten Punkt im dreidimensionalen Raum abbilden.
+Die Klasse \textit{Trackpoint} referenziert eine Länge, eine Breite und eine Höhe über dem Meeresspiegel.
+Als Gesamtheit repräsentiert ein \textit{Trackpoint} also einen präzisen Ort auf der Erde.
+Die Kohäsion ist also sehr hoch, da genau diese Werte zusammen ein wohldefinierten Punkt im dreidimensionalen Raum abbilden.
 
 
 \begin{figure}[H]
  \label{fig:HighKohesion}
   \centering
   \includesvg[inkscapelatex = false, scale = 0.5]{Chapters/Chapter4/Highkohesion}
-  \caption{UML Diagramm der Klasse Hillclimbing}
+  \caption{UML Diagramm der Klasse \textit{Hillclimbing}}
 \end{figure}
 
 
 \subsection{Don’t Repeat Yourself (DRY)}
 
-Im Commit (\href{https://github.com/reichert-p/GPXrechner/commit/8ffd648d794563fea2c8662debe12ca1277b1b3e#diff-3be7b5bf425b2c9794272cdc879a4e9b0ed23bab55acbdf71756fbda1356ff80}{commit 8ffd648d794563fea2c8662debe12ca1277b1b3e}{8ffd648}) wird der duplizierte Code aus den Klassen ElevationProfile und SpeedProfile aufgelöst.
+Im Commit \href{https://github.com/reichert-p/GPXrechner/commit/8ffd648d794563fea2c8662debe12ca1277b1b3e#diff-3be7b5bf425b2c9794272cdc879a4e9b0ed23bab55acbdf71756fbda1356ff80}{8ffd648} wird der duplizierte Code aus den Klassen \textit{ElevationProfile} und \textit{SpeedProfile} aufgelöst.
 
-Da beide Klassen Profile ausrechnen gibt es Berechnungen, die unabhängig vom Inhalt des Profils durchgeführt werden müssen. Beispielhaft wird hier die Methode normalize betrachtet, die jeweils den Wertebereich der Profile auf Zahlen zwischen 0 und 1 normiert. 
+In beiden Klassen werden Diagramme berechnet. Es gibt Berechnungen, die unabhängig von dem Inhalt des Profils durchgeführt werden müssen. Ein Beispiel hierfür ist die Methode \textit{normalize}, welche den Wertebereich der Profile auf Zahlen zwischen 0 und 1 normiert.
 
 
 \begin{lstlisting}[caption={Sich wiederholender Code vor dem Commit}]
 
 // SpeedProfile.java (Zeile 39)
 
-		speeds = normalize(speeds,min,max);
+speeds = normalize(speeds,min,max);
 		
 // (Zeile 50-58)
 
-    private List<Double> normalize(List<Double> list,double min, double max){
-        double diff = max - min;
-        for (int i = 0; i < list.size(); i++) {
-            double val = list.get(i);
-            double normalizedVal = (val - min) / diff;
-            list.set(i,normalizedVal);
-        }
-        return list;
+private List<Double> normalize(List<Double> list,double min, double max){
+	double diff = max - min;
+	for (int i = 0; i < list.size(); i++) {
+		double val = list.get(i);
+		double normalizedVal = (val - min) / diff;
+		list.set(i,normalizedVal);
 	}
-    
+	return list;
+}   
 
 // ElevationProfile.java (Zeile 37)
 
-		heights = normalize(heights,min,max);
+heights = normalize(heights,min,max);
 		
 // (Zeile 48-56)
 
-    private List<Double> normalize(List<Double> list,double min, double max){
-        double diff = max - min;
-        for (int i = 0; i < list.size(); i++) {
-            double val = list.get(i);
-            double normalizedVal = (val - min) / diff;
-            list.set(i,normalizedVal);
-        }
-        return list;
-    }
+private List<Double> normalize(List<Double> list,double min, double max){
+	double diff = max - min;
+	for (int i = 0; i < list.size(); i++) {
+		double val = list.get(i);
+		double normalizedVal = (val - min) / diff;
+		list.set(i,normalizedVal);
+	}
+	return list;
+}
 
 \end{lstlisting}
 
-
-
-\subsubsection{Nacher}
 
 \begin{lstlisting}[caption={Angewandtes DRY-Prinzip nach dem Commit}]
 
 // SpeedProfile.java (Zeile 39)
 
-		speeds = ProfileCalculation.normalize(speeds,min,max);
-		
-		
+speeds = ProfileCalculation.normalize(speeds,min,max);
+				
 // ElevationProfile.java (Zeile 37)
 
-		heights = ProfileCalculation.normalize(heights.stream().map(e->e.getValue()).toList(),
-		min.getValue(),
-		max.getValue());
-
+heights = ProfileCalculation.normalize(heights.stream().map(e->e.getValue()).toList(), min.getValue(), max.getValue());
 
 // ProfileCalculation.java (Zeile 6-14)
 
-    public static List<Double> normalize(List<Double> list, double min, double max){
-        double diff = max - min;
-        for (int i = 0; i < list.size(); i++) {
-            double val = list.get(i);
-            double normalizedVal = (val - min) / diff;
-            list.set(i,normalizedVal);
-        }
-        return list;
-    }
-
+public static List<Double> normalize(List<Double> list, double min, double max){
+	double diff = max - min;
+	for (int i = 0; i < list.size(); i++) {
+		double val = list.get(i);
+		double normalizedVal = (val - min) / diff;
+		list.set(i,normalizedVal);
+	}
+	return list;
+}
 
 \end{lstlisting}
