@@ -4,7 +4,8 @@
 
 \subsubsection{Positiv-Beispiel}
  
-Die Klasse Latitude und repräsentiert eine Breite im Sexalsystem. Die einzige Aufgabe ist die Korrekte Repräsentation dieser Breite.
+Die Klasse \textit{Latitude} repräsentiert eine Breite im Sexagesimalsystem.
+Die einzige Aufgabe ist dabei die korrekte Repräsentation eines Breitengrades, womit sie das Single-Responsibility-Principle einhält.
 
 \begin{figure}[h]
   \centering
@@ -14,9 +15,10 @@ Die Klasse Latitude und repräsentiert eine Breite im Sexalsystem. Die einzige A
 
 \subsubsection{Negativ-Beispiel}
 
-Die Klasse SpeedCalculator implementiert Berechnungen mit Geschwindigkeiten.
-Zwei der öffentlichen Methoden berechnen die Bewegungsgeschwindigkeit (Zusammengesetzt aus horizontaler, auf- und absteigender Geschwindigkeit) aus einer oder mehrerer begangener Touren. Eine weitere die relative Geschwindigkeit zweier Touren zueinander (Dies wird benötigt um Geschwindigkeit-Zeit-Diagramme zu erstellen).
-Die Klasse hat also zwei Aufgaben.
+Die Klasse \textit{SpeedCalculator} implementiert verschiedene Berechnungen von Geschwindigkeiten.
+Zwei der Methoden berechnen die Bewegungsgeschwindigkeit (Zusammengesetzt aus horizontaler, auf- und absteigender Geschwindigkeit) einer oder mehrerer begangener Touren.
+Eine weitere die relative Geschwindigkeit zweier Touren zueinander. Dies wird benötigt um Geschwindigkeit-Zeit-Diagramme zu erstellen.
+Die Klasse hat also zwei Aufgaben und verletzt somit das Single-Responsibility-Principle.
 
 \begin{figure}[h]
  \label{fig:shitSRP}
@@ -25,9 +27,8 @@ Die Klasse hat also zwei Aufgaben.
   \caption{UML Diagramm der Klasse SpeedCalculator}
 \end{figure}
 
-
-
-Um hier das Single-Responsibility-Principle umzusetzen könnte die Klasse aufgeteilt werden. Dadurch entstünden zwei neuen Klassen, welche jeweils nur eine Abhängigkeit hätten, wie Abbildung \ref{fig:betterSRP} zeigt.
+Um hier das Single-Responsibility-Principle umzusetzen könnte die Klasse aufgeteilt werden.
+Dadurch entstünden zwei neuen Klassen, welche jeweils nur eine Aufgabe hätten.
 
 \begin{figure}[h]
   \label{fig:betterSRP}
@@ -40,33 +41,34 @@ Um hier das Single-Responsibility-Principle umzusetzen könnte die Klasse aufget
 
 \subsubsection{Positiv-Beispiel}
 
-Ein Beispiel für die Anwendung des Open-Closed-Prinzips (OCP) findet sich im Instruction Interface. Dieses Interface bildet den zentralen Punkt in der Anwendungslogik der Anwendungsschicht.
-Implementierungen des Interfaces implementieren die Logik für verschiedene Anwendungsfälle.
-Die execute() Methode startet den entsprechenden Anwendungsfall aus.
-Durch die Umsetzung mithilfe des Instruction Interfaces können neue Anwendungsfälle problemlos hinzugefügt werden, ohne bestehende Befehle zu verändern.
+Ein Positivbeispiel für die Anwendung des Open-Closed-Prinzips (OCP) findet sich im \textit{Instruction} Interface. Dieses Interface bildet den zentralen Punkt in der Anwendungslogik der Anwendungsschicht.
+Implementierungen einer \textit{Instruction} implementieren die Logik für die jeweiligen Anwendungsfälle.
+Durch Ausführung der \textit{execute} Methode wird der jeweilige Anwendungsfall ausgeführt.
+Durch die Umsetzung mithilfe des Interfaces können neue Anwendungsfälle problemlos hinzugefügt werden, ohne die Implementierung bestehender Befehle zu verändern.
 
 \begin{figure}[H]
   \centering
   \includesvg[inkscapelatex = false, scale = 1]{Chapters/Chapter3/OCP_good}
-  \caption{UML Diagramm des Instruction Interfaces mit 2 beispielhaften Implementierungen}
+  \caption{UML Diagramm des Interfaces \textit{Instruction} mit 2 beispielhaften Implementierungen}
 \end{figure}
 
 \subsubsection{Negativ-Beispiel}
 
-Das Open-Closed-Prinzip (OCP) wird bei der Umsetzung des Programmflusses, der die Reihenfolge der wählbaren Anweisungen bestimmt, verletzt. Hierbei wird lediglich die Klasse Console implementiert und aufgerufen. Um dies auf eine andere Weise umzusetzen, beispielsweise mit Hilfe von Event Listenern oder um den Aufruf von "unsinnigen" Anweisungen zu vermeiden, müsste die bestehende Implementierung in der Klasse Console geändert werden.
+Die Umsetzung des Programmflusses, welcher die Reihenfolge der wählbaren Anweisungen bestimmt, verletzt das Open-Closed-Prinzip. Derzeit wird lediglich die Klasse \textit{Console} implementiert und aufgerufen. Um das OCP einzuhalten und beispielsweise Event Listener zu nutzen oder den Aufruf von sinnlosen Anweisungen zu vermeiden, müsste die bestehende Implementierung in der Klasse \textit{Console} oder der \textit{Main}-Methode angepasst werden.
 
 \begin{figure}[H]
   \centering
   \includesvg[inkscapelatex = false, scale = 1]{Chapters/Chapter3/OCP_bad}
-  \caption{UML Diagramm der Klasse SpeedCalculator}
+  \caption{UML Diagramm der Klasse \textit{Console}}
 \end{figure}
 
-Mithilfe eines ProgramFlow Interfaces könnte hier das OCP verwendet werden.
-Dadurch wäre es möglich, alternative Implementierungen als Implementierung des ProgramFlow Interfaces umzusetzen, ohne die bestehende Console Klasse zu ändern. Dies ermöglicht eine flexible Erweiterung des Programmflusses, ohne bestehenden Code zu modifizieren.
+
+Das Open-Closed-Prinzip könnte hier angewendet werden, indem man ein \textit{ProgramFlow} Interface nutzt. Dadurch ist es möglich, alternative Implementierungen als Umsetzung des \textit{ProgramFlow} Interfaces zu erstellen, ohne dass man die bestehende \textit{Console} Klasse ändern muss. Mit dieser Methode kann der Programmfluss flexibel erweitert werden, ohne dass man den vorhandenen Code ändern muss.
+
 \begin{figure}[H]
   \centering
   \includesvg[inkscapelatex = false, scale = 1]{Chapters/Chapter3/OCP_better}
-  \caption{UML Diagramm mit Umsetzung des SRP}
+  \caption{UML Diagramm für die Umsetzung des SRP mittels \textit{ProgramFlow} Interface}
 \end{figure}
 
 
@@ -74,24 +76,28 @@ Dadurch wäre es möglich, alternative Implementierungen als Implementierung des
 
 \subsubsection{Positiv-Beispiel}
 
-Das Dependency Inversion Principle wurde bei der Implementierung der TimePrediction angewendet, um zu verhindern, dass diese von den Details eines bestimmten Pfades abhängig ist. Durch die Verwendung des Path Interfaces ist die Detailimplementierung (Track) nun von der Abstraktion (Path) entkoppelt. Das bedeutet, dass verschiedene Implementierungen von Path verwendet werden können, ohne Änderungen an der TimePrediction-Klasse vornehmen zu müssen. Dies ermöglicht eine flexible Gestaltung der Software mit reduzierten Abhängigkeiten von konkreten Implementierungen.
+Das Dependency Inversion Principle wurde bei der Implementierung der Klasse \textit{TimePrediction} angewendet, um zu verhindern, dass diese von den Details eines bestimmten Weges abhängig ist.
+Durch die Verwendung des \textit{Path} Interfaces ist die Detailimplementierung \textit{Track} von der Abstraktion \textit{Path} entkoppelt.
+Das bedeutet, dass für verschiedene Implementierungen von \textit{Path} eine benötigte Zeit vorhergesagt werden kann, ohne Änderungen an der Klasse \textit{TimePrediction} vornehmen zu müssen.
+Dies ermöglicht eine flexible Gestaltung der Software mit reduzierten Abhängigkeiten von konkreten Implementierungen.
 
 \begin{figure}[H]
   \centering
   \includesvg[inkscapelatex = false, scale = 0.5]{Chapters/Chapter3/TimePrediction}
-  \caption{Dependency Inversion bei Zeitvorhersagen von verschiedenen Arten von Pfaden}
+  \caption{Dependency Inversion bei der Zeitvorhersagen von verschiedenen Arten von Wegen}
 \end{figure}
 
 \subsubsection{Negativ-Beispiel}
 
-Das Dependency-Inversion-Principle wird beim Zugriff auf die Klasse GPXToTour verletzt, die aus GPX Dateien ein Tour Objekt generiert.
-Sie ist eine Implementation des XMLParser Interfaces. Die Instruction ReadPath verwendet aber diese konkrete Implementierung anstelle des allgemeinen Interfaces, da beim Interface nicht klar ist welcher genaue Datentyp zurückgegeben werden soll. 
-Da hier eine Abhängigkeit von einer konkreten Implementierung anstelle des abstrakten Interfaces besteht ist das Dependency Inversion Principle verletzt.
+Das Dependency-Inversion-Principle wird beim Zugriff auf die Klasse \textit{GPXToTour} verletzt, welche aus GPX Dateien ein Tour Objekt generiert.
+Sie ist eine Implementation des  \textit{XMLParser} Interfaces.
+Die Klasse \textit{ReadPath} verwendet aber diese konkrete Implementierung anstelle des Interfaces, da beim Interface nicht klar ist welcher genaue Datentyp zurückgegeben werden soll. 
+Da hier eine Abhängigkeit auf eine konkrete Implementierung anstelle des abstrakten Interfaces besteht ist das Dependency Inversion Principle verletzt.
 
 \begin{figure}[H]
   \centering
   \includesvg[inkscapelatex = false, width = 300pt]{Chapters/Chapter2/negativ}
-  \caption{Abhängigkeiten auf die Klasse GPXToTour}
+  \caption{Abhängigkeiten auf die Klasse  \textit{GPXToTour}}
 \end{figure}
 
 
