@@ -6,11 +6,11 @@
 
 \subparagraph{Bedeutung}
 
-Eine Ansammlung an Sportarten, die das Movementspeed Interface implementieren. Eine Sportart kann ausgeführt werden wenn man einem GPX-Weg folgt. Eine Sportart beeinflusst die erwartete Zeit, die zum Folgen des Weges benötigt wird.
+Eine Ansammlung an Sportarten, die das \textit{Movementspeed} Interface implementieren. Eine Sportart kann ausgeführt werden, wenn man einem GPX-Weg folgt. Eine Sportart beeinflusst die erwartete Zeit, die beim Folgen des Weges benötigt wird.
 
 \subparagraph{Begründung}
 
-Eine Sportart ist teil der Ubiquitous Language, da sich alle Stakeholder vorstellen können was die groben Geschwindigkeiten sind, die üblicherweise in den jeweiligen Sportarten erreicht werden können.
+Eine Sportart ist Bestandteil der Ubiquitous Language, da sich alle Stakeholder vorstellen können, was die groben Geschwindigkeiten sind, die üblicherweise in den jeweiligen Sportarten erreicht werden können.
 
 \paragraph{Track}
 
@@ -20,19 +20,17 @@ Eine Chronologische Menge and Orten, die zusammen einen Weg ergeben.
 
 \subparagraph{Begründung}
 
-Domänen-Experten sprechen üblicherweise von GPX-Tracks, wenn sie vom GPX-äquivalent eines Weges sprechen. Damit Entwickler und Domänen-Experten hier unmissverständlich über die jeweils vorliegenden Informationen sprechen können, ist Track teil der Ubiquitous language.
+Domänen-Experten sprechen üblicherweise von GPX-Tracks, wenn sie vom GPX-äquivalent eines Weges sprechen. Damit Entwickler und Domänen-Experten hier unmissverständlich über die jeweils vorliegenden Informationen sprechen können, ist Track Bestandteil der Ubiquitous Language.
 
 \paragraph{Hillclimbing}
 
-
-
 \subparagraph{Bedeutung}
 
-Hillclimbing ist ein einfaches, heuristisches Optimierungsverfahren zum Finden lokaler Maxima.
+\textit{Hillclimbing} ist ein einfaches, heuristisches Optimierungsverfahren zum Finden lokaler Maxima.
 
 \subparagraph{Begründung}
 
-Hillclimbing ist Teil der Ubiquitous language, damit Domänenexperten (hier Optimierungsexperten) und Entwickler präzise über komplizierte Optimierungsverfahren kommunizieren können, wenn bestehende verstanden oder neue, bessere Verfahren implementiert werden sollen.
+\textit{Hillclimbing} ist Bestandteil der Ubiquitous Language, damit Domänenexperten (hier Optimierungsexperten) und Entwickler präzise über komplizierte Optimierungsverfahren kommunizieren können, wenn bestehende Verfahren verstanden oder neue, bessere Verfahren implementiert werden sollen.
 
 \paragraph{ElevationProfile}
 
@@ -42,50 +40,50 @@ Ein Höhenprofil ist ein Zweidimensionaler Schnitt einer Strecke, der die Höhe 
 
 \subparagraph{Begründung}
 
-Ein Höhenprofil ist teil der Ubiquitous Language, da der Begriff bei Domänenexperten etabliert ist und eine technischere Bezeichnung, etwa exaggeratedAltitudeAtDistanceFigure, schwer treffend zu formulieren ist.
-ElevationProfile
+Ein Höhenprofil ist Bestandteil der Ubiquitous Language, da der Begriff bei Domänenexperten etabliert ist und eine technischere Bezeichnung, etwa \textit{exaggeratedAltitudeAtDistanceFigure}, schwer treffend zu formulieren ist.
 
 \subsection{Entities}
 
-Die Klasse Hillclimbing Verbindet eine Anzahl an Lösungen für ein spezielles Problem. 
-Zur Erstellung der Entität sind die vorgeschlagenen Lösungen noch trivial, mit der Lebenszeit der Entity verbessern sich die Qualitäten der Lösungen. Eine Instanz der Klasse Hillclimbing stellt einen Konvergierten Lösungsvorschlag dar. Mehrere Gleiche Hillclimbing Objekte wären trotzdem einzeln zu betrachten, da sie lediglich aussagen würden dass mehrere Lösungsversuche zur selben Lösung konvergiert sind. Die eindeutigkeit ist implizip über den Objekthash in Java umgesetzt.
+Die Klasse \textit{Hillclimbing} verbindet eine Anzahl an Lösungen für ein spezielles Problem. 
+Bei der Erstellung der Entity sind die vorgeschlagenen Lösungen noch trivial, mit der Lebenszeit der Entity verbessern sich die Qualitäten der Lösungen.
+Eine Instanz der Klasse \textit{Hillclimbing} stellt einen konvergierten Lösungsvorschlag dar.
+Mehrere gleiche Hillclimbing Objekte wären trotzdem einzeln zu betrachten, da sie lediglich aussagen würden, dass mehrere Lösungsversuche zur selben Lösung konvergiert sind. Die Eindeutigkeit ist implizit über den Hashwertes des Objekts in Java umgesetzt.
 Somit ist Hillclimbing eine Entity.
 
 \begin{figure}[H]
   \centering
   \includesvg[inkscapelatex = false, width = 300pt]{Chapters/Chapter6/Hillclimbing2}
-  \caption{UML der Entity Hillclimbing}
+  \caption{UML der Entity \textit{Hillclimbing}}
 \end{figure}
 
 \subsection{Value Objects}
 
-Die Klasse Elevation stellt den Werte einer Höhe über dem Meeresspiegel um. Die klasse ist immutable und bei Erstellung wird geprüft ob sich der Wert in einem Auf der Erde Sinnvollen Rahmen bewegt (-500 bis 9000). 
-Auf eine Überschreibung der Hashfunktion oder der equals Methode wurde aufgrund von mangelnder Nötigkeit verzichtet.
-
+Die Klasse \textit{Elevation} stellt den Wert einer Höhe über dem Meeresspiegel dar. Die Klasse ist immutable und bei Erstellung wird geprüft, ob sich der Wert in einem auf der Erde sinnvollen Rahmen bewegt (-500 bis 9000). 
+Auf eine Überschreibung der Hashfunktion oder der equals Methode wurde aufgrund von mangelnder Notwendigkeit verzichtet.
 
 \begin{figure}[H]
   \centering
   \includesvg[inkscapelatex = false, width = 150pt]{Chapters/Chapter6/Elevation}
-  \caption{UML des Elevation Value Objects}
+  \caption{UML des Value Objects \textit{Elevation}}
 \end{figure}
 
 \subsection{Repositories}
 
-Das XMLGenerator Interface bietet dem Domänencode die Möglichkeit Tracks persistent zu speichern. Durch die Kapselung durch das Interface ist das Anti-Corruption-Layer implementiert.
-Somit ist der XMLGenerator der Adapter zwischen den Tracks und der persistenten Datenspeicherung in Form von Dateien auf der Festplatte.
+Das Interface \textit{XMLGenerator} bietet dem Domain Code die Möglichkeit Tracks persistent zu speichern. Durch die Kapselung durch das Interface ist das Anti-Corruption-Layer implementiert.
+Somit ist der \textit{XMLGenerator} der Adapter zwischen den Tracks und der persistenten Datenspeicherung in Form von Dateien auf der Festplatte.
 
 \begin{figure}[H]
   \centering
   \includesvg[inkscapelatex = false, width = 150pt]{Chapters/Chapter6/XMLWriter}
-  \caption{UML des XMLGeneratorImplementation}
+  \caption{UML der Klasse \textit{XMLGeneratorImplementation}}
 \end{figure}
 
 \subsection{Aggregates}
 
-Ein Track bietet eine Zusammenfassung von Trackpoints, die wiederum aus Elevation, Latitude und Longitude bestehen. Sie bilden eine eigene Einheit und werden üblicherweise auf diesem Level in GPX Dateien gespeichert und aus ihnen geladen.
+Ein Track bietet eine Zusammenfassung von \textit{Trackpoint}s, die wiederum aus \textit{Elevation}, \textit{Latitude} und \textit{Longitude} bestehen. Sie bilden eine eigene Einheit und werden üblicherweise auf diesem Level in GPX Dateien gespeichert und aus ihnen geladen.
 
 \begin{figure}[H]
   \centering
   \includesvg[inkscapelatex = false, width = 150pt]{Chapters/Chapter6/Track}
-  \caption{UML des Elevation Value Objects}
+  \caption{UML des Aggregates \textit{Track}}
 \end{figure}
