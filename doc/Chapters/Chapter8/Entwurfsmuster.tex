@@ -2,9 +2,12 @@
 
 \subsection{Entwurfsmuster Fabrik}
 
-Zur Erzeugung verschiedener Objekte aus GPX Dateien wurde das Entwurfsmuster Fabrik eingesetzt. Da aus der GPX nicht eindeutig erkennbar ist welches Objekt erzeugt werden muss, muss diese Logik vom Nutzer mitgegeben werden.
+Zur Erzeugung verschiedener Objekte aus GPX Dateien wurde das Entwurfsmuster Fabrik eingesetzt.
+Da aus der GPX Datei nicht eindeutig erkennbar ist, welches Objekt erzeugt werden soll, muss diese Logik vom Nutzer mitgegeben werden.
 
-Für das Entwurfsmuster wurde sich entschieden um die Lesbarkeit des Programmcodes zu erhöhen und die Logik in eigene Klassen zu Kapseln.
+Auf das Entwurfsmuster wurde zurückgegriffen um die Lesbarkeit des Programmcodes zu erhöhen und die Logik in eigene Klassen zu Kapseln.
+
+Es handelt sich um eine Fabrik, da eine gemeinsame Schnittstelle zur Erzeugung von Objekten durch das \textit{XMLParser} Interface besteht. Die spezifischen Implementierungen sind jedoch unabhängig voneinander und von den Übergabeparametern in verschiedenen Klassen gekapselt. 
 
 \begin{figure}[H]
   \centering
@@ -14,8 +17,9 @@ Für das Entwurfsmuster wurde sich entschieden um die Lesbarkeit des Programmcod
 
 \subsection{Entwurfsmuster Strategie}
 
-Bei der Evolutionären Optimierung von Umwegen wird müssen erzeugte Lösungen bewertet werden. Abhängig vom Anwendungsfall können diese Bewertungsalgorithmen stark voneinander Abweichen.
+Bei der Evolutionären Optimierung von Umwegen müssen erzeugte Lösungen bewertet werden. Abhängig vom Anwendungsfall können diese Bewertungsalgorithmen stark voneinander Abweichen.
 Um dies flexibel umzusetzen und weitere Bewertungsfunktionen zukünftig gut umsetzen zu können und die Übersichtlichkeit sowie Testbarkeit zu verbessern wurde auf das Strategie-Entwurfsmuster zurückgegriffen.
+Es handelt sich um das Entwurfsmuster Strategie, da durch Einsetzen einer anderen Implementierung von \textit{Evaluationfunction} der Algorithmus zur Bewertung von Problemen geändert werden kann.
 
 \begin{figure}[H]
   \centering
