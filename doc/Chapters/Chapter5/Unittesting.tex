@@ -9,14 +9,14 @@
 \textbf{Unit Test} & \textbf{Beschreibung} \\
 \\
 
-ElevationGainTest\#addElevation & Test auf korrekte Summierung von Auf- und Abstiegen \\
+ElevationGainTest\#addElevation & Test auf korrekte Aufsummierung von Auf- und Abstiegen \\
 ElevationGainTest\#getManhattenNorm & Test auf korrekte Berechnung der Manhattennorm von Auf- und Abstieg \\
 DistanceCalculatorTest\#calc3dDistance & Test auf ausreichend genaue Berechnung von Distanzen im dreidimensionalen Raum \\
-DistanceCalculatorTest\#calcElevationGain & Test auf korrekte Berechnung der Höhendifferenz von 2 Punken sowie gesamter GPX Tracks \\
-ProfileCalculationTest\#split & Test auf die Korrekte Aufteilung von Wegpunkten in Balken für Profile  \\
-ProfileCalculationTest\#normalize & Test auf korrekte Normalisierung von Werten auf Einen Wertebereich zwischen 0 und 1 \\
-SpeedHeuristicsTest\#calculateTime & Test auf die korrekte Berechnung der  benötigten Zeit einer Tour \\
-ElevationProfileTest\#getProfile & Test auf korrekte Erstellung einer Matrix die einem Höhenprofil entspricht \\
+DistanceCalculatorTest\#calcElevationGain & Test auf korrekte Berechnung der Höhendifferenz von mehreren Punkten im GPX Track \\
+ProfileCalculationTest\#split & Test auf korrekte Aufteilung von Wegpunkten in Wertegruppen für Profile  \\
+ProfileCalculationTest\#normalize & Test auf korrekte Normalisierung von Werten auf winen Wertebereich zwischen 0 und 1 \\
+SpeedHeuristicsTest\#calculateTime & Test auf die korrekte Berechnung der benötigten Zeit einer Tour \\
+ElevationProfileTest\#getProfile & Test auf korrekte Erstellung einer einem Höhenprofil entsprechenden Matrix \\
 SpeedCalculatorTest\#predictPMSSingle &  Test auf korrekte Erstellung eines Personal Movement Speeds (PMS) aus einer bestrittenen Tour \\
 SpeedHeuristicsTest\#getClimbingHeuristic & Test auf ausreichend genaue Berechnung der Steigungsgeschwindigkeit \\
 
@@ -27,54 +27,54 @@ SpeedHeuristicsTest\#getClimbingHeuristic & Test auf ausreichend genaue Berechnu
 \subsection{ATRIP: Automatic}
 
 Die Unit Tests sind beliebig oft wiederholbar und unabhängig voneinander ausführbar. Durch die Nutzung des JUnit Test Frameworks können sie mithilfe der IDE einfach gestartet werden.
-Mit IntelliJ beispielsweise können per rechtem Mausklick auf das Verzeichnis src/test und Auswahl der Option 'Run 'Tests in test'' alle Tests ausgeführt werden.
+Mithilfe der \textit{IntelliJ IDEA} beispielsweise können per rechtem Mausklick auf das Verzeichnis \textit{src/test} und Ausführung der Option  \textit{Run 'Tests in test'} alle Tests automatisch ausgeführt werden.
 Nach der Ausführung erscheint eine Übersicht über alle durchgeführten und erfolgreichen bzw. fehlgeschlagenen Tests.
 
 \subsection{ATRIP: Thorough}
 
 \subsubsection{Positiv-Beispiel}
 
-Im normalize Test der Klasse ProfileCalculationTest wird auf korrekte Normalisierung von Werten auf den Wertebereich von 0 bis 1 getestet.
-Der Test ist thorough, da der Test als ParameterizedTest mit der zugehörigen MethodSource normalizeValues viele Fälle abgedeckt werden.
+Im Test \textit{normalize} der Klasse \textit{ProfileCalculationTest} wird auf korrekte Normalisierung von Werten auf den Wertebereich von 0 bis 1 getestet.
+Der Test ist thorough, da der Test als ParameterizedTest mit der zugehörigen MethodSource \textit{normalizeValues} viele Fälle abgedeckt.
 
 \begin{lstlisting}
 
 @ParameterizedTest
 @MethodSource("normalizeValues")
 void normalize(Double[] input, Double[] expected){
-  List<Double> list = new ArrayList<>(Arrays.asList(input));
-  list = ProfileCalculation.normalize(list);
-  assertEquals(Arrays.asList(expected), list.stream().toList());
+	List<Double> list = new ArrayList<>(Arrays.asList(input));
+	list = ProfileCalculation.normalize(list);
+	assertEquals(Arrays.asList(expected), list.stream().toList());
 }
 
 private static List<Arguments> normalizeValues() {
-  return List.of(
-    Arguments.of(new Double[]{4.0,4.0,4.0}, new Double[]{1.0,1.0,1.0}),
-    Arguments.of(new Double[]{-10.0,0.0,10.0}, new Double[]{0.0,0.5,1.0}),
-    Arguments.of(new Double[]{2.0,3.0,3.0,4.0}, new Double[]{0.0,0.5,0.5,1.0}),
-    Arguments.of(new Double[]{0.0,3.0,6.0,2.0,8.0,9.0,10.0,2.0,3.0,4.0,5.0,6.0}, new Double[]{0.0,0.3,0.6,0.2,0.8,0.9,1.0,0.2,0.3,0.4,0.5,0.6}),
-    Arguments.of(new Double[]{4.0}, new Double[]{1.0}),
-    Arguments.of(new Double[]{}, new Double[]{}),
-    Arguments.of(new Double[]{9000.0,-500.0, 0.0}, new Double[]{1.0,0.0,500.0/9500}),
-    Arguments.of(new Double[]{60.75, 105.75, 240.75}, new Double[]{0.0,0.25,1.0})
-  );
+	return List.of(
+		Arguments.of(new Double[]{4.0,4.0,4.0}, new Double[]{1.0,1.0,1.0}),
+		Arguments.of(new Double[]{-10.0,0.0,10.0}, new Double[]{0.0,0.5,1.0}),
+		Arguments.of(new Double[]{2.0,3.0,3.0,4.0}, new Double[]{0.0,0.5,0.5,1.0}),
+		Arguments.of(new Double[]{0.0,3.0,6.0,2.0,8.0,9.0,10.0,2.0,3.0,4.0,5.0,6.0}, new Double[]{0.0,0.3,0.6,0.2,0.8,0.9,1.0,0.2,0.3,0.4,0.5,0.6}),
+		Arguments.of(new Double[]{4.0}, new Double[]{1.0}),
+		Arguments.of(new Double[]{}, new Double[]{}),
+		Arguments.of(new Double[]{9000.0,-500.0, 0.0}, new Double[]{1.0,0.0,500.0/9500}),
+		Arguments.of(new Double[]{60.75, 105.75, 240.75}, new Double[]{0.0,0.25,1.0})
+	);
 }
 
 \end{lstlisting}
 
 \subsubsection{Negativ-Beispiel}
 
-Das Negativ-Beispiel zu thorough Test Code ist der Test calc2dDistance der Klasse DistanceCalculatorTest. Hier wird die berechnete Distanz zweier Punkte sowie eines Tracks ohne Berücksichtigung der Höhe getestet. 
+Das Negativ-Beispiel zu thorough Test Code ist der Test \textit{calc2dDistance} der Klasse \textit{DistanceCalculatorTest}. Hier wird die berechnete Distanz zweier Punkte sowie eines Tracks (ohne Berücksichtigung der Höhe) getestet. 
 Der Test ist nicht thorough, da lediglich ein einziger Fall pro Überladung der Methode getestet wird, und keine besonderen Fälle vorkommen.
 
 \begin{lstlisting}
 
 void calc2dDistance() {
-  Distance distanceToFirstHut2D = DistanceCalculator.calc2dDistance(mountainTrack.getOrderedLocations().get(0), mountainTrack.getOrderedLocations().get(1));
-  assertEquals(308, distanceToFirstHut2D.getValue(), 1);
+	Distance distanceToFirstHut2D = DistanceCalculator.calc2dDistance(mountainTrack.getOrderedLocations().get(0), mountainTrack.getOrderedLocations().get(1));
+	assertEquals(308, distanceToFirstHut2D.getValue(), 1);
 
-  Distance distanceOfWholeTrack2D = DistanceCalculator.calc2dDistance(mountainTrack);
-  assertEquals(7795, distanceOfWholeTrack2D.getValue(), 10);
+	Distance distanceOfWholeTrack2D = DistanceCalculator.calc2dDistance(mountainTrack);
+	assertEquals(7795, distanceOfWholeTrack2D.getValue(), 10);
 }
 
 \end{lstlisting}
@@ -83,8 +83,8 @@ void calc2dDistance() {
 
 \subsubsection{Positivbeispiel}
 
- Im split Test der Klasse ProfileCalculationTest wird auf korrektes Aufteilen von Werten für das Erstellen von Profilen. Die zugrundeliegende Methode berechnet also wie viele tatsächliche Werte in einem x-Wert gebündelt werden.
-Der Test ist professionell da der Test als ParameterizedTest kurz und übersichtlich ist, keine Code Smells enthält und ausführlich relevante Testfälle abdeckt.
+ Im Test \textit{split} der Klasse \textit{ProfileCalculationTest} wird auf korrektes Aufteilen von Werten für die Erstellung von Profilen getestet. Die zugrundeliegende Methode berechnet also, wie viele tatsächliche Werte in einem x-Wert gebündelt werden.
+Der Test ist professionell, da der Test als ParameterizedTest kurz und übersichtlich ist, keine Code Smells enthält und ausführlich relevante Testfälle abdeckt.
 
 \begin{lstlisting}
 private static List<Arguments> splitValues() {
@@ -113,13 +113,14 @@ void split(int pool, int sections, int[] expected ){
 
 \subsubsection{Negativbeispiel}
 
-Das Negativ-Beispiel für professionelle Tests liefert der Test calcElevationGain der Klasse DistanceCalculatorTest. Hier wird auf korrekte Berechnung von Höhendifferenzen zwischen zwei Punkten und einem ganzen Track getestet.
+Das Negativ-Beispiel für professionelle Tests liefert der Test \textit{calcElevationGain} der Klasse \textit{DistanceCalculatorTest}.
+Der Test testet auf korrekte Berechnung von Höhendifferenzen zwei oder mehreren Punkten, die als Track gespeichert sind.
 
-Bei dem Test wird das SRP verletzt, da mehrere Überladungen der Methode im einem Test geprüft werden. Bei fehlgeschlagenen Assertions ist nicht leicht ersichtlich, wo genau der Fehler auftritt.
-
-Die Testpunkte für die Tests werden sich aus bestimmten Stellen einer Liste geholt. Das ist beim Lesen nicht nachvollziehbar, da kaum nachvollzogen werden kann welche Werte hier getestet werden.
-
+Bei dem Test wird das SRP verletzt, da mehrere Überladungen der Methode im einem Test geprüft werden. Bei fehlgeschlagenen Assertions ist zudem nicht leicht ersichtlich, wo genau der Fehler auftritt.
+Die zu testenden Punkte werden aus hardcoded Stellen einer Liste geholt. Das ist beim Lesen nicht nachvollziehbar, da kaum nachvollzogen werden kann welche Werte hier warum getestet werden.
 Es besteht viel duplizierter Code, der durch Methoden-Extraktion behoben werden könnte. Außerdem werden viele (nach Methoden Extraktion überflüssige) Variablen deklariert, die keine treffenden Namen haben (In Z.13 handelt es sich um wholeTrack nicht um eine Räpresentation des gesamten Tracks, sondern lediglich um die Höhendifferenz des Selbigen).
+
+All dies sind Merkmale von Unprofessioneller Programmierung und folglich eines unprofessionellen Tests.
 
 \begin{lstlisting}
   
@@ -146,36 +147,40 @@ void calcElevationGain() {
 Es werden 69\% der Klassen und 59\% der Zeilen getestet. 
 Dies wird als ausreichend für den aktuellen Stand des Projekts angesehen, da die Testabdeckung sich auf die relevanten Teile der Applikation fokussiert.\\
 
-Da die sich Plugin-Schicht aufgrund des Umfangs des Projekts auf der Konsole abspielt, welche simpel zu implementieren und gut durch manuelle End-to-end Test testbar ist, liegt kein Fokus auf deren Unit-Testabdeckung. Entsprechend liegt hier die Testabdeckung bei 50\% der Klassen und lediglich 27\% der Zeilen.\\
+Da die sich Plugin-Schicht aufgrund der Anforderungen an des Projekts mit der Konsole umgesetzt ist, welche simpel zu implementieren und gut durch manuelle Ende-zu-Ende Test testbar ist, liegt kein Fokus auf deren Unit-Testabdeckung. Entsprechend liegt hier die Testabdeckung bei 50\% der Klassen und lediglich 27\% der Zeilen.
 
-Die verschiedenen Anwendungsfälle der Anwendungsschicht wurden sehr ausführlich durch manuelle Ende-zu-Ende Tests getestet. Demnach wurden nur drei der Anwendungsfällabläufe durch Unit-Test abgedeckt.
+Die verschiedenen Anwendungsfälle der Anwendungsschicht wurden sehr ausführlich durch manuelle Ende-zu-Ende Tests getestet. Demnach wurden nur drei der Anwendungsfall Implementierungen von Unit-Test abgedeckt.\\
 
- Die meisten Unit Test testen also den Domänen code, da er komplizierte und langlebige Berechnungen enthält. hier liegt die Testabdeckung bei 93\% der Klassen und 87\% der Zeilen, mit der (experimentellen) Klasse SupplyEvaluation als Ausnahme\footnote{Da die Zeilen an reinem Source Code zum Stand der Dokumentation bei über 2300 liegen und das Projekt alleine implementiert wurde, wurde sich entschieden die Fortsetzung der komplizierten Bewertungsfunktion auf nach den Klausuren zu legen. Nichtsdestotrotz können Touren anhand von Übernachtungsorten geteilt werden. Seien sie aber gewarnt dass die Bewertung vergleichsweise wenig Rücksicht auf ihre gewünschte Gehzeit gibt um ein paar Tage zu sparen}.
- Die Ungetestenten Codezeilen sind überwiegend einzeilige Methoden wie getter- toString Methoden oder die Behandlung offensichtlicher Fehler.
+ Die meisten Unit Test testen also den Domain Code, da er komplizierte und langlebige Berechnungen enthält.
+Hier liegt die Testabdeckung bei 93\% der Klassen und 87\% der Zeilen, mit der (experimentellen) Klasse \textit{SupplyEvaluation} als ungetestete Ausnahme\footnote{Da die Zeilen an reinem Quellcode zum Stand der Dokumentation bei über 2300 liegen und das Projekt alleine implementiert wurde, wurde sich entschieden die Fortsetzung der komplizierten Bewertungsfunktion auf nach den Klausuren zu legen. Nichtsdestotrotz können Touren anhand von Übernachtungsorten geteilt werden. Bei der Nutzung sei aber gewarnt dass die Bewertung vergleichsweise wenig Rücksicht auf die gewünschte Gehzeit gibt um eventuell ein paar Tage zu sparen}.
+ Die restlichen Ungetesteten Codezeilen sind überwiegend einzeilige Methoden wie \textit{getter-} und \textit{toString} Methoden sowie die Behandlung offensichtlicher Fehler.
 
 \subsection{Fakes und Mocks}
  
  \subsubsection{1. Mockobjekt: DirectWayHeuristik}
  
- Im initDetours Test in der Klasse DetoursTest wird die korrekte Erzeugung von Detours getestet.
- Die Klasse hängt maßgeblich von der Bewertung der Umwege ab, welche über eine TimeHeuristic berechnet wird. 
- Deshalb wurde beim ein Mockobjekt für die Bestimmung der Zeit für die Detour verwendet.
- Dies ist Sinnvoll, da hier die Korrekte Initialisierung der Umwege an der richtigen Stelle getestet werden soll und nicht die Bestimmung der Zeit, die man benötigt um sich eine Gewisse (unbekannte) Strecke zu bewegen.
+ Im Test \textit{initDetours} der Klasse \textit{DetoursTest} wird die korrekte Erzeugung von \textit{Detours} getestet.
+ Die Klasse hängt maßgeblich von der Bestimmung der Zeit einzelne Umwege (Detour) ab, welche über eine Implementierung des Interfaces \textit{TimeHeuristic} berechnet wird. \\
+  
+ Es wurde ein Mockobjekt für die Bestimmung der Zeit für eine einzelne Detour verwendet.
+ Dies ist Sinnvoll, da hier die korrekte Initialisierung der Umwege an der richtigen Stelle getestet werden soll und nicht die Bestimmung der Zeit, die man benötigt um sich eine Gewisse (unbekannte) Strecke zu bewegen.
  
  \begin{figure}[H]
   \centering
   \includesvg[inkscapelatex = false, width = 200pt]{Chapters/Chapter5/TimeHeuristic.svg}
-  \caption{UML Diagramm des Mocks für DetoursTests}
+  \caption{UML Diagramm des Mocks für \textit{DetoursTests}}
 \end{figure}
 
  
  \subsubsection{2. Mockobjekt: EvaluationFunction}
  
- Beim Test evaluatinFunction in der Klasse HillClimbingTest  wurde beim Test des Hillclimbingalgorithmus die Bewertung der einzelnen Tests gemockt. %TODO was ist dieser Testname brudda
-Die Bewertungsfunktion bewertet alle Lösungen gleich gut bis auf die Lösung wahr,wahr,falsch, die bevorzugt bewertet wird.
-Dies macht deutlich, dass diese Lösung als Lokales (und globales) Optimum beim Hillclimbingalgorithmus herauskommen soll, da es das einzige existierende Optimum ist.
-Ein Test über eine Praxisnahe Bewertungsfunktion wäre sehr umständlich, da man umständlich ein Beispiel mit möglichst hohen Gradienten finden müsste um ein Steckenbleiben in einem lokalen Optimum zu vermeiden. 
- Zudem ist das Mock-Objekt ist sinnvoll, da die Bewertungsfunktion in anderen Tests abgedeckt ist und sich die Aufgabe der Hillclimbing Klasse auf das korrekte finden Lokaler Optima beschränkt.
+ Beim Test \textit{evaluatinFunction} in der Klasse \textit{HillClimbingTest} wurde beim Test des Hillclimbing-Algorithmus die Bewertung der einzelnen Lösungen des Algorithmus gemockt. \\
+ 
+Die so erstellte Bewertungsfunktion bewertet alle Lösungen bis auf eine gleich gut. Besser bewertetf wird die, die gefunden werden soll.
+Dies führt dazu, dass diese Lösung als Lokales (und globales) Optimum beim Hillclimbing-Algorithmus herauskommen sollte, da sie das einzige existierende Optimum ist. \\
+
+Ein Test über eine Praxisnahe Bewertungsfunktion wäre sehr umständlich, da man ein Beispiel mit möglichst gleichmäßigen Gradienten finden müsste, um ein Steckenbleiben in einem unvorhergesehenen lokalen Optimum zu vermeiden. 
+ Zudem ist das Mock-Objekt sinnvoll, da die Bewertungsfunktion in anderen Tests abgedeckt ist und sich die Aufgabe der Klasse und des Tests \textit{Hillclimbing} auf das korrekte finden Lokaler Optima beschränkt.
  
   \begin{figure}[H]
   \centering
