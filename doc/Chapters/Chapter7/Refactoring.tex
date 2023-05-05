@@ -4,9 +4,7 @@
 
 \subsubsection{Code Smell: Duplicated Code}
 
-%(Ausgebessert in commit https://github.com/reichert-p/GPXrechner/commit/4039bc31f6310508875c59ed44b6b227f2f0510d )
-
-Um Lösungen zu bewerten, muss bei Bitstringcodierung (welche in der Klasse Representation verwendet wird) gefiltert werden welche Umwege tatsächlich genommen werden.
+Um Lösungen zu bewerten, muss bei Bitstringcodierung (welche in der Klasse \textit{Representation} verwendet wird) gefiltert werden, welche Umwege tatsächlich genommen werden.
 
 Vorheriger Zustand:
 
@@ -42,7 +40,7 @@ List<Detours.Detour> orderedVisitedDetours = visitedDetours.stream().sorted(Comp
 	
 \end{lstlisting}
 
-Der in Commit \href{commit https://github.com/reichert-p/GPXrechner/commit/4039bc31f6310508875c59ed44b6b227f2f0510d}{4039bc3} gewählte Lösungsweg lagert die duplizierte Funktionalität aus in die externe statische Klasse EvaluationHelper. In den einzelnen Bewertungsfunktionen wird die Funktionalität aus der EvaluationHelper Klasse aufgerufen.
+Der in Commit \href{commit https://github.com/reichert-p/GPXrechner/commit/4039bc31f6310508875c59ed44b6b227f2f0510d}{4039bc3} gewählte Lösungsweg lagert die duplizierte Funktionalität aus in die externe statische Klasse \textit{EvaluationHelper}. In den einzelnen Bewertungsfunktionen wird die Funktionalität aus der Klasse \textit{EvaluationHelper} aufgerufen.
 
 \begin{lstlisting}
 
@@ -63,20 +61,20 @@ public static List<Detours.Detour> getRepresentedDetoursOrdered(Detours detours,
 
 \subsubsection{Code Smell: Code Comments}
 
-Der Kommentar 'remove runaways' in der Methode percentileandaverage der Klasse SpeedHeuristics ist ein Anzeichen dafür, dass die Funktionalität des Codes ohne den Kommentar nicht verständlich ist.
-
+Der Kommentar \textit{// remove runaways} in der Methode \textit{percentileandaverage} der Klasse SpeedHeuristics ist ein Anzeichen dafür, dass die Funktionalität des Codes ohne den Kommentar nicht verständlich ist.
 
 \begin{lstlisting}
 
 for (double d:paceValues) {
-  if (i + 1 > paceValues.size() * 0.25 && i < paceValues.size() * 0.9) // remove runaways
-  sum += d;
-  instances ++;
-  i++;
+  if (i + 1 > paceValues.size() * 0.25 && i < paceValues.size() * 0.9){ // remove runaways
+      sum += d;
+      instances ++;
+      i++;
+    }
 }
 \end{lstlisting}
 
-Der gewählte Lösungsweg ist die Auslagerung der Funktionalität in eine Methode mit sprechendem Namen auszulagern.
+Der gewählte Lösungsweg ist die Auslagerung der Funktionalität in eine Methode mit sprechendem Namen. 
 
 \begin{lstlisting}
 ...
@@ -97,40 +95,38 @@ private static List<Double> removeRunawaysfromSortedList(List<Double> input, dou
 
 \subsubsection{1. Refactoring: Rename Class}
 
-\href{https://github.com/reichert-p/GPXrechner/commit/7947597903210e73647ffbc20d07e6b5b257cff2\#diff-a3b6bacc77a02d2a1746cbbbd776a467bf3fcd7920bfefbef1e892af10172e50 }{a3b6bac}
-
-Die Klasse EvolutionaryDist implementiert die evolutionäre Suche nach lokalen Optima nach dem Hillclimbing-Verfahren.
-Das Refactoring ist die Umbenennung der Klasse EvolutionaryDist zu Hillclimbing, da der Name besser zum Inhalt der Klasse passt.
+Die Klasse \textit{EvolutionaryDist} implementiert die evolutionäre Suche nach lokalen Optima nach dem Hillclimbing-Verfahren.
+Das Refactoring aus commit \href{https://github.com/reichert-p/GPXrechner/commit/7947597903210e73647ffbc20d07e6b5b257cff2\#diff-a3b6bacc77a02d2a1746cbbbd776a467bf3fcd7920bfefbef1e892af10172e50 }{a3b6bac} ist die Umbenennung der Klasse \textit{EvolutionaryDist} zu \textit{Hillclimbing}, da der Name besser zum Inhalt der Klasse passt.
 
 \begin{figure}[H]
   \centering
-  \includesvg[inkscapelatex = false, width = 90pt]{Chapters/Chapter7/EvolutionaryDist.svg}
-  \caption{UML Diagramm der Klasse EvolutionaryDist}
+  \includesvg[inkscapelatex = false, width = 120pt]{Chapters/Chapter7/EvolutionaryDist.svg}
+  \caption{UML Diagramm der Klasse \textit{EvolutionaryDist}}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includesvg[inkscapelatex = false, width = 90pt]{Chapters/Chapter7/HillClimbing.svg}
-  \caption{UML Diagramm der Klasse unter dem Namen HillClimbing}
+  \includesvg[inkscapelatex = false, width = 120pt]{Chapters/Chapter7/HillClimbing.svg}
+  \caption{UML Diagramm der Klasse unter dem neuen Namen \textit{HillClimbing}}
 \end{figure}
 
 \subsubsection{2. Refactoring: Extract Method}
 
-Die Methode generateGPX zur Erstellung einer .gpx Datei aus gespeicherten Touren und Tracks besteht aus 35 Zeilen langem Spaghetticode. 
+Die Methode \textit{generateGPX} zur Erstellung einer .gpx Datei aus gespeicherten Touren und Tracks besteht aus 35 Zeilen langem Spaghetticode. 
 In den Commits 
 \href{https://github.com/reichert-p/GPXrechner/commit/59f9045a2ac73496111bba87c35016c2b26108e2}{59f9045}
 und 
 \href{https://github.com/reichert-p/GPXrechner/commit/7d57943bb5fcdf2d23e76f05c0157f7753f6c05e}{7d57943} 
-wurde mithilfe von Method Struktur in den Code gebracht, die Länge der einzelnen Methoden reduziert und das Verständnis des Codes durch Sprechenden Methodennamen verbessert.
+wurde mithilfe von des Refactorings \textit{Extract Method} Struktur in den Code gebracht. Die Länge der einzelnen Methoden wird reduziert und das Verständnis des Codes wird durch Sprechenden Methodennamen verbessert.
 
 \begin{figure}[H]
   \centering
-  \includesvg[inkscapelatex = false, width = 90pt]{Chapters/Chapter7/XMLGenSpaghetti.svg}
-  \caption{UML Diagramm der Klasse XMLGeneratorImplementation vor dem Refactoring}
+  \includesvg[inkscapelatex = false, width = 120pt]{Chapters/Chapter7/XMLGenSpaghetti.svg}
+  \caption{UML Diagramm der Klasse \textit{XMLGeneratorImplementation} vor dem Refactoring}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includesvg[inkscapelatex = false, width = 90pt]{Chapters/Chapter7/XMLGenRefactored.svg}
-  \caption{UML Diagramm der Klasse XMLGeneratorImplementation vor dem Refactoring}
+  \includesvg[inkscapelatex = false, width = 120pt]{Chapters/Chapter7/XMLGenRefactored.svg}
+  \caption{UML Diagramm der Klasse \textit{XMLGeneratorImplementation} nach dem Refactoring mit zwei extracteden Methoden}
 \end{figure}
